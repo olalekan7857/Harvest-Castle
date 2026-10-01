@@ -3,7 +3,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-appname = 'harvest_castle'
+app_name = 'harvest_castle'
 
 
 
@@ -15,9 +15,13 @@ urlpatterns = [
     path('privacy/', views.privacy, name='privacy'),
     path('terms/', views.terms, name='terms'),
     path('products/', views.product, name='product'),
+    path('product-detail/', views.product_detail, name='product_detail'),
     path('checkout/', views.checkout, name='checkout'),
     path('cart/', views.cart, name='cart'),
-    path('order_confirmation/', views.order_confirmation, name='order_confirmation'),
+    path('order-confirmation/', views.order_confirmation, name='order_confirmation'),
+    path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    path('admin-blog/', views.admin_blog, name='admin_blog'),
+    path('layout/', views.layout, name='layout')
 ]
 
 if settings.DEBUG:

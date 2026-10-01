@@ -22,7 +22,10 @@ def terms(request):
     return render(request, 'terms.html')
 
 def product(request):
-    return render(request, 'products.html')
+    return render(request, 'product.html')
+
+def product_detail(request):
+    return render(request, 'product-details.html')
 
 def checkout(request):
     return render(request, 'checkout.html')
@@ -32,3 +35,12 @@ def cart(request):
 
 def order_confirmation(request):
     return render(request, 'order_confirmation.html')
+
+def admin_dashboard(request):
+    return render(request, 'admin-dashboard.html')
+
+def admin_blog(request):
+    return render(request, 'admin-blog.html')
+
+def layout(request):
+    return render(request, 'layout.html')

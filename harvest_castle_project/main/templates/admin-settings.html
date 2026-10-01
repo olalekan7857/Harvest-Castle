@@ -40,7 +40,7 @@
          ?v= pin: force browsers to fetch the latest admin styles
          instead of serving a stale cached copy. Bump when this file
          changes again. -->
-    <link rel="stylesheet" href="assets/css/fd-admin.css?v=6.0">
+    <link rel="stylesheet" href="{% static 'assets/css/fd-admin.css' %}?v=6.0">
     <!-- Harvest Castle theme layer: light/dark tokens + dark surfaces (inert in Light mode) -->
     <link rel="stylesheet" href="{% static 'assets/css/fd-theme.css' %}">
     <!-- Apply the stored theme before first paint. Default is Light. -->
