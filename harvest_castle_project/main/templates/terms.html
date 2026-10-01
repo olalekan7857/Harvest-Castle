@@ -1,0 +1,453 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Terms &amp; Conditions | Harvest Castle</title>
+    <meta name="author" content="Harvest Castle">
+    <meta name="description" content="The terms that apply when you use the Harvest Castle website and ordering services — browsing, ordering, payment, delivery and contact.">
+    <meta name="keywords" content="Harvest Castle, terms and conditions, ordering terms">
+    <meta name="robots" content="INDEX,FOLLOW">
+    <meta property="og:title" content="Terms &amp; Conditions | Harvest Castle">
+    <meta property="og:description" content="The terms that apply when you use the Harvest Castle website and ordering services.">
+    <meta property="og:type" content="website">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicons - Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+
+    <!--==============================
+	  Google Fonts
+	============================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=DM+Sans:wght@400&amp;display=swap" rel="stylesheet">
+
+
+    <!--==============================
+	    All CSS File
+	============================== -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.min.css' %}">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="{% static 'assets/css/slick.min.css' %}">
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/harvest-castle.css' %}">
+    <!-- Harvest Castle foundation overrides (same system as every page) -->
+    <link rel="stylesheet" href="{% static 'assets/css/fresh-direct.css' %}">
+    <!-- Harvest Castle theme layer: light/dark tokens + dark surfaces (inert in Light mode) -->
+    <link rel="stylesheet" href="{% static 'assets/css/fd-theme.css' %}">
+    <!-- Apply the stored theme before first paint. Default is Light. -->
+    <script>try{var fdT=localStorage.getItem("freshdirect_theme_v1");if(fdT==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(fdE){}</script>
+
+</head>
+
+<body>
+
+    <a class="fd-skip-link" href="#fd-main">Skip to main content</a>
+
+    <!--[if lte IE 9]>
+    	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  	<![endif]-->
+
+
+
+    <!--********************************
+    	Code Start From Here
+	******************************** -->
+
+
+
+    <!--==============================
+    Mobile Menu
+    ============================== -->
+    <div class="vs-menu-wrapper" id="fd-mobile-menu">
+        <div class="vs-menu-area text-center">
+            <button class="vs-menu-toggle" aria-label="Close menu" aria-expanded="false" aria-controls="fd-mobile-menu"><i class="fal fa-times" aria-hidden="true"></i></button>
+            <div class="mobile-logo">
+                <a href="index.html" class="fd-logo" aria-label="Harvest Castle home"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="42" height="42">Harvest<span>Castle</span></a>
+            </div>
+            <nav class="vs-mobile-menu" aria-label="Mobile navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="product.html">Shop Produce</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="#" data-whatsapp="general">Order on WhatsApp</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!--==============================
+    Cart Side bar
+    ============================== -->
+    <div class="sideCart-wrapper offcanvas-wrapper" role="dialog" aria-modal="true" aria-label="Shopping cart preview">
+        <div class="sidemenu-content">
+            <button class="closeButton border-theme bg-theme-hover sideMenuCls2" aria-label="Close cart preview"><i class="far fa-times" aria-hidden="true"></i></button>
+            <div class="widget widget_shopping_cart">
+                <h3 class="widget_title">Shopping cart</h3>
+                <div class="widget_shopping_cart_content">
+                    <!-- Shown when the cart is empty; cart items + subtotal are
+                         injected here by assets/js/fresh-direct.js when present. -->
+                    <div class="fd-cart-empty">
+                        <i class="far fa-shopping-basket" aria-hidden="true"></i>
+                        <p><strong>Your cart is empty.</strong></p>
+                        <p>Browse fresh produce and add items to get started.</p>
+                    </div>
+                    <div class="buttons">
+                        <a href="product.html" class="vs-btn">Shop produce</a>
+                        <a href="cart.html" class="fd-view-cart-btn">View cart</a>
+                        <a href="#" class="fd-whatsapp-btn" data-whatsapp="cart"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--==============================
+    Header Area
+    ==============================-->
+    <header class="vs-header header-layout1">
+        <div class="header-top">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-auto">
+                        <div class="header-links">
+                            <ul>
+                                <li><i class="far fa-map-marker-alt" aria-hidden="true"></i>FUNAAB Alabata Road, Camp, Abeokuta</li>
+                                <li class="d-none d-md-inline-block"><i class="far fa-clock" aria-hidden="true"></i>Mon - Sat: 09.00 to 06.00</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-auto d-none d-sm-block">
+                        <div class="header-links">
+                            <ul>
+                                <li class="fd-top-note">Serving the FUNAAB community</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sticky-wrapper">
+            <div class="sticky-active">
+                <div class="menu-area">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <div class="header-logo">
+                                    <a href="index.html" class="fd-logo" aria-label="Harvest Castle home"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="42" height="42">Harvest<span>Castle</span></a>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <nav class="main-menu menu-style1 d-none d-lg-block" aria-label="Primary navigation">
+                                    <ul>
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="product.html">Shop Produce</a></li>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="index.html#how-it-works">How It Works</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="blog.html">Blog</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="col-auto d-lg-none">
+                                <div class="fd-header-actions">
+                                    <button type="button" class="icon-btn fd-mobile-btn fd-theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
+                                        <i class="fas fa-moon" data-theme-icon="moon" aria-hidden="true"></i>
+                                        <i class="fas fa-sun" data-theme-icon="sun" aria-hidden="true" hidden></i>
+                                    </button>
+                                    <a href="cart.html" class="icon-btn fd-mobile-btn fd-cart-btn" aria-label="View cart">
+                                        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                                        <span class="badge" id="fd-cart-count-mobile">0</span>
+                                    </a>
+                                    <button class="vs-menu-toggle d-inline-block" aria-label="Open menu" aria-expanded="false" aria-controls="fd-mobile-menu">
+                                        <i class="fal fa-bars" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <div class="header-icons fd-header-actions">
+                                    <button type="button" class="icon-btn fd-theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
+                                        <i class="fas fa-moon" data-theme-icon="moon" aria-hidden="true"></i>
+                                        <i class="fas fa-sun" data-theme-icon="sun" aria-hidden="true" hidden></i>
+                                    </button>
+                                    <a href="#" class="fd-whatsapp-btn" data-whatsapp="general"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                                    <a href="#" class="icon-btn sideCartToggler fd-cart-btn" aria-label="Open cart preview">
+                                        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                                        <span class="badge" id="fd-cart-count">0</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="fd-main">
+    <!--==============================
+    Terms intro
+    ============================== -->
+    <div class="fd-shop-intro">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="fd-breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li aria-current="page">Terms &amp; Conditions</li>
+                </ol>
+            </nav>
+            <span class="sec-subtitle">Plain and honest</span>
+            <h1 class="sec-title">Terms &amp; Conditions</h1>
+            <p>These terms apply when you use the Harvest Castle website and ordering services.</p>
+            <p><strong>Last updated: 15 September 2026.</strong></p>
+        </div>
+    </div>
+
+    <!--==============================
+    Terms document
+    ============================== -->
+    <section class="fd-pdp-info-section" aria-labelledby="fd-terms-start">
+        <div class="container pt-5" id="fd-terms-doc">
+            <h2 id="fd-terms-start">1. About these terms</h2>
+            <p>These Terms &amp; Conditions govern your use of the Harvest Castle website and the ordering services currently offered through it. Harvest Castle operates as a single-seller produce storefront — one business selling directly to customers, not a marketplace.</p>
+
+            <h2>2. Using Harvest Castle</h2>
+            <p>Through this website you may:</p>
+            <ul>
+                <li>Browse products and view product details.</li>
+                <li>Select available variants and weights.</li>
+                <li>Add products to your cart.</li>
+                <li>Submit an order through the website checkout.</li>
+                <li>Contact Harvest Castle or order through WhatsApp.</li>
+            </ul>
+            <p>Please provide accurate contact and delivery information when ordering, so your order can be confirmed and delivered.</p>
+
+            <h2>3. Products and availability</h2>
+            <p>Products shown on the website are subject to availability. Available variants and weights may differ by product, and prices and availability may change. Harvest Castle may update or remove products at any time. An item shown on the website — including on a previously loaded or cached page — is not guaranteed to be available until confirmed.</p>
+
+            <h2>4. Product information</h2>
+            <p>Harvest Castle aims to keep product names, descriptions, images, variants, quantities and prices accurate. Minor differences in appearance, packaging, size or photography may occur. Nothing on this website should be read as an organic certification or a verified farming-methods claim.</p>
+
+            <h2>5. Orders</h2>
+            <p>You can order in two ways:</p>
+            <ul>
+                <li><strong>Website:</strong> browse, select a variant and quantity, add to cart, and submit your order at checkout.</li>
+                <li><strong>WhatsApp:</strong> message Harvest Castle directly to place or clarify an order.</li>
+            </ul>
+            <p>A submitted order is a request, not a guarantee of every item: where necessary, Harvest Castle confirms availability with you before preparing anything.</p>
+
+            <h2>6. Order confirmation</h2>
+            <p>After submitting an order through the supported flow, you may receive an order or reference confirmation. Harvest Castle distinguishes between order states — for example WhatsApp or manual submissions, pending, failed, paid, and invalid orders — and a confirmation screen always reflects the actual state of your order. Submitting a checkout form alone does not mean an order is paid.</p>
+
+            <h2>7. Prices and totals</h2>
+            <p>Displayed prices apply to the displayed variant. Your selected variant and quantity determine the order subtotal, and your submitted order preserves the prices captured at that time. Prices may change before a future order. No taxes, service fees, delivery fees or discounts apply unless the website expressly shows them.</p>
+
+            <h2>8. Payment</h2>
+            <p>Online payment is not yet live on this website. Harvest Castle does not currently process card payments and does not store card details, and submitting a checkout form does not mark an order as paid. If third-party payment processing is introduced in future, it will be subject to the applicable provider's terms, and these Terms will be updated.</p>
+
+            <h2>9. WhatsApp orders</h2>
+            <p>You may use WhatsApp to ask questions, confirm availability, place orders and share order details. WhatsApp ordering is a manual communication channel with the Harvest Castle team — not an automatic online payment. Anything you send travels through WhatsApp's platform, which Harvest Castle does not operate.</p>
+
+            <h2>10. Delivery</h2>
+            <p>Delivery is manually coordinated, not automated:</p>
+            <ul>
+                <li><strong>On campus:</strong> provide your hostel or building, faculty or office, room or block, and any extra direction.</li>
+                <li><strong>Off campus:</strong> provide your full address, a nearby landmark, and delivery instructions.</li>
+                <li>Alternatively, agree a pickup time at the Harvest Castle store.</li>
+            </ul>
+            <p>No fixed delivery times, same-day promises, automatic rider assignment or live tracking apply unless expressly agreed with you for your order.</p>
+
+            <h2>11. Delivery charges</h2>
+            <p>There is currently no fixed delivery-fee table on this website. If any delivery charge applies to your order, it will be confirmed with you before anything is prepared — never added silently.</p>
+
+            <h2>12. Cancellations and changes</h2>
+            <p>If you need to change or cancel an order, contact Harvest Castle as soon as possible through the <a href="contact.html">Contact page</a> or WhatsApp. Whether a change or cancellation is possible depends on the order's current status and whether preparation or delivery has already begun.</p>
+
+            <h2>13. Produce quality and issues</h2>
+            <p>Farm produce is physical and perishable. If you receive something incorrect, damaged, or not as expected, contact Harvest Castle promptly with your order details so it can be reviewed with you. No automatic refund, replacement or compensation percentages apply beyond what is expressly agreed for your case.</p>
+
+            <h2>14. Customer responsibilities</h2>
+            <p>Please:</p>
+            <ul>
+                <li>Provide accurate contact and delivery details.</li>
+                <li>Review your selected products, variants and quantities before submitting.</li>
+                <li>Include useful delivery instructions.</li>
+                <li>Remain reasonably reachable while your order is being coordinated.</li>
+            </ul>
+
+            <h2>15. Website availability</h2>
+            <p>Harvest Castle aims to keep this website available and working, but uninterrupted access cannot be guaranteed at all times, including during maintenance or circumstances beyond its control.</p>
+
+            <h2>16. Intellectual property</h2>
+            <p>Harvest Castle's website content, branding, text and graphics may be protected by applicable intellectual-property laws. Third-party assets referenced on this site remain the property of their respective owners.</p>
+
+            <h2>17. Third-party services</h2>
+            <p>The only external service involved in ordering today is WhatsApp, when you choose to use it. No payment providers, map services, analytics or advertising networks are integrated into this website at this time.</p>
+
+            <h2>18. Privacy</h2>
+            <p>How Harvest Castle handles your information is described separately in the <a href="privacy.html">Privacy Policy</a>, which forms part of how this service operates.</p>
+
+            <h2>19. Changes to Harvest Castle</h2>
+            <p>Products, prices, availability, website features, ordering processes and these Terms may evolve as the business develops. Completed orders are handled on the basis agreed when they were placed.</p>
+
+            <h2>20. Changes to these Terms</h2>
+            <p>These Terms may be updated from time to time. The Last updated date above will change whenever a material update is made. Continued use of the website after an update means you accept the updated Terms.</p>
+
+            <h2>21. Contact</h2>
+            <p><strong>Harvest Castle</strong><br>
+            No. 89, behind Foursquare Church, FUNAAB Alabata Road, Camp, Abeokuta.</p>
+            <p>
+                <a href="contact.html" class="vs-btn">Contact Harvest Castle</a>
+            </p>
+        </div>
+    </section>
+    </main>
+
+    <!--==============================
+			Footer Area
+	==============================-->
+    <footer class="footer-wrapper footer-layout1" id="contact" data-bg-src="{% static 'assets/img/bg/footer-bg-1-1.jpg' %}">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="media-style1">
+                            <div class="media-icon"><img src="{% static 'assets/img/icon/icon-1-3.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async"></div>
+                            <div class="media-body">
+                                <h3 class="media-title">Visit us:</h3>
+                                <p class="media-info">No. 89, behind Foursquare Church, FUNAAB Alabata Road, Camp, Abeokuta</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="media-style1">
+                            <div class="media-icon"><img src="{% static 'assets/img/icon/icon-1-1.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async"></div>
+                            <div class="media-body">
+                                <h3 class="media-title">Order:</h3>
+                                <p class="media-info">Shop on the website<br>Mon - Sat: 09.00 to 06.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="media-style1">
+                            <div class="media-icon"><img src="{% static 'assets/img/icon/icon-1-2.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async"></div>
+                            <div class="media-body">
+                                <h3 class="media-title">WhatsApp:</h3>
+                                <p class="media-info"><a href="#" data-whatsapp="general">Chat with Harvest Castle to order</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget-area">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-md-6">
+                        <div class="widget footer-widget">
+                            <div class="vs-widget-about">
+                                <div class="footer-logo">
+                                    <a href="index.html" class="fd-logo" aria-label="Harvest Castle home"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="42" height="42">Harvest<span>Castle</span></a>
+                                </div>
+                                <p class="footer-text">Farm produce sold directly to you. Shop online on the website, or order through WhatsApp — serving the FUNAAB and Abeokuta community.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-xl-2">
+                        <div class="widget widget_categories footer-widget">
+                            <h3 class="widget_title">Shop</h3>
+                            <ul>
+                                <li><a href="product.html">All produce</a></li>
+                                <li><a href="product.html">Vegetables</a></li>
+                                <li><a href="product.html">Fruits</a></li>
+                                <li><a href="cart.html">Cart</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-xl-2">
+                        <div class="widget widget_categories footer-widget">
+                            <h3 class="widget_title">Company</h3>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="index.html#how-it-works">How It Works</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="widget footer-widget">
+                            <h4 class="widget_title">Order directly</h4>
+                            <p class="footer-text">The fastest way to order is WhatsApp. Tap below and send your list.</p>
+                            <a href="#" class="fd-whatsapp-btn" data-whatsapp="general"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-wrap">
+            <div class="container">
+                <div class="row justify-content-xl-between justify-content-center align-items-center">
+                    <div class="col-auto">
+                        <p class="copyright-text">Copyright <i class="fal fa-copyright" aria-hidden="true"></i> <span data-fd-year>2026</span> <a href="index.html">Harvest Castle</a>. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-auto">
+                        <div class="copyright-menu">
+                            <ul class="list-unstyled">
+                                <li><a href="privacy.html">Privacy Policy</a></li>
+                                <li><a href="terms.html">Ordering Terms</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll To Top -->
+    <a href="#" class="scrollToTop scroll-btn" aria-label="Scroll to top"><i class="far fa-arrow-up" aria-hidden="true"></i></a>
+
+    <!--********************************
+			Code End  Here
+	******************************** -->
+
+    <!--==============================
+        All Js File
+    ============================== -->
+    <!-- Jquery -->
+    <script src="{% static 'assets/js/vendor/jquery-3.6.0.min.js' %}"></script>
+    <!-- Slick Slider -->
+    <script src="{% static 'assets/js/slick.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <!-- Magnific Popup -->
+    <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <!-- Isotope Filter -->
+    <script src="{% static 'assets/js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
+    <!-- Main Js File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <!-- Harvest Castle config + enhancements (single WhatsApp source) -->
+    <script src="{% static 'assets/js/fresh-direct.js' %}"></script>
+    <script src="{% static 'assets/js/fd-theme.js' %}"></script>
+
+
+</body>
+
+
+</html>

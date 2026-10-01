@@ -1,0 +1,614 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Contact &amp; Help | Harvest Castle</title>
+    <meta name="author" content="Harvest Castle">
+    <meta name="description" content="Contact Harvest Castle for ordering help, product and delivery questions. Reach us directly on WhatsApp or visit us near FUNAAB, Abeokuta.">
+    <meta name="keywords" content="Harvest Castle, contact, help, WhatsApp order help, FUNAAB, Abeokuta">
+    <meta name="robots" content="INDEX,FOLLOW">
+    <meta property="og:title" content="Contact &amp; Help | Harvest Castle">
+    <meta property="og:description" content="Questions about ordering, products or delivery? Chat with Harvest Castle on WhatsApp.">
+    <meta property="og:type" content="website">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicons - Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" href="assets/img/harvest_castle/fd_favicon.png" type="image/x-icon">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+
+    <!--==============================
+	  Google Fonts
+	============================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=DM+Sans:wght@400&amp;display=swap" rel="stylesheet">
+
+
+    <!--==============================
+	    All CSS File
+	============================== -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.min.css' %}">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="{% static 'assets/css/slick.min.css' %}">
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/harvest-castle.css' %}">
+    <!-- Harvest Castle foundation overrides (same system as every page) -->
+    <link rel="stylesheet" href="{% static 'assets/css/fresh-direct.css' %}">
+    <!-- Harvest Castle theme layer: light/dark tokens + dark surfaces (inert in Light mode) -->
+    <link rel="stylesheet" href="{% static 'assets/css/fd-theme.css' %}">
+    <!-- Apply the stored theme before first paint. Default is Light. -->
+    <script>try{var fdT=localStorage.getItem("freshdirect_theme_v1");if(fdT==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(fdE){}</script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Harvest Castle",
+      "description": "Farm-direct produce store serving the FUNAAB and Abeokuta community. Order online or through WhatsApp.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "No. 89, behind Foursquare Church, FUNAAB Alabata Road, Camp",
+        "addressLocality": "Abeokuta",
+        "addressCountry": "NG"
+      }
+    }
+    </script>
+
+</head>
+
+<body>
+
+    <a class="fd-skip-link" href="#fd-main">Skip to main content</a>
+
+    <!--[if lte IE 9]>
+    	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  	<![endif]-->
+
+
+
+    <!--********************************
+    	Code Start From Here
+	******************************** -->
+
+
+
+    <!--==============================
+    Mobile Menu
+    ============================== -->
+    <div class="vs-menu-wrapper" id="fd-mobile-menu">
+        <div class="vs-menu-area text-center">
+            <button class="vs-menu-toggle" aria-label="Close menu" aria-expanded="false" aria-controls="fd-mobile-menu"><i class="fal fa-times" aria-hidden="true"></i></button>
+            <div class="mobile-logo">
+                <a href="index.html" class="fd-logo" aria-label="Harvest Castle home"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="42" height="42">Harvest<span>Castle</span></a>
+            </div>
+            <nav class="vs-mobile-menu" aria-label="Mobile navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="product.html">Shop Produce</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="contact.html" aria-current="page">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="#" data-whatsapp="general">Order on WhatsApp</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!--==============================
+    Cart Side bar
+    ============================== -->
+    <div class="sideCart-wrapper offcanvas-wrapper" role="dialog" aria-modal="true" aria-label="Shopping cart preview">
+        <div class="sidemenu-content">
+            <button class="closeButton border-theme bg-theme-hover sideMenuCls2" aria-label="Close cart preview"><i class="far fa-times" aria-hidden="true"></i></button>
+            <div class="widget widget_shopping_cart">
+                <h3 class="widget_title">Shopping cart</h3>
+                <div class="widget_shopping_cart_content">
+                    <!-- Shown when the cart is empty; cart items + subtotal are
+                         injected here by assets/js/fresh-direct.js when present. -->
+                    <div class="fd-cart-empty">
+                        <i class="far fa-shopping-basket" aria-hidden="true"></i>
+                        <p><strong>Your cart is empty.</strong></p>
+                        <p>Browse fresh produce and add items to get started.</p>
+                    </div>
+                    <div class="buttons">
+                        <a href="product.html" class="vs-btn">Shop produce</a>
+                        <a href="cart.html" class="fd-view-cart-btn">View cart</a>
+                        <a href="#" class="fd-whatsapp-btn" data-whatsapp="cart"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--==============================
+    Header Area
+    ==============================-->
+    <header class="vs-header header-layout1">
+        <div class="header-top">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-auto">
+                        <div class="header-links">
+                            <ul>
+                                <li><i class="far fa-map-marker-alt" aria-hidden="true"></i>FUNAAB Alabata Road, Camp, Abeokuta</li>
+                                <li class="d-none d-md-inline-block"><i class="far fa-clock" aria-hidden="true"></i>Mon - Sat: 09.00 to 06.00</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-auto d-none d-sm-block">
+                        <div class="header-links">
+                            <ul>
+                                <li class="fd-top-note">Serving the FUNAAB community</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sticky-wrapper">
+            <div class="sticky-active">
+                <div class="menu-area">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <div class="header-logo">
+                                    <a href="index.html" class="fd-logo" aria-label="Harvest Castle home"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="42" height="42">Harvest<span>Castle</span></a>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <nav class="main-menu menu-style1 d-none d-lg-block" aria-label="Primary navigation">
+                                    <ul>
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="product.html">Shop Produce</a></li>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="index.html#how-it-works">How It Works</a></li>
+                                        <li><a href="contact.html" aria-current="page">Contact</a></li>
+                                        <li><a href="blog.html">Blog</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="col-auto d-lg-none">
+                                <div class="fd-header-actions">
+                                    <button type="button" class="icon-btn fd-mobile-btn fd-theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
+                                        <i class="fas fa-moon" data-theme-icon="moon" aria-hidden="true"></i>
+                                        <i class="fas fa-sun" data-theme-icon="sun" aria-hidden="true" hidden></i>
+                                    </button>
+                                    <a href="cart.html" class="icon-btn fd-mobile-btn fd-cart-btn" aria-label="View cart">
+                                        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                                        <span class="badge" id="fd-cart-count-mobile">0</span>
+                                    </a>
+                                    <button class="vs-menu-toggle d-inline-block" aria-label="Open menu" aria-expanded="false" aria-controls="fd-mobile-menu">
+                                        <i class="fal fa-bars" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <div class="header-icons fd-header-actions">
+                                    <button type="button" class="icon-btn fd-theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
+                                        <i class="fas fa-moon" data-theme-icon="moon" aria-hidden="true"></i>
+                                        <i class="fas fa-sun" data-theme-icon="sun" aria-hidden="true" hidden></i>
+                                    </button>
+                                    <a href="#" class="fd-whatsapp-btn" data-whatsapp="general"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                                    <a href="#" class="icon-btn sideCartToggler fd-cart-btn" aria-label="Open cart preview">
+                                        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                                        <span class="badge" id="fd-cart-count">0</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="fd-main">
+    <!--==============================
+    Contact intro
+    ============================== -->
+    <div class="fd-shop-intro">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="fd-breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li aria-current="page">Contact</li>
+                </ol>
+            </nav>
+            <span class="sec-subtitle">We reply on WhatsApp</span>
+            <h1 class="sec-title">Get in Touch</h1>
+            <p>Questions about ordering, products or delivery? Chat with Harvest Castle directly — no accounts, no waiting on hold.</p>
+        </div>
+    </div>
+
+    <!--==============================
+    How to reach us
+    ============================== -->
+    <section class="space-bottom pt-5" id="reach" aria-labelledby="fd-reach-title">
+        <div class="container">
+            <div class="row g-4 align-items-stretch">
+                <div class="col-lg-6">
+                    <div class="fd-location-card">
+                        <span class="sec-subtitle">Fastest response</span>
+                        <h2 class="sec-title" id="fd-reach-title">Chat on WhatsApp</h2>
+                        <p>WhatsApp is the primary way to reach Harvest Castle. Message us for:</p>
+                        <ul>
+                            <li>Product questions and availability</li>
+                            <li>Placing or clarifying an order</li>
+                            <li>Delivery questions</li>
+                            <li>Help with an existing order</li>
+                        </ul>
+                        <a href="#" class="fd-whatsapp-btn" data-whatsapp="general"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Chat with Harvest Castle</span></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="fd-location-card">
+                        <span class="sec-subtitle">Find us</span>
+                        <h2 class="sec-title">Visit the Store</h2>
+                        <p>Harvest Castle is based just off campus, serving the FUNAAB and Camp community.</p>
+                        <address>
+                            <strong>Harvest Castle</strong><br>
+                            No. 89, behind Foursquare Church,<br>
+                            FUNAAB Alabata Road, Camp, Abeokuta.
+                        </address>
+                        <p class="mb-0">Open Mon – Sat: 09.00 to 06.00.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--==============================
+    Send us a message
+    ============================== -->
+    <section class="space-bottom" id="message" aria-labelledby="fd-message-title">
+        <div class="container">
+            <div class="title-area text-center">
+                <div class="title-img">
+                    <img src="{% static 'assets/img/icon/title-logo.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                </div>
+                <span class="sec-subtitle">Prefer to write?</span>
+                <h2 class="sec-title" id="fd-message-title">Send Us a Message</h2>
+                <p>Send a general enquiry and Harvest Castle will respond — or chat instantly on WhatsApp.</p>
+            </div>
+            <div class="row g-4 align-items-stretch">
+                <div class="col-lg-5">
+                    <div class="fd-location-card">
+                        <span class="sec-subtitle">How it works</span>
+                        <h3 class="h4">What happens next</h3>
+                        <p>Fill in your details and your message. Your message opens in WhatsApp, ready to send — Harvest Castle confirms and responds personally.</p>
+                        <ul>
+                            <li>No account needed</li>
+                            <li>We reply on WhatsApp</li>
+                            <li>Open Mon – Sat: 09.00 to 06.00</li>
+                        </ul>
+                        <a href="#" class="fd-whatsapp-btn" data-whatsapp="general"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Chat on WhatsApp instead</span></a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="fd-location-card fd-contact-card">
+                        <form id="fd-contact-form" novalidate>
+                            <div class="fd-field">
+                                <label for="fd-contact-name">Full Name</label>
+                                <input class="form-control" type="text" id="fd-contact-name" name="name" autocomplete="name" placeholder="e.g. Adaeze Okafor" required>
+                                <span class="fd-field-error" id="fd-contact-name-error" hidden></span>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="fd-field">
+                                        <label for="fd-contact-phone">Phone Number</label>
+                                        <input class="form-control" type="tel" id="fd-contact-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="e.g. 0803 123 4567" required>
+                                        <span class="fd-field-error" id="fd-contact-phone-error" hidden></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="fd-field">
+                                        <label for="fd-contact-email">Email Address <span class="fd-optional">(optional)</span></label>
+                                        <input class="form-control" type="email" id="fd-contact-email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com">
+                                        <span class="fd-field-error" id="fd-contact-email-error" hidden></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fd-field">
+                                <label for="fd-contact-subject">Subject</label>
+                                <input class="form-control" type="text" id="fd-contact-subject" name="subject" autocomplete="off" placeholder="e.g. Question about delivery" required>
+                                <span class="fd-field-error" id="fd-contact-subject-error" hidden></span>
+                            </div>
+                            <div class="fd-field">
+                                <label for="fd-contact-message">Message</label>
+                                <textarea class="form-control" id="fd-contact-message" name="message" rows="5" placeholder="How can we help?" required></textarea>
+                                <span class="fd-field-error" id="fd-contact-message-error" hidden></span>
+                            </div>
+                            <p class="fd-contact-status" id="fd-contact-status" role="status" aria-live="polite" hidden></p>
+                            <div class="fd-contact-actions">
+                                <button type="submit" class="vs-btn" id="fd-contact-send">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--==============================
+    Ordering & delivery help
+    ============================== -->
+    <section class="space-bottom" id="ordering-help" aria-labelledby="fd-ordering-help-title">
+        <div class="container">
+            <div class="title-area text-center">
+                <div class="title-img">
+                    <img src="{% static 'assets/img/icon/title-logo.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                </div>
+                <span class="sec-subtitle">Need help with your order?</span>
+                <h2 class="sec-title" id="fd-ordering-help-title">Two Ways to Order</h2>
+            </div>
+            <div class="row g-4 align-items-stretch">
+                <div class="col-lg-4">
+                    <div class="fd-location-card">
+                        <span class="sec-subtitle">Option one</span>
+                        <h3 class="h4">Order on the website</h3>
+                        <p>Shop → Product → Cart → Checkout. Browse produce, choose your variant and quantity, add to cart and check out — no account needed.</p>
+                        <a href="product.html" class="vs-btn">Shop Fresh Produce</a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="fd-location-card">
+                        <span class="sec-subtitle">Option two</span>
+                        <h3 class="h4">Order on WhatsApp</h3>
+                        <p>Send your list by chat — produce, quantities and where you are — and Harvest Castle confirms availability and delivery with you.</p>
+                        <a href="#" class="fd-whatsapp-btn" data-whatsapp="general"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="fd-location-card">
+                        <span class="sec-subtitle">Delivery</span>
+                        <h3 class="h4">Manually coordinated</h3>
+                        <p>There is no automated courier. Share <strong>on campus:</strong> hostel, room or block — or <strong>off campus:</strong> address and landmark. Pickup can also be agreed.</p>
+                        <a href="cart.html" class="fd-ghost-btn">Review Your Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--==============================
+    FAQ
+    ============================== -->
+    <section class="space-bottom" id="faq" aria-labelledby="fd-faq-title">
+        <div class="container">
+            <div class="title-area text-center">
+                <div class="title-img">
+                    <img src="{% static 'assets/img/icon/title-logo.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                </div>
+                <span class="sec-subtitle">Good to know</span>
+                <h2 class="sec-title" id="fd-faq-title">Frequently Asked Questions</h2>
+            </div>
+            <div class="accordion accordion-style1 fd-faq" id="fd-faq-accordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="fd-faq-h1">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fd-faq-c1" aria-expanded="false" aria-controls="fd-faq-c1">How can I order?</button>
+                    </h3>
+                    <div id="fd-faq-c1" class="accordion-collapse collapse" aria-labelledby="fd-faq-h1" data-bs-parent="#fd-faq-accordion">
+                        <div class="accordion-body">Two ways. Order on the website — browse produce, choose a variant and quantity, add to cart and check out. Or order through WhatsApp by sending your list and delivery details by chat.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="fd-faq-h2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fd-faq-c2" aria-expanded="false" aria-controls="fd-faq-c2">Do I need an account?</button>
+                    </h3>
+                    <div id="fd-faq-c2" class="accordion-collapse collapse" aria-labelledby="fd-faq-h2" data-bs-parent="#fd-faq-accordion">
+                        <div class="accordion-body">No. Harvest Castle does not require customer login — you can shop, check out and order as a guest.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="fd-faq-h3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fd-faq-c3" aria-expanded="false" aria-controls="fd-faq-c3">Can I choose the quantity and weight?</button>
+                    </h3>
+                    <div id="fd-faq-c3" class="accordion-collapse collapse" aria-labelledby="fd-faq-h3" data-bs-parent="#fd-faq-accordion">
+                        <div class="accordion-body">Yes. Each product shows its available variants and weights — for example 1kg or per bunch — and you choose the quantity before adding it to your cart.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="fd-faq-h4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fd-faq-c4" aria-expanded="false" aria-controls="fd-faq-c4">Do you deliver on campus?</button>
+                    </h3>
+                    <div id="fd-faq-c4" class="accordion-collapse collapse" aria-labelledby="fd-faq-h4" data-bs-parent="#fd-faq-accordion">
+                        <div class="accordion-body">Yes. Share your hostel or faculty building, room or block, and any extra direction at checkout or on WhatsApp, and delivery is arranged personally with you.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="fd-faq-h5">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fd-faq-c5" aria-expanded="false" aria-controls="fd-faq-c5">Do you deliver off campus?</button>
+                    </h3>
+                    <div id="fd-faq-c5" class="accordion-collapse collapse" aria-labelledby="fd-faq-h5" data-bs-parent="#fd-faq-accordion">
+                        <div class="accordion-body">Yes. Share your full address and a nearby landmark during checkout or on WhatsApp. Any delivery fee is confirmed with you before anything is prepared.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="fd-faq-h6">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fd-faq-c6" aria-expanded="false" aria-controls="fd-faq-c6">How do I know the status of my order?</button>
+                    </h3>
+                    <div id="fd-faq-c6" class="accordion-collapse collapse" aria-labelledby="fd-faq-h6" data-bs-parent="#fd-faq-accordion">
+                        <div class="accordion-body">Harvest Castle confirms every order personally — on WhatsApp, or when you check out on the website. There is no automated tracking screen; if anything is unclear, just ask on WhatsApp.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="fd-faq-h7">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#fd-faq-c7" aria-expanded="false" aria-controls="fd-faq-c7">What if I need help with an order?</button>
+                    </h3>
+                    <div id="fd-faq-c7" class="accordion-collapse collapse" aria-labelledby="fd-faq-h7" data-bs-parent="#fd-faq-accordion">
+                        <div class="accordion-body">Message Harvest Castle on WhatsApp with your name and what you ordered, and it will be sorted out with you directly.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--==============================
+    WhatsApp CTA band
+    ============================== -->
+    <section class="space-bottom" aria-labelledby="fd-cta-title">
+        <div class="container">
+            <div class="fd-cta-band">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-8">
+                        <h2 id="fd-cta-title">Still have a question?</h2>
+                        <p>Chat with Harvest Castle on WhatsApp — ordering help, product questions and delivery questions, answered directly.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <div class="d-flex flex-column gap-2 align-items-stretch align-items-lg-end">
+                            <a href="#" class="fd-whatsapp-btn" data-whatsapp="general"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Chat on WhatsApp</span></a>
+                            <a href="product.html" class="vs-btn">Shop Fresh Produce</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!--==============================
+			Footer Area
+	==============================-->
+    <footer class="footer-wrapper footer-layout1" id="contact" data-bg-src="{% static 'assets/img/bg/footer-bg-1-1.jpg' %}">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="media-style1">
+                            <div class="media-icon"><img src="{% static 'assets/img/icon/icon-1-3.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async"></div>
+                            <div class="media-body">
+                                <h3 class="media-title">Visit us:</h3>
+                                <p class="media-info">No. 89, behind Foursquare Church, FUNAAB Alabata Road, Camp, Abeokuta</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="media-style1">
+                            <div class="media-icon"><img src="{% static 'assets/img/icon/icon-1-1.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async"></div>
+                            <div class="media-body">
+                                <h3 class="media-title">Order:</h3>
+                                <p class="media-info">Shop on the website<br>Mon - Sat: 09.00 to 06.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="media-style1">
+                            <div class="media-icon"><img src="{% static 'assets/img/icon/icon-1-2.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async"></div>
+                            <div class="media-body">
+                                <h3 class="media-title">WhatsApp:</h3>
+                                <p class="media-info"><a href="#" data-whatsapp="general">Chat with Harvest Castle to order</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget-area">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-md-6">
+                        <div class="widget footer-widget">
+                            <div class="vs-widget-about">
+                                <div class="footer-logo">
+                                    <a href="index.html" class="fd-logo" aria-label="Harvest Castle home"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="42" height="42">Harvest<span>Castle</span></a>
+                                </div>
+                                <p class="footer-text">Farm produce sold directly to you. Shop online on the website, or order through WhatsApp — serving the FUNAAB and Abeokuta community.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-xl-2">
+                        <div class="widget widget_categories footer-widget">
+                            <h3 class="widget_title">Shop</h3>
+                            <ul>
+                                <li><a href="product.html">All produce</a></li>
+                                <li><a href="product.html">Vegetables</a></li>
+                                <li><a href="product.html">Fruits</a></li>
+                                <li><a href="cart.html">Cart</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-xl-2">
+                        <div class="widget widget_categories footer-widget">
+                            <h3 class="widget_title">Company</h3>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="index.html#how-it-works">How It Works</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="widget footer-widget">
+                            <h4 class="widget_title">Order directly</h4>
+                            <p class="footer-text">The fastest way to order is WhatsApp. Tap below and send your list.</p>
+                            <a href="#" class="fd-whatsapp-btn" data-whatsapp="general"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-wrap">
+            <div class="container">
+                <div class="row justify-content-xl-between justify-content-center align-items-center">
+                    <div class="col-auto">
+                        <p class="copyright-text">Copyright <i class="fal fa-copyright" aria-hidden="true"></i> <span data-fd-year>2026</span> <a href="index.html">Harvest Castle</a>. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-auto">
+                        <div class="copyright-menu">
+                            <ul class="list-unstyled">
+                                <!-- Later stage: Privacy / Terms pages. -->
+                                <li><a href="privacy.html">Privacy Policy</a></li>
+                                <li><a href="terms.html">Ordering Terms</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll To Top -->
+    <a href="#" class="scrollToTop scroll-btn" aria-label="Scroll to top"><i class="far fa-arrow-up" aria-hidden="true"></i></a>
+
+    <!--********************************
+			Code End  Here
+	******************************** -->
+
+    <!--==============================
+        All Js File
+    ============================== -->
+    <!-- Jquery -->
+    <script src="{% static 'assets/js/vendor/jquery-3.6.0.min.js' %}"></script>
+    <!-- Slick Slider -->
+    <script src="{% static 'assets/js/slick.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <!-- Magnific Popup -->
+    <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <!-- Isotope Filter -->
+    <script src="{% static 'assets/js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
+    <!-- Main Js File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <!-- Harvest Castle config + enhancements (single WhatsApp source) -->
+    <script src="{% static 'assets/js/fresh-direct.js' %}"></script>
+    <script src="{% static 'assets/js/fd-theme.js' %}"></script>
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,330 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Blog Editor | Harvest Castle Admin</title>
+    <meta name="author" content="Harvest Castle">
+    <!-- Admin is private: never index admin pages or expose post data. -->
+    <meta name="robots" content="NOINDEX,NOFOLLOW">
+    <meta name="description" content="Private Harvest Castle seller blog editor. Sign-in required.">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicons - Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" href="assets/img/harvest_castle/hc_favicon.png" type="image/png">
+    <link rel="icon" href="assets/img/harvest_castle/hc_favicon.png" type="image/png">
+
+    <!--==============================
+	  Google Fonts (same as storefront)
+	============================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=DM+Sans:wght@400&amp;display=swap" rel="stylesheet">
+
+    <!--==============================
+	    All CSS File (same stack + scoped admin foundation)
+	============================== -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/harvest-castle.css' %}">
+    <!-- Harvest Castle foundation overrides -->
+    <link rel="stylesheet" href="{% static 'assets/css/fresh-direct.css' %}">
+    <!-- Harvest Castle admin foundation. -->
+    <link rel="stylesheet" href="assets/css/fd-admin.css?v=6.0">
+    <!-- Harvest Castle theme layer: light/dark tokens + dark surfaces (inert in Light mode) -->
+    <link rel="stylesheet" href="{% static 'assets/css/fd-theme.css' %}">
+    <!-- Apply the stored theme before first paint. Default is Light. -->
+    <script>try{var fdT=localStorage.getItem("freshdirect_theme_v1");if(fdT==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(fdE){}</script>
+
+</head>
+
+<body class="fd-admin">
+
+    <a class="fd-skip-link" href="#fd-admin-main">Skip to blog editor</a>
+
+    <!--==============================
+    Admin shell (Stage 1 foundation, reused unchanged).
+    The blog editor lives under Blog, so Blog keeps
+    aria-current="page".
+    ============================== -->
+    <div class="fd-admin-shell" id="fd-admin-shell">
+
+        <!-- Sidebar navigation -->
+        <aside class="fd-admin-sidebar" id="fd-admin-sidebar" aria-label="Admin navigation">
+            <div class="fd-admin-brand">
+                <a href="index.html" class="fd-logo" aria-label="Harvest Castle storefront"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="36" height="36">Harvest<span>Castle</span></a>
+            </div>
+            <p class="fd-admin-role">Seller Admin</p>
+            <nav class="fd-admin-nav" aria-label="Management sections">
+                <ul>
+                    <li>
+                        <a href="admin-dashboard.html" class="fd-admin-nav-link">
+                            <i class="fas fa-tachometer-alt" aria-hidden="true"></i>Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-products.html" class="fd-admin-nav-link">
+                            <i class="fas fa-box" aria-hidden="true"></i>Products
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-blog.html" class="fd-admin-nav-link" aria-current="page">
+                            <i class="fas fa-newspaper" aria-hidden="true"></i>Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-orders.html" class="fd-admin-nav-link">
+                            <i class="fas fa-receipt" aria-hidden="true"></i>Orders
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-settings.html" class="fd-admin-nav-link">
+                            <i class="fas fa-cog" aria-hidden="true"></i>Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="fd-admin-side-foot">
+                <!-- Disabled until a seller session exists; wired to FreshDirectAdminAuth.signOut(). -->
+                <button type="button" class="fd-admin-logout" id="fd-admin-logout" aria-disabled="true" title="Sign in first — log out is available after sign-in">
+                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i>Log Out
+                </button>
+                <p class="fd-admin-logout-hint">Log out is available after you sign in.</p>
+            </div>
+        </aside>
+
+        <!-- Drawer scrim (mobile only, shown via CSS when .nav-open) -->
+        <button type="button" class="fd-admin-scrim" id="fd-admin-scrim" aria-label="Close admin menu" tabindex="-1"></button>
+
+        <!-- Main column -->
+        <div class="fd-admin-main">
+            <header class="fd-admin-topbar">
+                <button type="button" class="fd-admin-menu-btn" id="fd-admin-menu-btn" aria-label="Open admin menu" aria-expanded="false" aria-controls="fd-admin-sidebar">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+                <h1 class="fd-admin-title" id="fd-bed-topbar-title">Blog Editor</h1>
+                <span class="fd-admin-context">Seller area &middot; blog management</span>
+                <button type="button" class="icon-btn fd-theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
+                    <i class="fas fa-moon" data-theme-icon="moon" aria-hidden="true"></i>
+                    <i class="fas fa-sun" data-theme-icon="sun" aria-hidden="true" hidden></i>
+                </button>
+            </header>
+
+            <main class="fd-admin-content fd-dash" id="fd-admin-main" tabindex="-1">
+                <div class="fd-dash-head">
+                    <p class="fd-edit-back"><a href="admin-blog.html"><i class="fas fa-arrow-left" aria-hidden="true"></i>Back to Blog</a></p>
+                    <h2 class="fd-edit-title" id="fd-bed-heading">Blog Editor</h2>
+                    <p class="fd-dash-lead" id="fd-bed-lead">Create a new Harvest Castle article or edit an existing one. Fields mirror blog-detail.html (title, excerpt, category, author, image, body, tags).</p>
+                </div>
+
+                <noscript>
+                    <div class="fd-admin-notice is-error" role="alert">
+                        <strong>JavaScript is required.</strong>
+                        The blog editor needs JavaScript enabled to work.
+                    </div>
+                </noscript>
+
+                <!-- Post-not-found state: never silently creates a post. -->
+                <div class="fd-dash-empty" id="fd-bed-missing" hidden>
+                    <i class="far fa-search" aria-hidden="true"></i>
+                    <h3>Post not found</h3>
+                    <p>We could not find that post. It may have been removed or the link is incorrect. Nothing was created or changed.</p>
+                    <div class="fd-dash-empty-actions">
+                        <a href="admin-blog.html" class="vs-btn fd-dash-btn">Back to Blog</a>
+                        <a href="admin-blog-edit.html" class="fd-ghost-btn fd-dash-btn">Add a new post</a>
+                    </div>
+                </div>
+
+                <div id="fd-bed-content">
+                    <form id="fd-bed-form" novalidate aria-describedby="fd-bed-lead">
+
+                        <!-- Validation summary: populated on submit, links to fields. -->
+                        <div class="fd-admin-notice is-error" id="fd-bed-summary" role="alert" tabindex="-1" hidden>
+                            <strong>Check the highlighted fields.</strong>
+                            <ul id="fd-bed-summary-list"></ul>
+                        </div>
+
+                        <!-- Post identity (edit mode only): IDs/slugs never change silently. -->
+                        <section class="fd-dash-section" id="fd-bed-identity-section" aria-labelledby="fd-bed-identity-title" hidden>
+                            <h2 id="fd-bed-identity-title">Post identity</h2>
+                            <p class="fd-edit-id-line">Post ID: <code id="fd-bed-post-id"></code></p>
+                            <p class="fd-dash-hint">The post ID never changes, even if you retitle the article.</p>
+                        </section>
+
+                        <!-- Basic information -->
+                        <section class="fd-dash-section" aria-labelledby="fd-bed-basic-title">
+                            <h2 id="fd-bed-basic-title">Basic information</h2>
+                            <div class="fd-field">
+                                <label for="fd-bed-title">Post title</label>
+                                <input class="form-control" type="text" id="fd-bed-title" name="title" autocomplete="off" maxlength="160" required aria-describedby="fd-bed-title-error fd-bed-title-hint">
+                                <p class="fd-dash-hint" id="fd-bed-title-hint">The headline readers see on cards and the article page (mirrors blog-detail.html title).</p>
+                                <span class="fd-field-error" id="fd-bed-title-error" hidden></span>
+                            </div>
+                            <div class="fd-field">
+                                <label for="fd-bed-category">Category</label>
+                                <select class="form-select" id="fd-bed-category" name="category" required aria-describedby="fd-bed-category-error">
+                                    <option value="">Choose a category…</option>
+                                    <option value="Fresh Produce">Fresh Produce</option>
+                                    <option value="Fruits">Fruits</option>
+                                    <option value="Vegetables">Vegetables</option>
+                                    <option value="Healthy Living">Healthy Living</option>
+                                    <option value="Recipes">Recipes</option>
+                                    <option value="Food Storage">Food Storage</option>
+                                    <option value="Farm Tips">Farm Tips</option>
+                                    <option value="Seasonal">Seasonal</option>
+                                </select>
+                                <span class="fd-field-error" id="fd-bed-category-error" hidden></span>
+                            </div>
+                            <div class="fd-field">
+                                <label for="fd-bed-excerpt">Excerpt</label>
+                                <textarea class="form-control" id="fd-bed-excerpt" name="excerpt" rows="3" maxlength="500" required aria-describedby="fd-bed-excerpt-error fd-bed-excerpt-hint"></textarea>
+                                <p class="fd-dash-hint" id="fd-bed-excerpt-hint">Short summary shown on blog cards and under the headline (mirrors the deck on blog-detail.html).</p>
+                                <span class="fd-field-error" id="fd-bed-excerpt-error" hidden></span>
+                            </div>
+                            <div class="fd-field">
+                                <label for="fd-bed-author">Author</label>
+                                <input class="form-control" type="text" id="fd-bed-author" name="author" autocomplete="off" maxlength="80" value="Harvest Castle Team" aria-describedby="fd-bed-author-hint">
+                                <p class="fd-dash-hint" id="fd-bed-author-hint">Shown in the article byline.</p>
+                            </div>
+                            <div class="fd-field">
+                                <label for="fd-bed-tags">Tags <span class="fd-optional">(optional)</span></label>
+                                <input class="form-control" type="text" id="fd-bed-tags" name="tags" autocomplete="off" maxlength="250" aria-describedby="fd-bed-tags-hint">
+                                <p class="fd-dash-hint" id="fd-bed-tags-hint">Comma-separated, e.g. “tomatoes, storage, food waste”. Used for related posts and search.</p>
+                            </div>
+                        </section>
+
+                        <!-- Featured image: choose a file to preview it here. -->
+                        <section class="fd-dash-section" aria-labelledby="fd-bed-image-title">
+                            <h2 id="fd-bed-image-title">Featured image</h2>
+                            <p class="fd-dash-hint" style="margin-top:0">Add a clear cover photo. Choose a file to preview it here before saving.</p>
+                            <div class="fd-edit-image-layout">
+                                <div class="fd-edit-image-fields">
+                                    <div class="fd-field fd-edit-upload">
+                                        <label for="fd-bed-image-file">Upload featured image</label>
+                                        <input class="form-control fd-edit-file-input" type="file" id="fd-bed-image-file" name="imageFile" accept="image/png,image/jpeg,image/webp,image/gif" aria-describedby="fd-bed-image-file-hint fd-bed-image-file-error fd-bed-image-status">
+                                        <p class="fd-dash-hint" id="fd-bed-image-file-hint">PNG, JPEG, WebP or GIF, up to 5&nbsp;MB. Choosing a file replaces the preview.</p>
+                                        <span class="fd-field-error" id="fd-bed-image-file-error" hidden></span>
+                                        <p class="fd-edit-file-meta" id="fd-bed-image-status" role="status" aria-live="polite">No image selected yet.</p>
+                                    </div>
+                                    <div class="fd-field">
+                                        <label for="fd-bed-image-src">Or paste an image address</label>
+                                        <input class="form-control" type="text" id="fd-bed-image-src" name="imageSrc" autocomplete="off" maxlength="500" aria-describedby="fd-bed-image-src-hint fd-bed-image-src-error">
+                                        <p class="fd-dash-hint" id="fd-bed-image-src-hint">Paste an image address. A file selected above takes priority when present.</p>
+                                        <span class="fd-field-error" id="fd-bed-image-src-error" hidden></span>
+                                    </div>
+                                    <div class="fd-field">
+                                        <label for="fd-bed-image-alt">Image description (alt text)</label>
+                                        <input class="form-control" type="text" id="fd-bed-image-alt" name="imageAlt" autocomplete="off" maxlength="125" required aria-describedby="fd-bed-image-alt-error fd-bed-image-alt-hint">
+                                        <p class="fd-dash-hint" id="fd-bed-image-alt-hint">Describe the photo for screen readers, e.g. “Box of fresh vegetables”.</p>
+                                        <span class="fd-field-error" id="fd-bed-image-alt-error" hidden></span>
+                                    </div>
+                                    <div class="fd-field">
+                                        <label for="fd-bed-caption">Image caption <span class="fd-optional">(optional)</span></label>
+                                        <input class="form-control" type="text" id="fd-bed-caption" name="caption" autocomplete="off" maxlength="160" aria-describedby="fd-bed-caption-hint">
+                                        <p class="fd-dash-hint" id="fd-bed-caption-hint">Shown under the cover photo on the article page.</p>
+                                    </div>
+                                </div>
+                                <figure class="fd-edit-preview" aria-live="polite">
+                                    <span class="fd-edit-preview-frame">
+                                        <img id="fd-bed-preview-img" alt="" hidden>
+                                    </span>
+                                    <figcaption id="fd-bed-preview-cap">Image preview appears here.</figcaption>
+                                </figure>
+                            </div>
+                        </section>
+
+                        <!-- Article body -->
+                        <section class="fd-dash-section" aria-labelledby="fd-bed-body-title">
+                            <h2 id="fd-bed-body-title">Article content</h2>
+                            <div class="fd-field">
+                                <label for="fd-bed-body">Body</label>
+                                <textarea class="form-control" id="fd-bed-body" name="body" rows="12" required aria-describedby="fd-bed-body-error fd-bed-body-hint"></textarea>
+                                <p class="fd-dash-hint" id="fd-bed-body-hint">The full article (mirrors the blog-detail.html body: paragraphs, headings, lists, quotes, tips). Plain text — line breaks are kept. Django renders the structured body.</p>
+                                <span class="fd-field-error" id="fd-bed-body-error" hidden></span>
+                            </div>
+                        </section>
+
+                        <!-- Publishing -->
+                        <fieldset class="fd-dash-section fd-edit-availability" aria-describedby="fd-bed-status-error">
+                            <legend>Publishing</legend>
+                            <div class="fd-edit-radio-group" role="radiogroup" aria-label="Post status">
+                                <label class="fd-edit-radio" for="fd-bed-status-published">
+                                    <input type="radio" id="fd-bed-status-published" name="status" value="published" checked>
+                                    <span><strong>Published</strong><span class="fd-edit-radio-sub">Visible on the blog immediately.</span></span>
+                                </label>
+                                <label class="fd-edit-radio" for="fd-bed-status-draft">
+                                    <input type="radio" id="fd-bed-status-draft" name="status" value="draft">
+                                    <span><strong>Draft</strong><span class="fd-edit-radio-sub">Hidden until you publish it.</span></span>
+                                </label>
+                            </div>
+                            <span class="fd-field-error" id="fd-bed-status-error" hidden></span>
+                            <div class="fd-field" style="margin-top:16px">
+                                <label class="fd-edit-default" for="fd-bed-featured" style="margin:0">
+                                    <input type="checkbox" id="fd-bed-featured" name="featured">
+                                    <span>Feature this post <span class="fd-edit-radio-sub">Shows in the “Editor's pick” slot on blog.html.</span></span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <!-- SEO -->
+                        <section class="fd-dash-section" aria-labelledby="fd-bed-seo-title">
+                            <h2 id="fd-bed-seo-title">SEO <span class="fd-optional">(optional)</span></h2>
+                            <div class="fd-field">
+                                <label for="fd-bed-seo-title-input">SEO title</label>
+                                <input class="form-control" type="text" id="fd-bed-seo-title-input" name="seoTitle" autocomplete="off" maxlength="160" aria-describedby="fd-bed-seo-title-hint">
+                                <p class="fd-dash-hint" id="fd-bed-seo-title-hint">Falls back to the post title when empty.</p>
+                            </div>
+                            <div class="fd-field">
+                                <label for="fd-bed-seo-desc">SEO description</label>
+                                <textarea class="form-control" id="fd-bed-seo-desc" name="seoDescription" rows="2" maxlength="300" aria-describedby="fd-bed-seo-desc-hint"></textarea>
+                                <p class="fd-dash-hint" id="fd-bed-seo-desc-hint">Falls back to the excerpt when empty.</p>
+                            </div>
+                        </section>
+
+                        <!-- Actions -->
+                        <section class="fd-dash-section fd-edit-actions" aria-label="Editor actions">
+                            <button type="submit" class="vs-btn fd-dash-btn" id="fd-bed-submit">
+                                <i class="fas fa-check" aria-hidden="true"></i><span id="fd-bed-submit-label">Save Changes</span>
+                            </button>
+                            <a href="admin-blog.html" class="fd-ghost-btn fd-dash-btn" id="fd-bed-cancel">Cancel</a>
+                        </section>
+
+                    </form>
+
+                    <!-- Submission result: seller-facing confirmation + post summary. -->
+                    <section class="fd-dash-section" id="fd-bed-result" aria-labelledby="fd-bed-result-title" hidden>
+                        <h2 id="fd-bed-result-title" tabindex="-1">Post saved</h2>
+                        <div class="fd-admin-notice is-success" role="status" id="fd-bed-result-note"></div>
+                        <div class="fd-edit-result-summary" id="fd-bed-result-summary"></div>
+                        <div class="fd-edit-result-actions">
+                            <a href="admin-blog.html" class="vs-btn fd-dash-btn">Back to Blog</a>
+                            <a href="admin-blog-edit.html" class="fd-ghost-btn fd-dash-btn" id="fd-bed-result-new" hidden>Create another post</a>
+                            <a href="blog-detail.html" class="fd-ghost-btn fd-dash-btn" id="fd-bed-result-view" hidden>View on blog</a>
+                        </div>
+                    </section>
+                </div>
+
+                <p class="fd-dash-foot-note">
+                    Copyright <i class="fal fa-copyright" aria-hidden="true"></i> <span data-fd-year>2026</span> <a href="index.html">Harvest Castle</a>. Seller area.
+                </p>
+            </main>
+        </div>
+    </div>
+
+    <!-- Admin JS only: deliberately NOT loading fresh-direct.js so the
+         customer cart store can never leak into the admin. -->
+    <script src="{% static 'assets/js/fd-admin.js' %}"></script>
+    <script src="{% static 'assets/js/fd-theme.js' %}"></script>
+    <!-- Blog editor (static demo; Django persists the post). -->
+    <script src="{% static 'assets/js/fd-admin-blog-editor.js' %}"></script>
+
+</body>
+
+</html>

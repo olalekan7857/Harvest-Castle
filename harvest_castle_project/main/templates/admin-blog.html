@@ -1,0 +1,343 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Blog Posts | Harvest Castle Admin</title>
+    <meta name="author" content="Harvest Castle">
+    <!-- Admin is private: never index admin pages or expose post data. -->
+    <meta name="robots" content="NOINDEX,NOFOLLOW">
+    <meta name="description" content="Private Harvest Castle seller blog list. Sign-in required.">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicons - Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" href="assets/img/harvest_castle/hc_favicon.png" type="image/png">
+    <link rel="icon" href="assets/img/harvest_castle/hc_favicon.png" type="image/png">
+
+    <!--==============================
+	  Google Fonts (same as storefront)
+	============================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=DM+Sans:wght@400&amp;display=swap" rel="stylesheet">
+
+    <!--==============================
+	    All CSS File (same stack + scoped admin foundation)
+	============================== -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/harvest-castle.css' %}">
+    <!-- Harvest Castle foundation overrides -->
+    <link rel="stylesheet" href="{% static 'assets/css/fresh-direct.css' %}">
+    <!-- Harvest Castle admin foundation.
+         ?v= pin: force browsers to fetch the latest styles. -->
+    <link rel="stylesheet" href="assets/css/fd-admin.css?v=6.0">
+    <!-- Harvest Castle theme layer: light/dark tokens + dark surfaces (inert in Light mode) -->
+    <link rel="stylesheet" href="{% static 'assets/css/fd-theme.css' %}">
+    <!-- Apply the stored theme before first paint. Default is Light. -->
+    <script>try{var fdT=localStorage.getItem("freshdirect_theme_v1");if(fdT==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(fdE){}</script>
+
+</head>
+
+<body class="fd-admin">
+
+    <a class="fd-skip-link" href="#fd-admin-main">Skip to blog list</a>
+
+    <!--==============================
+    Admin shell (Stage 1 foundation, reused unchanged).
+    Blog sets aria-current="page" on its own nav item.
+    ============================== -->
+    <div class="fd-admin-shell" id="fd-admin-shell">
+
+        <!-- Sidebar navigation -->
+        <aside class="fd-admin-sidebar" id="fd-admin-sidebar" aria-label="Admin navigation">
+            <div class="fd-admin-brand">
+                <a href="index.html" class="fd-logo" aria-label="Harvest Castle storefront"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="36" height="36">Harvest<span>Castle</span></a>
+            </div>
+            <p class="fd-admin-role">Seller Admin</p>
+            <nav class="fd-admin-nav" aria-label="Management sections">
+                <ul>
+                    <li>
+                        <a href="admin-dashboard.html" class="fd-admin-nav-link">
+                            <i class="fas fa-tachometer-alt" aria-hidden="true"></i>Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-products.html" class="fd-admin-nav-link">
+                            <i class="fas fa-box" aria-hidden="true"></i>Products
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-blog.html" class="fd-admin-nav-link" aria-current="page">
+                            <i class="fas fa-newspaper" aria-hidden="true"></i>Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-orders.html" class="fd-admin-nav-link">
+                            <i class="fas fa-receipt" aria-hidden="true"></i>Orders
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-settings.html" class="fd-admin-nav-link">
+                            <i class="fas fa-cog" aria-hidden="true"></i>Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="fd-admin-side-foot">
+                <!-- Disabled until a seller session exists; wired to FreshDirectAdminAuth.signOut(). -->
+                <button type="button" class="fd-admin-logout" id="fd-admin-logout" aria-disabled="true" title="Sign in first — log out is available after sign-in">
+                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i>Log Out
+                </button>
+                <p class="fd-admin-logout-hint">Log out is available after you sign in.</p>
+            </div>
+        </aside>
+
+        <!-- Drawer scrim (mobile only, shown via CSS when .nav-open) -->
+        <button type="button" class="fd-admin-scrim" id="fd-admin-scrim" aria-label="Close admin menu" tabindex="-1"></button>
+
+        <!-- Main column -->
+        <div class="fd-admin-main">
+            <header class="fd-admin-topbar">
+                <button type="button" class="fd-admin-menu-btn" id="fd-admin-menu-btn" aria-label="Open admin menu" aria-expanded="false" aria-controls="fd-admin-sidebar">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+                <h1 class="fd-admin-title">Blog Posts</h1>
+                <span class="fd-admin-context">Seller area &middot; blog management</span>
+                <button type="button" class="icon-btn fd-theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
+                    <i class="fas fa-moon" data-theme-icon="moon" aria-hidden="true"></i>
+                    <i class="fas fa-sun" data-theme-icon="sun" aria-hidden="true" hidden></i>
+                </button>
+            </header>
+
+            <main class="fd-admin-content fd-dash" id="fd-admin-main" tabindex="-1">
+                <div class="fd-dash-head">
+                    <p class="fd-dash-lead">Search, filter and manage every article on the Harvest Castle blog.</p>
+                </div>
+
+                <noscript>
+                    <div class="fd-admin-notice is-error" role="alert">
+                        <strong>JavaScript is required.</strong>
+                        The blog list needs JavaScript enabled.
+                    </div>
+                </noscript>
+
+                <!--
+                  Blog presentation: one semantic list — each post is a
+                  single bordered card (.fd-prod-card, shared admin card
+                  pattern) with thumb, title, category, date and status.
+                  Static example posts below mirror blog.html / blog-detail.html
+                  fields (image, title, category, excerpt, date, read time).
+                  Django will render one card per post here.
+                -->
+                <section class="fd-dash-section" aria-labelledby="fd-blog-list-title">
+                    <div class="fd-prod-head">
+                        <div class="fd-prod-head-text">
+                            <h2 id="fd-blog-list-title">Blog post list</h2>
+                            <p class="fd-dash-count" id="fd-blog-count" role="status" aria-live="polite"></p>
+                        </div>
+                        <a href="admin-blog-edit.html" class="vs-btn fd-dash-btn">
+                            <i class="fas fa-plus" aria-hidden="true"></i>Add Post
+                        </a>
+                    </div>
+
+                    <div class="fd-prod-toolbar">
+                        <div class="fd-shop-search fd-prod-search">
+                            <i class="far fa-search" aria-hidden="true"></i>
+                            <label class="visually-hidden" for="fd-blog-search">Search posts by title, category or tag</label>
+                            <input id="fd-blog-search" class="form-control" type="search" placeholder="Search title, category or tag…" autocomplete="off">
+                        </div>
+                        <label class="fd-shop-select" for="fd-blog-cat">Category
+                            <select id="fd-blog-cat" class="form-select">
+                                <option value="all">All Categories</option>
+                                <option value="Food Storage">Food Storage</option>
+                                <option value="Fruits">Fruits</option>
+                                <option value="Recipes">Recipes</option>
+                                <option value="Seasonal">Seasonal</option>
+                                <option value="Vegetables">Vegetables</option>
+                            </select>
+                        </label>
+                        <label class="fd-shop-select" for="fd-blog-status">Status
+                            <select id="fd-blog-status" class="form-select">
+                                <option value="all">All</option>
+                                <option value="published">Published</option>
+                                <option value="draft">Draft</option>
+                            </select>
+                        </label>
+                        <button type="button" class="fd-ghost-btn fd-dash-btn" id="fd-blog-clear" disabled>
+                            <i class="far fa-times" aria-hidden="true"></i>Clear filters
+                        </button>
+                    </div>
+
+                    <div class="fd-prod-list-wrap" id="fd-blog-list-wrap">
+                        <ul class="fd-prod-list" id="fd-blog-list" aria-label="Seller blog post list">
+                            <li class="fd-prod-card" data-title="How to Store Tomatoes So They Stay Fresh Longer" data-category="Food Storage" data-status="published">
+                                <div class="fd-prod-card-top">
+                                    <span class="fd-prod-thumb" aria-hidden="true"><img src="{% static 'assets/img/product/product-1-3.png' %}" alt="" loading="lazy" decoding="async"></span>
+                                    <div class="fd-prod-id-block">
+                                        <h3 class="fd-prod-name">How to Store Tomatoes So They Stay Fresh Longer</h3>
+                                        <p class="fd-prod-cat">Food Storage · 10 Sep 2026 · 4 min read · Published</p>
+                                    </div>
+                                    <span class="fd-dash-pill is-ok">Published</span>
+                                </div>
+                                <div class="fd-prod-card-foot">
+                                    <p class="fd-prod-price" style="font-size:15px;font-weight:500;">Counter or fridge? A practical guide to keeping tomatoes firm and flavourful.</p>
+                                    <div class="fd-prod-actions">
+                                        <a class="fd-prod-btn" href="blog-detail.html" target="_blank" rel="noopener" aria-label="View How to Store Tomatoes So They Stay Fresh Longer on the blog"><i class="far fa-eye" aria-hidden="true"></i>View</a>
+                                        <a class="fd-prod-btn" href="admin-blog-edit.html?id=tomato-storage" aria-label="Edit How to Store Tomatoes So They Stay Fresh Longer"><i class="far fa-edit" aria-hidden="true"></i>Edit</a>
+                                        <button type="button" class="fd-prod-btn is-danger" data-delete-id="tomato-storage" data-delete-name="How to Store Tomatoes So They Stay Fresh Longer" aria-label="Delete How to Store Tomatoes So They Stay Fresh Longer"><i class="far fa-trash-alt" aria-hidden="true"></i>Delete</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="fd-prod-card" data-title="Ugu Leaves: Choosing Fresh Bunches and Cooking Them Well" data-category="Vegetables" data-status="published">
+                                <div class="fd-prod-card-top">
+                                    <span class="fd-prod-thumb" aria-hidden="true"><img src="{% static 'assets/img/blog/blog-img-1-4.jpg' %}" alt="" loading="lazy" decoding="async"></span>
+                                    <div class="fd-prod-id-block">
+                                        <h3 class="fd-prod-name">Ugu Leaves: Choosing Fresh Bunches and Cooking Them Well</h3>
+                                        <p class="fd-prod-cat">Vegetables · 6 Sep 2026 · 3 min read · Published</p>
+                                    </div>
+                                    <span class="fd-dash-pill is-ok">Published</span>
+                                </div>
+                                <div class="fd-prod-card-foot">
+                                    <p class="fd-prod-price" style="font-size:15px;font-weight:500;">Deep-green colour, crisp stems, no wilting — what to look for when buying ugu.</p>
+                                    <div class="fd-prod-actions">
+                                        <a class="fd-prod-btn" href="blog-detail.html" target="_blank" rel="noopener" aria-label="View Ugu Leaves article on the blog"><i class="far fa-eye" aria-hidden="true"></i>View</a>
+                                        <a class="fd-prod-btn" href="admin-blog-edit.html?id=ugu-leaves" aria-label="Edit Ugu Leaves article"><i class="far fa-edit" aria-hidden="true"></i>Edit</a>
+                                        <button type="button" class="fd-prod-btn is-danger" data-delete-id="ugu-leaves" data-delete-name="Ugu Leaves: Choosing Fresh Bunches and Cooking Them Well" aria-label="Delete Ugu Leaves article"><i class="far fa-trash-alt" aria-hidden="true"></i>Delete</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="fd-prod-card" data-title="Red Scotch Pepper: Heat, Flavour, and Three Simple Uses" data-category="Recipes" data-status="published">
+                                <div class="fd-prod-card-top">
+                                    <span class="fd-prod-thumb" aria-hidden="true"><img src="{% static 'assets/img/blog/blog-img-1-1.jpg' %}" alt="" loading="lazy" decoding="async"></span>
+                                    <div class="fd-prod-id-block">
+                                        <h3 class="fd-prod-name">Red Scotch Pepper: Heat, Flavour, and Three Simple Uses</h3>
+                                        <p class="fd-prod-cat">Recipes · 30 Aug 2026 · 3 min read · Published</p>
+                                    </div>
+                                    <span class="fd-dash-pill is-ok">Published</span>
+                                </div>
+                                <div class="fd-prod-card-foot">
+                                    <p class="fd-prod-price" style="font-size:15px;font-weight:500;">Small pepper, big character. How to buy, store, and cook with scotch pepper.</p>
+                                    <div class="fd-prod-actions">
+                                        <a class="fd-prod-btn" href="blog-detail.html" target="_blank" rel="noopener" aria-label="View Red Scotch Pepper article on the blog"><i class="far fa-eye" aria-hidden="true"></i>View</a>
+                                        <a class="fd-prod-btn" href="admin-blog-edit.html?id=scotch-pepper" aria-label="Edit Red Scotch Pepper article"><i class="far fa-edit" aria-hidden="true"></i>Edit</a>
+                                        <button type="button" class="fd-prod-btn is-danger" data-delete-id="scotch-pepper" data-delete-name="Red Scotch Pepper: Heat, Flavour, and Three Simple Uses" aria-label="Delete Red Scotch Pepper article"><i class="far fa-trash-alt" aria-hidden="true"></i>Delete</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="fd-prod-card" data-title="Seasonal Fruits Worth Buying Around Abeokuta Right Now" data-category="Seasonal" data-status="published">
+                                <div class="fd-prod-card-top">
+                                    <span class="fd-prod-thumb" aria-hidden="true"><img src="{% static 'assets/img/product/product-1-4.png' %}" alt="" loading="lazy" decoding="async"></span>
+                                    <div class="fd-prod-id-block">
+                                        <h3 class="fd-prod-name">Seasonal Fruits Worth Buying Around Abeokuta Right Now</h3>
+                                        <p class="fd-prod-cat">Seasonal · 22 Aug 2026 · 5 min read · Published</p>
+                                    </div>
+                                    <span class="fd-dash-pill is-ok">Published</span>
+                                </div>
+                                <div class="fd-prod-card-foot">
+                                    <p class="fd-prod-price" style="font-size:15px;font-weight:500;">Buying fruit in season means better taste and better prices.</p>
+                                    <div class="fd-prod-actions">
+                                        <a class="fd-prod-btn" href="blog-detail.html" target="_blank" rel="noopener" aria-label="View Seasonal Fruits article on the blog"><i class="far fa-eye" aria-hidden="true"></i>View</a>
+                                        <a class="fd-prod-btn" href="admin-blog-edit.html?id=seasonal-fruits" aria-label="Edit Seasonal Fruits article"><i class="far fa-edit" aria-hidden="true"></i>Edit</a>
+                                        <button type="button" class="fd-prod-btn is-danger" data-delete-id="seasonal-fruits" data-delete-name="Seasonal Fruits Worth Buying Around Abeokuta Right Now" aria-label="Delete Seasonal Fruits article"><i class="far fa-trash-alt" aria-hidden="true"></i>Delete</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="fd-prod-card" data-title="Five Onion Storage Mistakes That Cost You Money" data-category="Food Storage" data-status="draft">
+                                <div class="fd-prod-card-top">
+                                    <span class="fd-prod-thumb" aria-hidden="true"><img src="{% static 'assets/img/blog/blog-s-1-1.png' %}" alt="" loading="lazy" decoding="async"></span>
+                                    <div class="fd-prod-id-block">
+                                        <h3 class="fd-prod-name">Five Onion Storage Mistakes That Cost You Money</h3>
+                                        <p class="fd-prod-cat">Food Storage · 15 Aug 2026 · 4 min read · Draft</p>
+                                    </div>
+                                    <span class="fd-dash-pill is-warn">Draft</span>
+                                </div>
+                                <div class="fd-prod-card-foot">
+                                    <p class="fd-prod-price" style="font-size:15px;font-weight:500;">Sprouting, soft spots, and that one rotten onion spoiling the bag.</p>
+                                    <div class="fd-prod-actions">
+                                        <a class="fd-prod-btn" href="blog-detail.html" target="_blank" rel="noopener" aria-label="View Onion Storage article on the blog"><i class="far fa-eye" aria-hidden="true"></i>View</a>
+                                        <a class="fd-prod-btn" href="admin-blog-edit.html?id=onion-storage" aria-label="Edit Onion Storage article"><i class="far fa-edit" aria-hidden="true"></i>Edit</a>
+                                        <button type="button" class="fd-prod-btn is-danger" data-delete-id="onion-storage" data-delete-name="Five Onion Storage Mistakes That Cost You Money" aria-label="Delete Onion Storage article"><i class="far fa-trash-alt" aria-hidden="true"></i>Delete</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="fd-prod-card" data-title="Banana Ripening at Home: From Green to Perfectly Sweet" data-category="Fruits" data-status="published">
+                                <div class="fd-prod-card-top">
+                                    <span class="fd-prod-thumb" aria-hidden="true"><img src="{% static 'assets/img/product/product-1-6.png' %}" alt="" loading="lazy" decoding="async"></span>
+                                    <div class="fd-prod-id-block">
+                                        <h3 class="fd-prod-name">Banana Ripening at Home: From Green to Perfectly Sweet</h3>
+                                        <p class="fd-prod-cat">Fruits · 18 Jul 2026 · 3 min read · Published</p>
+                                    </div>
+                                    <span class="fd-dash-pill is-ok">Published</span>
+                                </div>
+                                <div class="fd-prod-card-foot">
+                                    <p class="fd-prod-price" style="font-size:15px;font-weight:500;">How to ripen green bananas evenly and rescue overripe ones for cooking.</p>
+                                    <div class="fd-prod-actions">
+                                        <a class="fd-prod-btn" href="blog-detail.html" target="_blank" rel="noopener" aria-label="View Banana Ripening article on the blog"><i class="far fa-eye" aria-hidden="true"></i>View</a>
+                                        <a class="fd-prod-btn" href="admin-blog-edit.html?id=banana-ripening" aria-label="Edit Banana Ripening article"><i class="far fa-edit" aria-hidden="true"></i>Edit</a>
+                                        <button type="button" class="fd-prod-btn is-danger" data-delete-id="banana-ripening" data-delete-name="Banana Ripening at Home: From Green to Perfectly Sweet" aria-label="Delete Banana Ripening article"><i class="far fa-trash-alt" aria-hidden="true"></i>Delete</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="fd-dash-empty" id="fd-blog-empty" hidden>
+                        <i class="far fa-newspaper" aria-hidden="true"></i>
+                        <h3>No matching posts</h3>
+                        <p>No posts match the current search and filters. Try different keywords or reset the filters below.</p>
+                        <div class="fd-dash-empty-actions">
+                            <button type="button" class="vs-btn fd-dash-btn" id="fd-blog-reset-empty">Clear search &amp; filters</button>
+                        </div>
+                    </div>
+
+                    <p class="fd-dash-hint">“View” opens the customer article page; “Edit” opens the blog editor; “Delete” asks for confirmation first. The backend performs the real deletion.</p>
+
+                    <!-- Django pagination will populate page numbers and prev/next
+                         availability (?page=2). This static example shows page 1. -->
+                    <nav class="fd-pagination" aria-label="Blog posts pagination">
+                        <span class="fd-page-link is-disabled" aria-disabled="true">Previous</span>
+                        <a class="fd-page-link is-current" href="admin-blog.html" aria-current="page">1</a>
+                        <a class="fd-page-link" href="admin-blog.html?page=2">2</a>
+                        <a class="fd-page-link" href="admin-blog.html?page=2">Next</a>
+                    </nav>
+                </section>
+
+                <p class="fd-dash-foot-note">
+                    Copyright <i class="fal fa-copyright" aria-hidden="true"></i> <span data-fd-year>2026</span> <a href="index.html">Harvest Castle</a>. Seller area.
+                </p>
+            </main>
+        </div>
+    </div>
+
+    <!-- Delete confirmation: backend handles the real deletion.
+         This modal only confirms intent; Django deletes on confirm. -->
+    <div class="fd-modal" id="fd-blog-delete-modal" role="dialog" aria-modal="true" aria-labelledby="fd-blog-delete-title" hidden>
+        <button type="button" class="fd-modal-scrim" id="fd-blog-delete-scrim" aria-label="Cancel deletion" tabindex="-1"></button>
+        <div class="fd-modal-card">
+            <h2 id="fd-blog-delete-title">Delete post?</h2>
+            <p id="fd-blog-delete-text">This post will be permanently removed. This cannot be undone.</p>
+            <div class="fd-modal-actions">
+                <button type="button" class="fd-ghost-btn fd-dash-btn" id="fd-blog-delete-cancel">Cancel</button>
+                <button type="button" class="vs-btn fd-dash-btn is-danger-btn" id="fd-blog-delete-confirm">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin JS only: deliberately NOT loading fresh-direct.js so the
+         customer cart store can never leak into the admin. -->
+    <script src="{% static 'assets/js/fd-admin.js' %}"></script>
+    <script src="{% static 'assets/js/fd-theme.js' %}"></script>
+    <!-- Blog list (static demo; Django replaces the list source). -->
+    <script src="{% static 'assets/js/fd-admin-blog.js' %}"></script>
+
+</body>
+
+</html>

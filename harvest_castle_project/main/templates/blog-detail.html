@@ -1,0 +1,483 @@
+{% load static %}
+<!doctype html>
+<!-- Harvest Castle blog article template.
+     Static example article below. Django will render this same template
+     per article (slug-based path) and replace the marked values:
+     title, excerpt, category, dates, author, image, body, tags. -->
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- Django: post.seo_title -->
+    <title>How to Store Tomatoes So They Stay Fresh Longer — Harvest Castle Blog</title>
+    <meta name="author" content="Harvest Castle">
+    <!-- Django: post.seo_description -->
+    <meta name="description" content="Counter or fridge? A practical Harvest Castle guide to storing tomatoes so they stay firm and flavourful.">
+    <meta name="robots" content="INDEX,FOLLOW">
+    <meta property="og:title" content="How to Store Tomatoes So They Stay Fresh Longer">
+    <meta property="og:description" content="Counter or fridge? A practical Harvest Castle guide to storing tomatoes so they stay firm and flavourful.">
+    <meta property="og:type" content="article">
+    <!-- Django: canonical post URL -->
+    <link rel="canonical" href="blog-detail.html">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="assets/img/harvest_castle/fd_favicon.png" type="image/png">
+    <link rel="icon" href="assets/img/harvest_castle/fd_favicon.png" type="image/png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=DM+Sans:wght@400&amp;display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.min.css' %}">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="{% static 'assets/css/slick.min.css' %}">
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/harvest-castle.css' %}">
+    <!-- Harvest Castle foundation overrides -->
+    <link rel="stylesheet" href="{% static 'assets/css/fresh-direct.css' %}">
+    <!-- Harvest Castle blog design system -->
+    <link rel="stylesheet" href="{% static 'assets/css/fd-blog.css' %}">
+    <!-- Harvest Castle theme layer: light/dark tokens + dark surfaces (inert in Light mode) -->
+    <link rel="stylesheet" href="{% static 'assets/css/fd-theme.css' %}">
+    <!-- Apply the stored theme before first paint. Default is Light. -->
+    <script>try{var fdT=localStorage.getItem("freshdirect_theme_v1");if(fdT==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(fdE){}</script>
+
+    <!-- Django: BlogPosting JSON-LD rendered from the post -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "How to Store Tomatoes So They Stay Fresh Longer",
+      "description": "Counter or fridge? A practical Harvest Castle guide to storing tomatoes so they stay firm and flavourful.",
+      "datePublished": "2026-09-10",
+      "dateModified": "2026-09-10",
+      "author": { "@type": "Organization", "name": "Harvest Castle" }
+    }
+    </script>
+
+</head>
+
+<body>
+
+    <a class="fd-skip-link" href="#fd-main">Skip to main content</a>
+
+    <!--==============================
+    Mobile Menu
+    ============================== -->
+    <div class="vs-menu-wrapper" id="fd-mobile-menu">
+        <div class="vs-menu-area text-center">
+            <button class="vs-menu-toggle" aria-label="Close menu" aria-expanded="false" aria-controls="fd-mobile-menu"><i class="fal fa-times" aria-hidden="true"></i></button>
+            <div class="mobile-logo">
+                <a href="index.html" class="fd-logo" aria-label="Harvest Castle home"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="42" height="42">Harvest<span>Castle</span></a>
+            </div>
+            <nav class="vs-mobile-menu" aria-label="Mobile navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="product.html">Shop Produce</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html" aria-current="page">Blog</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="#" data-whatsapp="general">Order on WhatsApp</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!--==============================
+    Cart Side bar
+    ============================== -->
+    <div class="sideCart-wrapper offcanvas-wrapper" role="dialog" aria-modal="true" aria-label="Shopping cart preview">
+        <div class="sidemenu-content">
+            <button class="closeButton border-theme bg-theme-hover sideMenuCls2" aria-label="Close cart preview"><i class="far fa-times" aria-hidden="true"></i></button>
+            <div class="widget widget_shopping_cart">
+                <h3 class="widget_title">Shopping cart</h3>
+                <div class="widget_shopping_cart_content">
+                    <div class="fd-cart-empty">
+                        <i class="far fa-shopping-basket" aria-hidden="true"></i>
+                        <p><strong>Your cart is empty.</strong></p>
+                        <p>Browse fresh produce and add items to get started.</p>
+                    </div>
+                    <div class="buttons">
+                        <a href="product.html" class="vs-btn">Shop produce</a>
+                        <a href="cart.html" class="fd-view-cart-btn">View cart</a>
+                        <a href="#" class="fd-whatsapp-btn" data-whatsapp="cart"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--==============================
+    Header Area
+    ==============================-->
+    <header class="vs-header header-layout1">
+        <div class="header-top">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-auto">
+                        <div class="header-links">
+                            <ul>
+                                <li><i class="far fa-map-marker-alt" aria-hidden="true"></i>FUNAAB Alabata Road, Camp, Abeokuta</li>
+                                <li class="d-none d-md-inline-block"><i class="far fa-clock" aria-hidden="true"></i>Mon - Sat: 09.00 to 06.00</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-auto d-none d-sm-block">
+                        <div class="header-links">
+                            <ul>
+                                <li class="fd-top-note">Serving the FUNAAB community</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sticky-wrapper">
+            <div class="sticky-active">
+                <div class="menu-area">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <div class="header-logo">
+                                    <a href="index.html" class="fd-logo" aria-label="Harvest Castle home"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="42" height="42">Harvest<span>Castle</span></a>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <nav class="main-menu menu-style1 d-none d-lg-block" aria-label="Primary navigation">
+                                    <ul>
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="product.html">Shop Produce</a></li>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="index.html#how-it-works">How It Works</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="blog.html" aria-current="page">Blog</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="col-auto d-lg-none">
+                                <div class="fd-header-actions">
+                                    <button type="button" class="icon-btn fd-mobile-btn fd-theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
+                                        <i class="fas fa-moon" data-theme-icon="moon" aria-hidden="true"></i>
+                                        <i class="fas fa-sun" data-theme-icon="sun" aria-hidden="true" hidden></i>
+                                    </button>
+                                    <a href="cart.html" class="icon-btn fd-mobile-btn fd-cart-btn" aria-label="View cart">
+                                        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                                        <span class="badge" id="fd-cart-count-mobile">0</span>
+                                    </a>
+                                    <button class="vs-menu-toggle d-inline-block" aria-label="Open menu" aria-expanded="false" aria-controls="fd-mobile-menu">
+                                        <i class="fal fa-bars" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <div class="header-icons fd-header-actions">
+                                    <button type="button" class="icon-btn fd-theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
+                                        <i class="fas fa-moon" data-theme-icon="moon" aria-hidden="true"></i>
+                                        <i class="fas fa-sun" data-theme-icon="sun" aria-hidden="true" hidden></i>
+                                    </button>
+                                    <a href="#" class="fd-whatsapp-btn" data-whatsapp="general"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                                    <a href="#" class="icon-btn sideCartToggler fd-cart-btn" aria-label="Open cart preview">
+                                        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                                        <span class="badge" id="fd-cart-count">0</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="fd-main">
+    <div class="fd-blog-block" style="padding-top: 40px;">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="fd-breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li aria-current="page">How to Store Tomatoes So They Stay Fresh Longer</li>
+                </ol>
+            </nav>
+            <div class="fd-post-layout">
+                <!-- Django: the article below is rendered from the post record.
+                     Static values here are the example content. -->
+                <article class="fd-post-article">
+                    <header class="fd-post-header">
+                        <!-- Django: post.category -->
+                        <p class="fd-featured-kicker"><a class="fd-post-cat" href="blog-category.html">Food Storage</a></p>
+                        <!-- Django: post.title -->
+                        <h1>How to Store Tomatoes So They Stay Fresh Longer</h1>
+                        <!-- Django: post.excerpt -->
+                        <p class="fd-post-deck">Counter or fridge? Whole or sliced? A practical guide to keeping tomatoes firm, flavourful, and waste-free.</p>
+                        <!-- Django: post.published_at / reading time / author -->
+                        <p class="fd-post-meta">
+                            <span class="fd-meta-item">10 Sep 2026</span>
+                            <span class="fd-meta-item">4 min read</span>
+                            <span class="fd-meta-item">By Harvest Castle Team</span>
+                        </p>
+                    </header>
+                    <figure style="margin: 0;">
+                        <!-- Django: post.featured_image + image_alt -->
+                        <div class="fd-post-media-main">
+                            <img src="{% static 'assets/img/product/product-1-3.png' %}" alt="Box of fresh vegetables" fetchpriority="high">
+                        </div>
+                        <figcaption class="fd-post-figcaption">Box of fresh vegetables</figcaption>
+                    </figure>
+                    <!-- Django: post.content (structured article body) -->
+                    <div class="fd-post-body-rich">
+                        <p>Tomatoes lose flavour faster than almost any other produce when they are stored badly. The good news is that keeping them fresh takes no special equipment — just a few habits that match how you plan to use them.</p>
+                        <h2 id="counter-storage">Keep whole, ripe tomatoes on the counter</h2>
+                        <p>Ripe tomatoes keep their taste best at room temperature. Store them stem-side up in a single layer, away from direct sunlight, and use them within three to four days. Stacking or piling them causes bruises that turn into soft spots.</p>
+                        <h2 id="refrigeration">Refrigerate only when you must</h2>
+                        <p>Cold dulls tomato flavour and turns the flesh mealy. Reach for the fridge only in two cases:</p>
+                        <ul>
+                            <li>Tomatoes that are fully ripe and you cannot use within two days.</li>
+                            <li>Cut or sliced tomatoes, which must always be refrigerated.</li>
+                        </ul>
+                        <blockquote>
+                            <p>Cut tomatoes belong in an airtight container in the fridge and are best used within two days.</p>
+                        </blockquote>
+                        <h2 id="unripe-tomatoes">What about unripe tomatoes?</h2>
+                        <p>Firm, pale tomatoes ripen well on the counter. Keep them at room temperature and check daily — once they give slightly at the stem end and smell sweet, they are ready.</p>
+                        <h3 id="storage-routine">A quick storage routine</h3>
+                        <ol>
+                            <li>Sort tomatoes into ripe and still-firm when you get home.</li>
+                            <li>Keep ripe ones on the counter in a single layer.</li>
+                            <li>Refrigerate only cut tomatoes or ripe ones you cannot use in time.</li>
+                            <li>Bring refrigerated whole tomatoes back to room temperature before eating.</li>
+                        </ol>
+                        <aside class="fd-post-tip"><strong>Harvest Castle tip:</strong> shopping for the week? Add tomatoes to your Harvest Castle order and choose firm ones for later in the week and ripe ones for the next two days.</aside>
+                    </div>
+                    <section class="fd-post-share-bottom" aria-labelledby="fd-share-title">
+                        <h2 id="fd-share-title">Share this article</h2>
+                        <div class="fd-share-row">
+                            <a class="fd-whatsapp-btn" href="#" data-share-whatsapp target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Share on WhatsApp</span></a>
+                            <button type="button" class="fd-ghost-btn" data-copy-link><i class="far fa-copy" aria-hidden="true"></i><span>Copy Link</span></button>
+                        </div>
+                    </section>
+                    <aside class="fd-post-shop-cta fd-location-card" aria-label="Shop related produce">
+                        <span class="sec-subtitle">From the store</span>
+                        <h2 class="h4">Cooking something from this article?</h2>
+                        <p>The ingredients you read about are available to order when in season — shop online or send your list on WhatsApp.</p>
+                        <a href="product.html" class="vs-btn">Shop Fresh Produce</a>
+                    </aside>
+                </article>
+                <aside class="fd-post-side" aria-label="Article sidebar">
+                    <nav class="fd-side-card" aria-label="Table of contents">
+                        <h2>On this page</h2>
+                        <ul class="fd-toc-list">
+                            <li><a href="#counter-storage">Keep whole, ripe tomatoes on the counter</a></li>
+                            <li><a href="#refrigeration">Refrigerate only when you must</a></li>
+                            <li><a href="#unripe-tomatoes">What about unripe tomatoes?</a></li>
+                            <li class="is-h3"><a href="#storage-routine">A quick storage routine</a></li>
+                        </ul>
+                    </nav>
+                    <div class="fd-side-card" aria-label="Browse topics">
+                        <h2>Browse Topics</h2>
+                        <ul class="fd-side-cats">
+                            <li><a href="blog-category.html"><span>Fresh Produce</span><span>2</span></a></li>
+                            <li><a href="blog-category.html"><span>Recipes</span><span>2</span></a></li>
+                            <li><a href="blog-category.html" aria-current="page"><span>Food Storage</span><span>2</span></a></li>
+                            <li><a href="blog-category.html"><span>Seasonal</span><span>2</span></a></li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+            <!-- Django: related posts (same category first, current excluded) -->
+            <section aria-labelledby="fd-related-title" style="margin-top: 56px;">
+                <div class="fd-section-head">
+                    <h2 id="fd-related-title">More from Harvest Castle</h2>
+                    <a href="blog.html">View all articles</a>
+                </div>
+                <div class="fd-post-grid">
+                    <article class="fd-post-card">
+                        <a class="fd-post-media" href="blog-detail.html" tabindex="-1" aria-hidden="true">
+                            <img src="{% static 'assets/img/blog/blog-s-1-1.png' %}" alt="Green crops growing on the farm" loading="lazy" decoding="async">
+                        </a>
+                        <div class="fd-post-body">
+                            <a class="fd-post-cat" href="blog-category.html">Food Storage</a>
+                            <h3 class="fd-post-title"><a href="blog-detail.html">Five Onion Storage Mistakes That Cost You Money</a></h3>
+                            <p class="fd-post-excerpt">Sprouting, soft spots, and that one rotten onion spoiling the bag — all avoidable with better storage.</p>
+                            <p class="fd-post-meta"><span class="fd-meta-item">15 Aug 2026</span><span class="fd-meta-item">4 min read</span></p>
+                            <a class="fd-post-more" href="blog-detail.html">Read Article</a>
+                        </div>
+                    </article>
+                    <article class="fd-post-card">
+                        <a class="fd-post-media" href="blog-detail.html" tabindex="-1" aria-hidden="true">
+                            <img src="{% static 'assets/img/blog/blog-img-1-1.jpg' %}" alt="Farmer holding freshly harvested vegetables" loading="lazy" decoding="async">
+                        </a>
+                        <div class="fd-post-body">
+                            <a class="fd-post-cat" href="blog-category.html">Recipes</a>
+                            <h3 class="fd-post-title"><a href="blog-detail.html">Red Scotch Pepper: Heat, Flavour, and Three Simple Uses</a></h3>
+                            <p class="fd-post-excerpt">Small pepper, big character. How to buy, store, and cook with fresh red scotch pepper without overpowering your food.</p>
+                            <p class="fd-post-meta"><span class="fd-meta-item">30 Aug 2026</span><span class="fd-meta-item">3 min read</span></p>
+                            <a class="fd-post-more" href="blog-detail.html">Read Article</a>
+                        </div>
+                    </article>
+                    <article class="fd-post-card">
+                        <a class="fd-post-media" href="blog-detail.html" tabindex="-1" aria-hidden="true">
+                            <img src="{% static 'assets/img/blog/blog-d-1-1.jpg' %}" alt="People inspecting fresh greens in a greenhouse" loading="lazy" decoding="async">
+                        </a>
+                        <div class="fd-post-body">
+                            <a class="fd-post-cat" href="blog-category.html">Recipes</a>
+                            <h3 class="fd-post-title"><a href="blog-detail.html">Simple Fresh Vegetable Soup With Whatever Is Available</a></h3>
+                            <p class="fd-post-excerpt">A flexible one-pot soup that adapts to whatever greens and vegetables you have — with timings that actually work.</p>
+                            <p class="fd-post-meta"><span class="fd-meta-item">20 Jun 2026</span><span class="fd-meta-item">6 min read</span></p>
+                            <a class="fd-post-more" href="blog-detail.html">Read Article</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <!-- Django: when the requested article does not exist, render the
+                 not-found state below instead of the article above.
+            <div class="fd-shop-state" role="status">
+                <i class="far fa-newspaper" aria-hidden="true"></i>
+                <h2>Article not found</h2>
+                <p>We could not find that article. It may have moved, or the link may be incomplete.</p>
+                <p class="fd-post-missing-actions"><a class="vs-btn" href="blog.html">Back to Blog</a> <a class="fd-ghost-btn" href="product.html">Shop Fresh Produce</a></p>
+            </div>
+            -->
+        </div>
+    </div>
+    </main>
+
+    <!--==============================
+			Footer Area
+	==============================-->
+    <footer class="footer-wrapper footer-layout1" id="contact" data-bg-src="{% static 'assets/img/bg/footer-bg-1-1.jpg' %}">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="media-style1">
+                            <div class="media-icon"><img src="{% static 'assets/img/icon/icon-1-3.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async"></div>
+                            <div class="media-body">
+                                <h3 class="media-title">Visit us:</h3>
+                                <p class="media-info">No. 89, behind Foursquare Church, FUNAAB Alabata Road, Camp, Abeokuta</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="media-style1">
+                            <div class="media-icon"><img src="{% static 'assets/img/icon/icon-1-1.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async"></div>
+                            <div class="media-body">
+                                <h3 class="media-title">Order:</h3>
+                                <p class="media-info">Shop on the website<br>Mon - Sat: 09.00 to 06.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="media-style1">
+                            <div class="media-icon"><img src="{% static 'assets/img/icon/icon-1-2.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async"></div>
+                            <div class="media-body">
+                                <h3 class="media-title">WhatsApp:</h3>
+                                <p class="media-info"><a href="#" data-whatsapp="general">Chat with Harvest Castle to order</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget-area">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-md-6">
+                        <div class="widget footer-widget">
+                            <div class="vs-widget-about">
+                                <div class="footer-logo">
+                                    <a href="index.html" class="fd-logo" aria-label="Harvest Castle home"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="42" height="42">Harvest<span>Castle</span></a>
+                                </div>
+                                <p class="footer-text">Farm produce sold directly to you. Shop online on the website, or order through WhatsApp — serving the FUNAAB and Abeokuta community.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-xl-2">
+                        <div class="widget widget_categories footer-widget">
+                            <h3 class="widget_title">Shop</h3>
+                            <ul>
+                                <li><a href="product.html">All produce</a></li>
+                                <li><a href="product.html">Vegetables</a></li>
+                                <li><a href="product.html">Fruits</a></li>
+                                <li><a href="cart.html">Cart</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-xl-2">
+                        <div class="widget widget_categories footer-widget">
+                            <h3 class="widget_title">Company</h3>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="index.html#how-it-works">How It Works</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="widget footer-widget">
+                            <h4 class="widget_title">Order directly</h4>
+                            <p class="footer-text">The fastest way to order is WhatsApp. Tap below and send your list.</p>
+                            <a href="#" class="fd-whatsapp-btn" data-whatsapp="general"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-wrap">
+            <div class="container">
+                <div class="row justify-content-xl-between justify-content-center align-items-center">
+                    <div class="col-auto">
+                        <p class="copyright-text">Copyright <i class="fal fa-copyright" aria-hidden="true"></i> <span data-fd-year>2026</span> <a href="index.html">Harvest Castle</a>. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-auto">
+                        <div class="copyright-menu">
+                            <ul class="list-unstyled">
+                                <li><a href="privacy.html">Privacy Policy</a></li>
+                                <li><a href="terms.html">Ordering Terms</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll To Top -->
+    <a href="#" class="scrollToTop scroll-btn" aria-label="Scroll to top"><i class="far fa-arrow-up" aria-hidden="true"></i></a>
+
+    <!-- Jquery -->
+    <script src="{% static 'assets/js/vendor/jquery-3.6.0.min.js' %}"></script>
+    <!-- Slick Slider -->
+    <script src="{% static 'assets/js/slick.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <!-- Magnific Popup -->
+    <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <!-- Isotope Filter -->
+    <script src="{% static 'assets/js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
+    <!-- Main Js File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <!-- Harvest Castle config + enhancements (single WhatsApp source) -->
+    <script src="{% static 'assets/js/fresh-direct.js' %}"></script>
+    <script src="{% static 'assets/js/fd-theme.js' %}"></script>
+    <!-- Harvest Castle blog UI interactions (share/copy only — no data logic) -->
+    <script src="{% static 'assets/js/fd-blog.js' %}"></script>
+
+
+</body>
+
+
+</html>

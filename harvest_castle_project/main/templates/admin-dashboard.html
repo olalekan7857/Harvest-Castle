@@ -1,0 +1,263 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Dashboard | Harvest Castle Admin</title>
+    <meta name="author" content="Harvest Castle">
+    <!-- Admin is private: never index admin pages or expose dashboard content. -->
+    <meta name="robots" content="NOINDEX,NOFOLLOW">
+    <meta name="description" content="Private Harvest Castle seller dashboard. Sign-in required.">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicons - Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" href="assets/img/harvest_castle/hc_favicon.png" type="image/png">
+    <link rel="icon" href="assets/img/harvest_castle/hc_favicon.png" type="image/png">
+
+    <!--==============================
+	  Google Fonts (same as storefront)
+	============================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=DM+Sans:wght@400&amp;display=swap" rel="stylesheet">
+
+    <!--==============================
+	    All CSS File (same stack + scoped admin foundation)
+	============================== -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/harvest-castle.css' %}">
+    <!-- Harvest Castle foundation overrides -->
+    <link rel="stylesheet" href="{% static 'assets/css/fresh-direct.css' %}">
+    <!-- Harvest Castle admin foundation (Stages 1–3B).
+         ?v= pin: keep the shared admin stylesheet fresh (see admin-products.html). -->
+    <link rel="stylesheet" href="assets/css/fd-admin.css?v=6.0">
+    <!-- Harvest Castle theme layer: light/dark tokens + dark surfaces (inert in Light mode) -->
+    <link rel="stylesheet" href="{% static 'assets/css/fd-theme.css' %}">
+    <!-- Apply the stored theme before first paint. Default is Light. -->
+    <script>try{var fdT=localStorage.getItem("freshdirect_theme_v1");if(fdT==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(fdE){}</script>
+
+</head>
+
+<body class="fd-admin">
+
+    <a class="fd-skip-link" href="#fd-admin-main">Skip to dashboard content</a>
+
+    <!--==============================
+    Admin shell (Stage 1 foundation, reused unchanged).
+    Dashboard sets aria-current="page" on its own nav item.
+    ============================== -->
+    <div class="fd-admin-shell" id="fd-admin-shell">
+
+        <!-- Sidebar navigation -->
+        <aside class="fd-admin-sidebar" id="fd-admin-sidebar" aria-label="Admin navigation">
+            <div class="fd-admin-brand">
+                <a href="index.html" class="fd-logo" aria-label="Harvest Castle storefront"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="36" height="36">Harvest<span>Castle</span></a>
+            </div>
+            <p class="fd-admin-role">Seller Admin</p>
+            <nav class="fd-admin-nav" aria-label="Management sections">
+                <ul>
+                    <li>
+                        <a href="admin-dashboard.html" class="fd-admin-nav-link" aria-current="page">
+                            <i class="fas fa-tachometer-alt" aria-hidden="true"></i>Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-products.html" class="fd-admin-nav-link">
+                            <i class="fas fa-box" aria-hidden="true"></i>Products
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-blog.html" class="fd-admin-nav-link">
+                            <i class="fas fa-newspaper" aria-hidden="true"></i>Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-orders.html" class="fd-admin-nav-link">
+                            <i class="fas fa-receipt" aria-hidden="true"></i>Orders
+                        </a>
+                    </li>
+                    <li>
+                        <a href="admin-settings.html" class="fd-admin-nav-link">
+                            <i class="fas fa-cog" aria-hidden="true"></i>Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="fd-admin-side-foot">
+                <!-- Disabled until seller sessions exist; wired to FreshDirectAdminAuth.signOut(). -->
+                <button type="button" class="fd-admin-logout" id="fd-admin-logout" aria-disabled="true" title="Sign in first — log out is available after sign-in">
+                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i>Log Out
+                </button>
+                <p class="fd-admin-logout-hint">Log out is available after you sign in.</p>
+            </div>
+        </aside>
+
+        <!-- Drawer scrim (mobile only, shown via CSS when .nav-open) -->
+        <button type="button" class="fd-admin-scrim" id="fd-admin-scrim" aria-label="Close admin menu" tabindex="-1"></button>
+
+        <!-- Main column -->
+        <div class="fd-admin-main">
+            <header class="fd-admin-topbar">
+                <button type="button" class="fd-admin-menu-btn" id="fd-admin-menu-btn" aria-label="Open admin menu" aria-expanded="false" aria-controls="fd-admin-sidebar">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+                <h1 class="fd-admin-title">Dashboard</h1>
+                <span class="fd-admin-context">Seller area &middot; store overview</span>
+                <button type="button" class="icon-btn fd-theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
+                    <i class="fas fa-moon" data-theme-icon="moon" aria-hidden="true"></i>
+                    <i class="fas fa-sun" data-theme-icon="sun" aria-hidden="true" hidden></i>
+                </button>
+            </header>
+
+            <main class="fd-admin-content fd-dash" id="fd-admin-main" tabindex="-1">
+                <div class="fd-dash-head">
+                    <p class="fd-dash-lead">What needs your attention, your most recent orders, and what is available right now.</p>
+                </div>
+
+                <noscript>
+                    <div class="fd-admin-notice is-error" role="alert">
+                        <strong>JavaScript is required.</strong>
+                        The dashboard needs JavaScript enabled to show your overview.
+                    </div>
+                </noscript>
+
+                <!-- Loading state: shown until the first render settles. -->
+                <div class="fd-admin-notice" id="fd-dash-loading" role="status" aria-live="polite">
+                    <strong>Loading dashboard…</strong>
+                    Getting your latest overview.
+                </div>
+
+                <!-- Error state: honest, with retry. Never shows stale numbers. -->
+                <div class="fd-admin-notice is-error" id="fd-dash-error" role="alert" hidden>
+                    <strong>Dashboard data could not be loaded.</strong>
+                    Nothing below is current, so it is hidden until the data loads.
+                    <div class="fd-dash-error-actions">
+                        <button type="button" class="vs-btn fd-dash-btn" id="fd-dash-retry">
+                            <i class="far fa-redo" aria-hidden="true"></i>Try again
+                        </button>
+                    </div>
+                </div>
+
+                <div id="fd-dash-content" aria-busy="true" hidden>
+
+                    <!-- Overview -->
+                    <section class="fd-dash-section" aria-labelledby="fd-dash-overview-title">
+                        <h2 id="fd-dash-overview-title">Overview</h2>
+                        <ul class="fd-dash-grid" id="fd-dash-cards" aria-live="polite"></ul>
+                    </section>
+
+                    <!-- Quick actions: future destinations stay intentionally disabled. -->
+                    <section class="fd-dash-section" aria-labelledby="fd-dash-actions-title">
+                        <h2 id="fd-dash-actions-title">Quick actions</h2>
+                        <div class="fd-dash-actions">
+                            <a href="admin-product-edit.html" class="vs-btn fd-dash-btn">
+                                <i class="fas fa-plus" aria-hidden="true"></i>Add Product
+                            </a>
+                            <a href="admin-orders.html" class="vs-btn fd-dash-btn">
+                                <i class="fas fa-receipt" aria-hidden="true"></i>View Orders
+                            </a>
+                            <a href="admin-products.html" class="vs-btn fd-dash-btn">
+                                <i class="fas fa-box" aria-hidden="true"></i>Manage Products
+                            </a>
+                        </div>
+                        <p class="fd-dash-hint">Open an order to update its status or follow up with the customer.</p>
+                    </section>
+
+                    <!-- Recent orders -->
+                    <section class="fd-dash-section" aria-labelledby="fd-dash-orders-title">
+                        <div class="fd-dash-section-head">
+                            <h2 id="fd-dash-orders-title">Recent orders</h2>
+                            <p class="fd-dash-count" id="fd-dash-orders-count" aria-live="polite"></p>
+                        </div>
+                        <div class="fd-dash-table-scroll" id="fd-dash-orders-wrap" tabindex="0" role="region" aria-label="Recent orders table, scroll horizontally on small screens" hidden>
+                            <table class="fd-dash-table">
+                                <caption class="fd-dash-caption">Most recent orders, newest first.</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Reference</th>
+                                        <th scope="col">Customer</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Payment</th>
+                                        <th scope="col">Order status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="fd-dash-orders-body"></tbody>
+                            </table>
+                        </div>
+                        <div class="fd-dash-empty" id="fd-dash-orders-empty" hidden>
+                            <i class="far fa-receipt" aria-hidden="true"></i>
+                            <h3>No orders yet</h3>
+                            <p>Orders placed through Harvest Castle will appear here.</p>
+                        </div>
+                        <div class="fd-dash-foot">
+                            <a href="admin-orders.html" class="fd-ghost-btn fd-dash-btn">
+                                View all orders
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- Product availability -->
+                    <section class="fd-dash-section" aria-labelledby="fd-dash-products-title">
+                        <div class="fd-dash-section-head">
+                            <h2 id="fd-dash-products-title">Product availability</h2>
+                            <p class="fd-dash-count" id="fd-dash-products-count" aria-live="polite"></p>
+                        </div>
+                        <ul class="fd-dash-products" id="fd-dash-products-list" hidden></ul>
+                        <div class="fd-dash-empty" id="fd-dash-products-empty" hidden>
+                            <i class="far fa-box-open" aria-hidden="true"></i>
+                            <h3>No products yet</h3>
+                            <p>Create your first product to start building your Harvest Castle catalog.</p>
+                        </div>
+                        <p class="fd-dash-hint">Manage the full list on the <a href="admin-products.html">Products page</a>. Availability here mirrors the storefront — Available, Limited or Out of Stock.</p>
+                    </section>
+
+                    <!-- Needs attention -->
+                    <section class="fd-dash-section" aria-labelledby="fd-dash-attention-title">
+                        <h2 id="fd-dash-attention-title">Needs attention</h2>
+                        <ul class="fd-dash-attention" id="fd-dash-attention-list" hidden></ul>
+                        <div class="fd-dash-empty is-calm" id="fd-dash-attention-empty" hidden>
+                            <i class="far fa-check-circle" aria-hidden="true"></i>
+                            <h3>Nothing needs attention</h3>
+                            <p>No pending orders and no unavailable products.</p>
+                        </div>
+                    </section>
+
+                </div>
+
+                <p class="fd-dash-foot-note">
+                    Copyright <i class="fal fa-copyright" aria-hidden="true"></i> <span data-fd-year>2026</span> <a href="index.html">Harvest Castle</a>. Seller area.
+                </p>
+            </main>
+        </div>
+    </div>
+
+    <!-- Admin JS only: deliberately NOT loading fresh-direct.js so the
+         customer cart store can never leak into the admin. -->
+    <script src="{% static 'assets/js/fd-admin.js' %}"></script>
+    <script src="{% static 'assets/js/fd-theme.js' %}"></script>
+    <!-- Settings record (Stage 5: seller record kept in this browser). -->
+    <script src="{% static 'assets/js/fd-admin-settings-data.js' %}"></script>
+    <!-- Order source boundary (Stage 4: checkout snapshots kept in this
+         browser; the dashboard reads recent orders through it so the
+         dashboard and the Orders pages can never disagree). -->
+    <script src="{% static 'assets/js/fd-admin-orders-data.js' %}"></script>
+    <!-- Local seller-data store (kept in this browser; the future backend
+         replaces its internals while the dashboard UI is reused untouched). -->
+    <script src="{% static 'assets/js/fd-admin-store.js' %}"></script>
+    <!-- Dashboard data (reads the store above). -->
+    <script src="{% static 'assets/js/fd-admin-dashboard-data.js' %}"></script>
+    <!-- Dashboard renderer (consumes the data boundary above). -->
+    <script src="{% static 'assets/js/fd-admin-dashboard.js' %}"></script>
+
+</body>
+
+</html>

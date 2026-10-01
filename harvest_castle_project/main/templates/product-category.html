@@ -1,0 +1,703 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Shop Vegetables | Harvest Castle</title>
+    <meta name="author" content="Harvest Castle">
+    <meta name="description" content="Shop fresh Vegetables from Harvest Castle. Browse what is available right now, add items to your cart, or order through WhatsApp.">
+    <meta name="keywords" content="Harvest Castle, shop farm produce, vegetables, fruits, pepper, tomatoes, onions, FUNAAB, Abeokuta">
+    <meta name="robots" content="INDEX,FOLLOW">
+    <meta property="og:title" content="Shop Vegetables | Harvest Castle">
+    <meta property="og:description" content="Browse fresh farm produce from Harvest Castle. Shop online or order through WhatsApp.">
+    <meta property="og:type" content="website">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicons - Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+
+    <!--==============================
+	  Google Fonts
+	============================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&amp;family=DM+Sans:wght@400&amp;display=swap" rel="stylesheet">
+
+
+    <!--==============================
+	    All CSS File
+	============================== -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <!-- Fontawesome Icon -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.min.css' %}">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="{% static 'assets/css/slick.min.css' %}">
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/harvest-castle.css' %}">
+    <!-- Harvest Castle foundation overrides -->
+    <link rel="stylesheet" href="{% static 'assets/css/fresh-direct.css' %}">
+    <!-- Harvest Castle theme layer: light/dark tokens + dark surfaces (inert in Light mode) -->
+    <link rel="stylesheet" href="{% static 'assets/css/fd-theme.css' %}">
+    <!-- Apply the stored theme before first paint. Default is Light. -->
+    <script>try{var fdT=localStorage.getItem("freshdirect_theme_v1");if(fdT==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(fdE){}</script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Harvest Castle",
+      "description": "Farm-direct produce store serving the FUNAAB and Abeokuta community. Order online or through WhatsApp.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "No. 89, behind Foursquare Church, FUNAAB Alabata Road, Camp",
+        "addressLocality": "Abeokuta",
+        "addressCountry": "NG"
+      }
+    }
+    </script>
+
+</head>
+
+<body>
+
+    <a class="fd-skip-link" href="#fd-main">Skip to main content</a>
+
+    <!--[if lte IE 9]>
+    	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+
+
+    <!--********************************
+   		Code Start From Here
+	******************************** -->
+
+
+
+    <!--==============================
+    Mobile Menu
+    ============================== -->
+    <div class="vs-menu-wrapper" id="fd-mobile-menu">
+        <div class="vs-menu-area text-center">
+            <button class="vs-menu-toggle" aria-label="Close menu" aria-expanded="false" aria-controls="fd-mobile-menu"><i class="fal fa-times" aria-hidden="true"></i></button>
+            <div class="mobile-logo">
+                <a href="index.html" class="fd-logo" aria-label="Harvest Castle home"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="42" height="42">Harvest<span>Castle</span></a>
+            </div>
+            <nav class="vs-mobile-menu" aria-label="Mobile navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="product.html" aria-current="page">Shop Produce</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="#" data-whatsapp="general">Order on WhatsApp</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!--==============================
+    Cart Side bar
+    ============================== -->
+    <div class="sideCart-wrapper offcanvas-wrapper" role="dialog" aria-modal="true" aria-label="Shopping cart preview">
+        <div class="sidemenu-content">
+            <button class="closeButton border-theme bg-theme-hover sideMenuCls2" aria-label="Close cart preview"><i class="far fa-times" aria-hidden="true"></i></button>
+            <div class="widget widget_shopping_cart">
+                <h3 class="widget_title">Shopping cart</h3>
+                <div class="widget_shopping_cart_content">
+                    <!-- Shown when the cart is empty; cart items + subtotal are
+                         injected here by assets/js/fresh-direct.js when present. -->
+                    <div class="fd-cart-empty">
+                        <i class="far fa-shopping-basket" aria-hidden="true"></i>
+                        <p><strong>Your cart is empty.</strong></p>
+                        <p>Browse fresh produce and add items to get started.</p>
+                    </div>
+                    <div class="buttons">
+                        <a href="product.html" class="vs-btn">Shop produce</a>
+                        <a href="cart.html" class="fd-view-cart-btn">View cart</a>
+                        <a href="#" class="fd-whatsapp-btn" data-whatsapp="cart"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--==============================
+    Header Area
+    ==============================-->
+    <header class="vs-header header-layout1">
+        <div class="header-top">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-auto">
+                        <div class="header-links">
+                            <ul>
+                                <li><i class="far fa-map-marker-alt" aria-hidden="true"></i>FUNAAB Alabata Road, Camp, Abeokuta</li>
+                                <li class="d-none d-md-inline-block"><i class="far fa-clock" aria-hidden="true"></i>Mon - Sat: 09.00 to 06.00</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-auto d-none d-sm-block">
+                        <div class="header-links">
+                            <ul>
+                                <li class="fd-top-note">Serving the FUNAAB community</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sticky-wrapper">
+            <div class="sticky-active">
+                <div class="menu-area">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-auto">
+                                <div class="header-logo">
+                                    <a href="index.html" class="fd-logo" aria-label="Harvest Castle home"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="42" height="42">Harvest<span>Castle</span></a>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <nav class="main-menu menu-style1 d-none d-lg-block" aria-label="Primary navigation">
+                                    <ul>
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="product.html" aria-current="page">Shop Produce</a></li>
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="index.html#how-it-works">How It Works</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="blog.html">Blog</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="col-auto d-lg-none">
+                                <div class="fd-header-actions">
+                                    <button type="button" class="icon-btn fd-mobile-btn fd-theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
+                                        <i class="fas fa-moon" data-theme-icon="moon" aria-hidden="true"></i>
+                                        <i class="fas fa-sun" data-theme-icon="sun" aria-hidden="true" hidden></i>
+                                    </button>
+                                    <a href="cart.html" class="icon-btn fd-mobile-btn fd-cart-btn" aria-label="View cart">
+                                        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                                        <span class="badge" id="fd-cart-count-mobile">0</span>
+                                    </a>
+                                    <button class="vs-menu-toggle d-inline-block" aria-label="Open menu" aria-expanded="false" aria-controls="fd-mobile-menu">
+                                        <i class="fal fa-bars" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <div class="header-icons fd-header-actions">
+                                    <button type="button" class="icon-btn fd-theme-toggle" data-theme-toggle aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode">
+                                        <i class="fas fa-moon" data-theme-icon="moon" aria-hidden="true"></i>
+                                        <i class="fas fa-sun" data-theme-icon="sun" aria-hidden="true" hidden></i>
+                                    </button>
+                                    <a href="#" class="fd-whatsapp-btn" data-whatsapp="general"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                                    <a href="#" class="icon-btn sideCartToggler fd-cart-btn" aria-label="Open cart preview">
+                                        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                                        <span class="badge" id="fd-cart-count">0</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="fd-main">
+    <!--==============================
+    Shop intro
+    ============================== -->
+    <div class="fd-shop-intro">
+        <div class="container">
+            <nav aria-label="Breadcrumb">
+                <ol class="fd-breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="product.html">Shop</a></li>
+                    <!-- Django: category.name -->
+                    <li aria-current="page">Vegetables</li>
+                </ol>
+            </nav>
+            <span class="sec-subtitle">One farm, direct to you</span>
+            <!-- Django: category.name renders here (static example shows Vegetables).
+                 Same product grid, toolbar, and card markup as product.html. -->
+            <h1 class="sec-title">Shop Vegetables</h1>
+            <p>Browse fresh Vegetables available from Harvest Castle right now. Add items to your cart, or order anything through WhatsApp.</p>
+        </div>
+    </div>
+
+    <!--==============================
+    Products
+    ============================== -->
+    <!--
+      STAGE 2 MOCK DATA: products below are temporary visual placeholders.
+      Each card exposes data-product-id / name / price / unit / category /
+      stock so the Django backend can replace this markup (or a JSON feed)
+      without touching the cart, filter, or WhatsApp logic. Prices are
+      illustrative only. Images reuse existing template assets as stand-ins.
+    -->
+    <div class="space">
+        <div class="container">
+            <div class="fd-shop-toolbar" id="fd-shop-toolbar">
+                <div class="fd-shop-search">
+                    <i class="far fa-search" aria-hidden="true"></i>
+                    <label class="visually-hidden" for="fd-shop-search">Search fresh produce</label>
+                    <input id="fd-shop-search" class="form-control" type="search" placeholder="Search tomatoes, peppers, fruits…" autocomplete="off">
+                </div>
+                <div class="fd-cat-pills" id="fd-shop-pills" role="group" aria-label="Filter by category">
+                    <!-- Built from the actual products by fresh-direct.js -->
+                </div>
+                <div class="fd-shop-meta-row">
+                    <p class="fd-result-count" id="fd-shop-count" role="status" aria-live="polite"></p>
+                    <label class="fd-shop-select" for="fd-shop-avail">Availability
+                        <select id="fd-shop-avail" class="form-select">
+                            <option value="all">All</option>
+                            <option value="in">Available now</option>
+                            <option value="out">Out of stock</option>
+                        </select>
+                    </label>
+                    <label class="fd-shop-select" for="fd-shop-sort">Sort by
+                        <select id="fd-shop-sort" class="form-select">
+                            <option value="featured">Featured</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                            <option value="name">Name: A–Z</option>
+                        </select>
+                    </label>
+                    <div class="fd-view-toggle" role="group" aria-label="Change product view">
+                        <button type="button" class="icon-btn" data-shop-view="grid" aria-pressed="true" aria-label="Grid view"><i class="fas fa-th" aria-hidden="true"></i></button>
+                        <button type="button" class="icon-btn" data-shop-view="list" aria-pressed="false" aria-label="List view"><i class="fas fa-list" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="visually-hidden" id="fd-list-title">Fresh produce listing</h2>
+            <div class="row g-4" id="fd-shop-grid" aria-labelledby="fd-list-title">
+                <div class="col-6 col-md-4 col-lg-3">
+                    <article class="product-style1" data-product-id="mock-tomatoes" data-product-name="Fresh Tomatoes" data-price="2500" data-unit="1kg" data-category="Tomatoes" data-stock="in">
+                        <span class="fd-badge">Fresh</span>
+                        <div class="product-img">
+                            <img src="{% static 'assets/img/product/product-1-1.png' %}" alt="Fresh red tomatoes" width="203" height="190" loading="lazy" decoding="async">
+                        </div>
+                        <div class="product-about">
+                            <span class="fd-product-cat">Tomatoes</span>
+                            <h3 class="product-title"><a href="product-details.html">Fresh Tomatoes</a></h3>
+                            <p class="fd-product-unit">1kg pack</p>
+                            <div class="fd-buy-row">
+                                <span class="price">₦2,500</span>
+                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-tomatoes">Add to Cart</button>
+                            </div>
+                            <div class="fd-secondary-row">
+                                <a href="product-details.html" class="fd-view-link">View product</a>
+                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Fresh Tomatoes" data-qty="1" data-unit="1kg">WhatsApp</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <article class="product-style1" data-product-id="mock-pepper" data-product-name="Red Scotch Pepper" data-price="3200" data-unit="1kg" data-category="Peppers" data-stock="in">
+                        <span class="fd-badge">Fresh</span>
+                        <div class="product-img">
+                            <img src="{% static 'assets/img/product/product-1-2.png' %}" alt="Fresh red scotch peppers" width="212" height="190" loading="lazy" decoding="async">
+                        </div>
+                        <div class="product-about">
+                            <span class="fd-product-cat">Peppers</span>
+                            <h3 class="product-title"><a href="product-details.html">Red Scotch Pepper</a></h3>
+                            <p class="fd-product-unit">1kg pack</p>
+                            <div class="fd-buy-row">
+                                <span class="price">₦3,200</span>
+                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-pepper">Add to Cart</button>
+                            </div>
+                            <div class="fd-secondary-row">
+                                <a href="product-details.html" class="fd-view-link">View product</a>
+                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Red Scotch Pepper" data-qty="1" data-unit="1kg">WhatsApp</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <article class="product-style1" data-product-id="mock-onions" data-product-name="Sweet Onions" data-price="2800" data-unit="2kg" data-category="Onions" data-stock="in">
+                        <div class="product-img">
+                            <img src="{% static 'assets/img/product/product-1-3.png' %}" alt="Fresh sweet onions" width="201" height="190" loading="lazy" decoding="async">
+                        </div>
+                        <div class="product-about">
+                            <span class="fd-product-cat">Onions</span>
+                            <h3 class="product-title"><a href="product-details.html">Sweet Onions</a></h3>
+                            <p class="fd-product-unit">2kg pack</p>
+                            <div class="fd-buy-row">
+                                <span class="price">₦2,800</span>
+                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-onions">Add to Cart</button>
+                            </div>
+                            <div class="fd-secondary-row">
+                                <a href="product-details.html" class="fd-view-link">View product</a>
+                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Sweet Onions" data-qty="1" data-unit="2kg">WhatsApp</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <article class="product-style1" data-product-id="mock-ugu" data-product-name="Fresh Ugu Leaves" data-price="800" data-unit="bunch" data-category="Vegetables" data-stock="limited">
+                        <span class="fd-badge is-low">Limited</span>
+                        <div class="product-img">
+                            <img src="{% static 'assets/img/product/product-1-4.png' %}" alt="Fresh ugu leaves" width="240" height="190" loading="lazy" decoding="async">
+                        </div>
+                        <div class="product-about">
+                            <span class="fd-product-cat">Vegetables</span>
+                            <h3 class="product-title"><a href="product-details.html">Fresh Ugu Leaves</a></h3>
+                            <p class="fd-product-unit">Per bunch</p>
+                            <div class="fd-buy-row">
+                                <span class="price">₦800</span>
+                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-ugu">Add to Cart</button>
+                            </div>
+                            <div class="fd-secondary-row">
+                                <a href="product-details.html" class="fd-view-link">View product</a>
+                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Fresh Ugu Leaves" data-qty="1" data-unit="bunch">WhatsApp</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <article class="product-style1" data-product-id="mock-bananas" data-product-name="Ripe Bananas" data-price="1500" data-unit="bunch" data-category="Fruits" data-stock="in">
+                        <div class="product-img">
+                            <img src="{% static 'assets/img/product/product-1-5.png' %}" alt="Ripe yellow bananas" width="110" height="190" loading="lazy" decoding="async">
+                        </div>
+                        <div class="product-about">
+                            <span class="fd-product-cat">Fruits</span>
+                            <h3 class="product-title"><a href="product-details.html">Ripe Bananas</a></h3>
+                            <p class="fd-product-unit">Per bunch</p>
+                            <div class="fd-buy-row">
+                                <span class="price">₦1,500</span>
+                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-bananas">Add to Cart</button>
+                            </div>
+                            <div class="fd-secondary-row">
+                                <a href="product-details.html" class="fd-view-link">View product</a>
+                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Ripe Bananas" data-qty="1" data-unit="bunch">WhatsApp</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <article class="product-style1" data-product-id="mock-oranges" data-product-name="Fresh Oranges" data-price="2000" data-unit="2kg" data-category="Fruits" data-stock="in">
+                        <div class="product-img">
+                            <img src="{% static 'assets/img/product/product-1-6.png' %}" alt="Fresh juicy oranges" width="173" height="190" loading="lazy" decoding="async">
+                        </div>
+                        <div class="product-about">
+                            <span class="fd-product-cat">Fruits</span>
+                            <h3 class="product-title"><a href="product-details.html">Fresh Oranges</a></h3>
+                            <p class="fd-product-unit">2kg pack</p>
+                            <div class="fd-buy-row">
+                                <span class="price">₦2,000</span>
+                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-oranges">Add to Cart</button>
+                            </div>
+                            <div class="fd-secondary-row">
+                                <a href="product-details.html" class="fd-view-link">View product</a>
+                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Fresh Oranges" data-qty="1" data-unit="2kg">WhatsApp</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <article class="product-style1" data-product-id="mock-yam" data-product-name="White Yam" data-price="4500" data-unit="tuber" data-category="Tubers" data-stock="in">
+                        <div class="product-img">
+                            <img src="{% static 'assets/img/product/product-1-7.png' %}" alt="Fresh white yam tubers" width="134" height="190" loading="lazy" decoding="async">
+                        </div>
+                        <div class="product-about">
+                            <span class="fd-product-cat">Tubers</span>
+                            <h3 class="product-title"><a href="product-details.html">White Yam</a></h3>
+                            <p class="fd-product-unit">Per tuber</p>
+                            <div class="fd-buy-row">
+                                <span class="price">₦4,500</span>
+                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-yam">Add to Cart</button>
+                            </div>
+                            <div class="fd-secondary-row">
+                                <a href="product-details.html" class="fd-view-link">View product</a>
+                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="White Yam" data-qty="1" data-unit="tuber">WhatsApp</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <article class="product-style1" data-product-id="mock-pineapple" data-product-name="Ripe Pineapple" data-price="1200" data-unit="piece" data-category="Fruits" data-stock="in">
+                        <div class="product-img">
+                            <img src="{% static 'assets/img/product/product-1-8.png' %}" alt="Ripe pineapple" width="210" height="190" loading="lazy" decoding="async">
+                        </div>
+                        <div class="product-about">
+                            <span class="fd-product-cat">Fruits</span>
+                            <h3 class="product-title"><a href="product-details.html">Ripe Pineapple</a></h3>
+                            <p class="fd-product-unit">Per piece</p>
+                            <div class="fd-buy-row">
+                                <span class="price">₦1,200</span>
+                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-pineapple">Add to Cart</button>
+                            </div>
+                            <div class="fd-secondary-row">
+                                <a href="product-details.html" class="fd-view-link">View product</a>
+                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Ripe Pineapple" data-qty="1" data-unit="piece">WhatsApp</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <article class="product-style1 is-out" data-product-id="mock-tatashe" data-product-name="Tatashe Peppers" data-price="2800" data-unit="1kg" data-category="Peppers" data-stock="out">
+                        <span class="fd-badge is-out">Out of Stock</span>
+                        <div class="product-img">
+                            <img src="{% static 'assets/img/product/product-1-2.png' %}" alt="Tatashe peppers, currently out of stock" width="212" height="190" loading="lazy" decoding="async">
+                        </div>
+                        <div class="product-about">
+                            <span class="fd-product-cat">Peppers</span>
+                            <h3 class="product-title"><a href="product-details.html">Tatashe Peppers</a></h3>
+                            <p class="fd-product-unit">1kg pack</p>
+                            <div class="fd-buy-row">
+                                <span class="price">₦2,800</span>
+                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-tatashe" disabled aria-disabled="true">Out of Stock</button>
+                            </div>
+                            <div class="fd-secondary-row">
+                                <a href="product-details.html" class="fd-view-link">View product</a>
+                                <a href="#" class="fd-wa-link" data-whatsapp="restock" data-product="Tatashe Peppers">Notify me</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <article class="product-style1" data-product-id="mock-spring-onions" data-product-name="Spring Onions" data-price="600" data-unit="bunch" data-category="Vegetables" data-stock="in">
+                        <div class="product-img">
+                            <img src="{% static 'assets/img/product/product-1-3.png' %}" alt="Fresh spring onions" width="201" height="190" loading="lazy" decoding="async">
+                        </div>
+                        <div class="product-about">
+                            <span class="fd-product-cat">Vegetables</span>
+                            <h3 class="product-title"><a href="product-details.html">Spring Onions</a></h3>
+                            <p class="fd-product-unit">Per bunch</p>
+                            <div class="fd-buy-row">
+                                <span class="price">₦600</span>
+                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-spring-onions">Add to Cart</button>
+                            </div>
+                            <div class="fd-secondary-row">
+                                <a href="product-details.html" class="fd-view-link">View product</a>
+                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Spring Onions" data-qty="1" data-unit="bunch">WhatsApp</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <article class="product-style1" data-product-id="mock-cassava" data-product-name="Cassava Tubers" data-price="2400" data-unit="3kg" data-category="Tubers" data-stock="in">
+                        <div class="product-img">
+                            <img src="{% static 'assets/img/product/product-1-7.png' %}" alt="Fresh cassava tubers" width="134" height="190" loading="lazy" decoding="async">
+                        </div>
+                        <div class="product-about">
+                            <span class="fd-product-cat">Tubers</span>
+                            <h3 class="product-title"><a href="product-details.html">Cassava Tubers</a></h3>
+                            <p class="fd-product-unit">3kg pack</p>
+                            <div class="fd-buy-row">
+                                <span class="price">₦2,400</span>
+                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-cassava">Add to Cart</button>
+                            </div>
+                            <div class="fd-secondary-row">
+                                <a href="product-details.html" class="fd-view-link">View product</a>
+                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Cassava Tubers" data-qty="1" data-unit="3kg">WhatsApp</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <article class="product-style1" data-product-id="mock-scent-leaves" data-product-name="Scent Leaves" data-price="500" data-unit="bunch" data-category="Herbs &amp; Spices" data-stock="in">
+                        <div class="product-img">
+                            <img src="{% static 'assets/img/product/product-1-4.png' %}" alt="Fresh scent leaves" width="240" height="190" loading="lazy" decoding="async">
+                        </div>
+                        <div class="product-about">
+                            <span class="fd-product-cat">Herbs &amp; Spices</span>
+                            <h3 class="product-title"><a href="product-details.html">Scent Leaves</a></h3>
+                            <p class="fd-product-unit">Per bunch</p>
+                            <div class="fd-buy-row">
+                                <span class="price">₦500</span>
+                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-scent-leaves">Add to Cart</button>
+                            </div>
+                            <div class="fd-secondary-row">
+                                <a href="product-details.html" class="fd-view-link">View product</a>
+                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Scent Leaves" data-qty="1" data-unit="bunch">WhatsApp</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div class="fd-shop-state mt-4" id="fd-shop-empty" hidden>
+                <i class="far fa-shopping-basket" aria-hidden="true"></i>
+                <h2>No fresh produce found</h2>
+                <p>Try a different search word or category — or clear everything to browse the full range again.</p>
+                <button type="button" class="vs-btn" id="fd-shop-reset">Clear search &amp; filters</button>
+            </div>
+
+            <!-- Django pagination will populate page numbers and prev/next
+                 availability (?page=2). This static example shows page 1. -->
+            <nav class="fd-pagination" aria-label="Category pagination">
+                <span class="fd-page-link is-disabled" aria-disabled="true">Previous</span>
+                <a class="fd-page-link is-current" href="product-category.html?category=Vegetables" aria-current="page">1</a>
+                <a class="fd-page-link" href="product-category.html?category=Vegetables&page=2">2</a>
+                <a class="fd-page-link" href="product-category.html?category=Vegetables&page=2">Next</a>
+            </nav>
+        </div>
+    </div>
+
+    <!--==============================
+    WhatsApp CTA band
+    ============================== -->
+    <section class="space-bottom" aria-labelledby="fd-shop-cta-title">
+        <div class="container">
+            <div class="fd-cta-band">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-8">
+                        <h2 id="fd-shop-cta-title">Can't find what you need?</h2>
+                        <p>Send Harvest Castle your list on WhatsApp and we will confirm what is available on the farm right now.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a href="#" class="fd-whatsapp-btn" data-whatsapp="general"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!--==============================
+			Footer Area
+	==============================-->
+    <footer class="footer-wrapper footer-layout1" id="contact" data-bg-src="{% static 'assets/img/bg/footer-bg-1-1.jpg' %}">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="media-style1">
+                            <div class="media-icon"><img src="{% static 'assets/img/icon/icon-1-3.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async"></div>
+                            <div class="media-body">
+                                <h3 class="media-title">Visit us:</h3>
+                                <p class="media-info">No. 89, behind Foursquare Church, FUNAAB Alabata Road, Camp, Abeokuta</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="media-style1">
+                            <div class="media-icon"><img src="{% static 'assets/img/icon/icon-1-1.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async"></div>
+                            <div class="media-body">
+                                <h3 class="media-title">Order:</h3>
+                                <p class="media-info">Shop on the website<br>Mon - Sat: 09.00 to 06.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="media-style1">
+                            <div class="media-icon"><img src="{% static 'assets/img/icon/icon-1-2.png' %}" alt="" aria-hidden="true" loading="lazy" decoding="async"></div>
+                            <div class="media-body">
+                                <h3 class="media-title">WhatsApp:</h3>
+                                <p class="media-info"><a href="#" data-whatsapp="general">Chat with Harvest Castle to order</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget-area">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-md-6">
+                        <div class="widget footer-widget">
+                            <div class="vs-widget-about">
+                                <div class="footer-logo">
+                                    <a href="index.html" class="fd-logo" aria-label="Harvest Castle home"><img src="{% static 'assets/img/harvest_castle/hc_favicon.png' %}" alt="" aria-hidden="true" class="fd-logo-img" width="42" height="42">Harvest<span>Castle</span></a>
+                                </div>
+                                <p class="footer-text">Farm produce sold directly to you. Shop online on the website, or order through WhatsApp — serving the FUNAAB and Abeokuta community.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-xl-2">
+                        <div class="widget widget_categories footer-widget">
+                            <h3 class="widget_title">Shop</h3>
+                            <ul>
+                                <li><a href="product.html">All produce</a></li>
+                                <li><a href="product.html">Vegetables</a></li>
+                                <li><a href="product.html">Fruits</a></li>
+                                <li><a href="cart.html">Cart</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3 col-xl-2">
+                        <div class="widget widget_categories footer-widget">
+                            <h3 class="widget_title">Company</h3>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="index.html#how-it-works">How It Works</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="widget footer-widget">
+                            <h4 class="widget_title">Order directly</h4>
+                            <p class="footer-text">The fastest way to order is WhatsApp. Tap below and send your list.</p>
+                            <a href="#" class="fd-whatsapp-btn" data-whatsapp="general"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-wrap">
+            <div class="container">
+                <div class="row justify-content-xl-between justify-content-center align-items-center">
+                    <div class="col-auto">
+                        <p class="copyright-text">Copyright <i class="fal fa-copyright" aria-hidden="true"></i> <span data-fd-year>2026</span> <a href="index.html">Harvest Castle</a>. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-auto">
+                        <div class="copyright-menu">
+                            <ul class="list-unstyled">
+                                <!-- Later stage: Privacy / Terms pages. -->
+                                <li><a href="privacy.html">Privacy Policy</a></li>
+                                <li><a href="terms.html">Ordering Terms</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll To Top -->
+    <a href="#" class="scrollToTop scroll-btn" aria-label="Scroll to top"><i class="far fa-arrow-up" aria-hidden="true"></i></a>
+
+    <!--********************************
+			Code End  Here
+	******************************** -->
+
+    <!--==============================
+        All Js File
+    ============================== -->
+    <!-- Jquery -->
+    <script src="{% static 'assets/js/vendor/jquery-3.6.0.min.js' %}"></script>
+    <!-- Slick Slider -->
+    <script src="{% static 'assets/js/slick.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <!-- Magnific Popup -->
+    <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <!-- Isotope Filter -->
+    <script src="{% static 'assets/js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
+    <!-- Main Js File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <!-- Harvest Castle config + cart + shop (single WhatsApp source) -->
+    <script src="{% static 'assets/js/fresh-direct.js' %}"></script>
+    <script src="{% static 'assets/js/fd-theme.js' %}"></script>
+
+
+</body>
+
+
+</html>

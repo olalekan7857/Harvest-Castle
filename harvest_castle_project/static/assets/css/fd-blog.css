@@ -1,0 +1,1068 @@
+/* ==========================================================================
+   Harvest Castle Blog — Stage B2 design system
+   --------------------------------------------------------------------------
+   Blog-only components (.fd-blog-*, .fd-post-*, .fd-featured-*,
+   .fd-toc-*, .fd-skeleton) built on the existing Harvest Castle language:
+     tokens   -> style.css :root + fd-theme.css --fd-* (dark remaps)
+     buttons  -> .vs-btn / .fd-ghost-btn / .icon-btn (template + foundation)
+     pills    -> .fd-cat-pills / .fd-cat-pill (shop toolbar)
+     bands    -> .fd-shop-intro / .fd-breadcrumb / .fd-cta-band
+     states   -> .fd-shop-state / .fd-result-count
+     radius   -> --fd-radius (18px) / --fd-radius-img (12px)
+   Load order on blog pages: style.css -> fresh-direct.css -> fd-blog.css
+   -> fd-theme.css. Dark rules below use the same --fd-* tokens as
+   fd-theme.css (no second theme system, no new palette).
+   Responsive strategy mirrors the project: desktop -> <=991px ->
+   <=767px -> <=575px -> <=400px -> <=360px -> <=330px, touch targets
+   never below 40px.
+   ========================================================================== */
+
+/* ---------- Blog sections ---------- */
+.fd-blog-block {
+  padding: 56px 0;
+}
+
+.fd-blog-block.is-smoke {
+  background: var(--smoke-color);
+}
+
+.fd-blog-head {
+  max-width: 720px;
+  margin-bottom: 28px;
+}
+
+.fd-blog-head h2 {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.fd-blog-head p {
+  margin-bottom: 0;
+  max-width: 62ch;
+}
+
+/* ---------- Blog hero (editorial band) ---------- */
+.fd-blog-hero {
+  background: var(--smoke-color);
+  border-bottom: 1px solid #ececec;
+  padding: 60px 0 48px;
+}
+
+.fd-blog-hero h1 {
+  font-size: 40px;
+  line-height: 1.15;
+  margin-bottom: 14px;
+  max-width: 22ch;
+}
+
+.fd-blog-hero .fd-hero-tag {
+  margin-bottom: 16px;
+}
+
+.fd-blog-hero p {
+  font-size: 17px;
+  max-width: 60ch;
+  margin-bottom: 24px;
+}
+
+.fd-blog-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---------- Featured article ---------- */
+.fd-featured-post {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 0;
+  background: var(--white-color);
+  border: 1px solid #ececec;
+  border-radius: var(--fd-radius);
+  overflow: hidden;
+}
+
+.fd-featured-media {
+  display: block;
+  min-height: 320px;
+  max-height: 420px;
+  background: var(--smoke-color);
+  overflow: hidden;
+}
+
+.fd-featured-media img {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  max-height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+.fd-featured-body {
+  padding: 32px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.fd-featured-body p {
+  margin-bottom: 0;
+}
+
+.fd-featured-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.fd-featured-title {
+  font-size: 27px;
+  line-height: 1.3;
+  margin-bottom: 0;
+}
+
+.fd-featured-title a {
+  color: var(--title-color);
+}
+
+.fd-featured-excerpt {
+  font-size: 15.5px;
+  color: var(--body-color);
+}
+
+/* ---------- Category pills (active = current page) ---------- */
+.fd-blog-cats {
+  margin-bottom: 26px;
+}
+
+.fd-cat-pills .fd-cat-pill[aria-current="page"] {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: var(--white-color);
+}
+
+/* ---------- Article grid + cards ---------- */
+.fd-post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  min-width: 0;
+}
+
+.fd-post-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white-color);
+  border: 1px solid #ececec;
+  border-radius: var(--fd-radius);
+  overflow: hidden;
+  min-width: 0;
+  transition: box-shadow ease 0.4s;
+}
+
+.fd-post-card:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.fd-post-media {
+  display: block;
+  aspect-ratio: 16 / 10;
+  background: var(--smoke-color);
+  overflow: hidden;
+}
+
+.fd-post-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fd-post-media.is-fallback,
+.fd-post-card.has-fallback .fd-post-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fd-post-img-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--white-color);
+  color: var(--secondary-color);
+  font-size: 28px;
+}
+
+.fd-post-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 22px 20px 24px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.fd-post-body p {
+  margin-bottom: 0;
+}
+
+.fd-post-cat {
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--secondary-color);
+}
+
+.fd-post-cat.is-plain {
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 13px;
+}
+
+.fd-post-title {
+  font-size: 19px;
+  line-height: 1.4;
+  margin-bottom: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.fd-post-title a {
+  color: var(--title-color);
+}
+
+.fd-post-excerpt {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--body-color);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.fd-post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  font-size: 13.5px;
+  color: var(--body-color);
+}
+
+/* Meta items never split: date, reading time and author wrap as whole
+   units so no separator or single word is ever stranded on its own line. */
+.fd-post-meta .fd-meta-item {
+  white-space: nowrap;
+}
+
+.fd-post-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6px;
+  font-family: var(--title-font);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 22px;
+  min-height: 44px;
+  border-radius: 9999px;
+  border: 2px solid var(--theme-color);
+  color: var(--title-color);
+  transition: all ease 0.4s;
+  white-space: nowrap;
+}
+
+.fd-post-more:hover {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: var(--white-color);
+}
+
+/* ---------- Pagination (Django fills numbers/availability via ?page=) -- */
+.fd-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.fd-page-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-color);
+  background: var(--white-color);
+  color: var(--title-color);
+  font-family: var(--title-font);
+  font-weight: 600;
+  font-size: 14.5px;
+  transition: all ease 0.4s;
+}
+
+a.fd-page-link:hover {
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+}
+
+.fd-page-link.is-current {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: var(--white-color);
+}
+
+/* The current page keeps white text on green when hovered — never
+   green-on-green. */
+a.fd-page-link.is-current:hover {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: var(--white-color);
+}
+
+.fd-page-link.is-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+html[data-theme="dark"] .fd-page-link {
+  background: var(--fd-surface);
+  border-color: var(--fd-hairline);
+  color: var(--fd-text);
+}
+
+html[data-theme="dark"] a.fd-page-link:hover {
+  border-color: var(--fd-brand-green-text);
+  color: var(--fd-brand-green-text);
+}
+
+html[data-theme="dark"] .fd-page-link.is-current,
+html[data-theme="dark"] a.fd-page-link.is-current:hover {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: var(--white-color);
+}
+
+/* Pagination keeps its desktop pill radius on mobile (no reduction).
+   Only product-card View/WhatsApp links take the softened 14px radius
+   on small screens (see fresh-direct.css product-card rules). */
+
+/* ---------- Load more row ---------- */
+.fd-blog-foot {
+  text-align: center;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.fd-blog-foot .fd-result-count {
+  margin: 0;
+}
+
+/* ---------- Search bar ---------- */
+.fd-blog-searchbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  max-width: 640px;
+}
+
+.fd-blog-searchbar .form-control {
+  flex: 1 1 auto;
+  min-width: 0;
+  border-radius: 9999px;
+  margin-bottom: 0;
+  min-height: 52px;
+}
+
+.fd-blog-searchbar .vs-btn {
+  flex: 0 0 auto;
+  min-height: 52px;
+  margin: 0;
+}
+
+/* ---------- Article page layout ---------- */
+.fd-post-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 28px;
+  align-items: start;
+}
+
+.fd-post-header {
+  max-width: 780px;
+  margin-bottom: 22px;
+}
+
+.fd-post-header h1 {
+  font-size: 34px;
+  line-height: 1.25;
+  margin: 10px 0 12px 0;
+  overflow-wrap: break-word;
+}
+
+.fd-post-deck {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--body-color);
+  margin-bottom: 14px;
+  max-width: 62ch;
+}
+
+.fd-post-media-main {
+  margin: 0 0 8px 0;
+  border-radius: var(--fd-radius);
+  overflow: hidden;
+  background: var(--smoke-color);
+}
+
+.fd-post-media-main img {
+  width: 100%;
+  max-height: 440px;
+  object-fit: cover;
+  display: block;
+}
+
+.fd-post-media-main.is-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+}
+
+.fd-post-media-main.is-fallback .fd-post-img-fallback {
+  width: 88px;
+  height: 88px;
+  font-size: 34px;
+}
+
+.fd-post-figcaption {
+  font-size: 13.5px;
+  color: var(--body-color);
+  margin: 0 0 24px 0;
+}
+
+/* ---------- Article body typography ---------- */
+.fd-post-article {
+  min-width: 0;
+}
+
+.fd-post-body-rich {
+  font-size: 16.5px;
+  line-height: 1.75;
+  max-width: 72ch;
+}
+
+.fd-post-body-rich > p {
+  margin-bottom: 18px;
+}
+
+.fd-post-body-rich h2 {
+  font-size: 24px;
+  line-height: 1.35;
+  margin: 30px 0 12px 0;
+  scroll-margin-top: 90px;
+}
+
+.fd-post-body-rich h3 {
+  font-size: 20px;
+  line-height: 1.4;
+  margin: 24px 0 10px 0;
+  scroll-margin-top: 90px;
+}
+
+.fd-post-body-rich ul,
+.fd-post-body-rich ol {
+  margin: 0 0 18px 0;
+  padding-left: 24px;
+}
+
+.fd-post-body-rich li {
+  margin-bottom: 8px;
+}
+
+.fd-post-body-rich li::marker {
+  color: var(--secondary-color);
+  font-weight: 700;
+}
+
+.fd-post-body-rich blockquote {
+  margin: 0 0 20px 0;
+  padding: 18px 20px;
+  background: var(--smoke-color);
+  border-left: 4px solid var(--secondary-color);
+  border-radius: 0 var(--fd-radius-img) var(--fd-radius-img) 0;
+  font-size: 16px;
+}
+
+.fd-post-body-rich blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.fd-post-tip {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--smoke-color);
+  border-radius: var(--fd-radius);
+  padding: 16px 18px;
+  font-size: 14.5px;
+  margin: 0 0 20px 0;
+}
+
+.fd-post-body-rich figure {
+  margin: 0 0 20px 0;
+  overflow-x: auto;
+}
+
+.fd-post-body-rich table {
+  width: 100%;
+  min-width: 480px;
+  border-collapse: collapse;
+  font-size: 14.5px;
+  background: var(--white-color);
+  border: 1px solid #ececec;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.fd-post-body-rich caption {
+  text-align: left;
+  font-family: var(--title-font);
+  font-weight: 600;
+  padding: 10px 4px;
+  caption-side: top;
+}
+
+.fd-post-body-rich th,
+.fd-post-body-rich td {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid #ececec;
+  vertical-align: top;
+}
+
+.fd-post-body-rich thead th {
+  font-family: var(--title-font);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--body-color);
+}
+
+.fd-post-body-rich figcaption {
+  font-size: 13.5px;
+  color: var(--body-color);
+  padding: 8px 2px 0 2px;
+}
+
+.fd-post-body-rich a {
+  color: var(--secondary-color);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: break-word;
+}
+
+/* ---------- Sidebar ---------- */
+.fd-post-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.fd-side-card {
+  background: var(--white-color);
+  border: 1px solid #ececec;
+  border-radius: var(--fd-radius);
+  padding: 22px 20px;
+  min-width: 0;
+}
+
+.fd-side-card h2 {
+  font-size: 18px;
+  margin: 0 0 14px 0;
+}
+
+.fd-toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fd-toc-list a {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 600;
+  font-family: var(--title-font);
+  color: var(--title-color);
+  padding: 8px 10px;
+  border-radius: 10px;
+  line-height: 1.45;
+}
+
+.fd-toc-list a:hover {
+  background: var(--smoke-color);
+  color: var(--secondary-color);
+}
+
+.fd-toc-list .is-h3 a {
+  padding-left: 22px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.fd-share-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fd-share-row .fd-ghost-btn,
+.fd-share-row .fd-whatsapp-btn {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  min-height: 48px;
+  font-size: 14px;
+  padding: 10px 18px;
+}
+
+.fd-side-cats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fd-side-cats a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+  font-weight: 600;
+  font-family: var(--title-font);
+  color: var(--title-color);
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.fd-side-cats a:hover {
+  background: var(--smoke-color);
+  color: var(--secondary-color);
+}
+
+.fd-side-cats [aria-current="page"] {
+  color: var(--secondary-color);
+}
+
+/* ---------- Bottom share + shop CTA ---------- */
+.fd-post-share-bottom {
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid #ececec;
+  max-width: 72ch;
+}
+
+.fd-post-share-bottom h2 {
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+.fd-post-share-bottom .fd-share-row {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.fd-post-share-bottom .fd-share-row .fd-ghost-btn,
+.fd-post-share-bottom .fd-share-row .fd-whatsapp-btn {
+  width: auto;
+  flex: 1 1 200px;
+}
+
+.fd-post-shop-cta {
+  margin-top: 26px;
+  max-width: 72ch;
+}
+
+/* ---------- Related ---------- */
+.fd-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-bottom: 22px;
+}
+
+.fd-section-head h2 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.fd-section-head a {
+  font-family: var(--title-font);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--secondary-color);
+}
+
+/* ---------- Missing-article actions ---------- */
+.fd-post-missing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* ---------- Skeletons ---------- */
+.fd-post-card.is-loading {
+  pointer-events: none;
+}
+
+.fd-skeleton {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+  background: var(--smoke-color);
+  animation: fdSkeletonPulse 1.4s ease-in-out infinite;
+}
+
+.fd-skeleton.is-line {
+  min-height: 0;
+  height: 14px;
+  border-radius: 7px;
+  margin-top: 10px;
+}
+
+.fd-skeleton.is-line.is-short {
+  width: 42%;
+}
+
+.fd-skeleton.is-line.is-meta {
+  width: 60%;
+}
+
+@keyframes fdSkeletonPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+/* ---------- Dark mode (same tokens, no new palette) ---------- */
+html[data-theme="dark"] .fd-blog-hero,
+html[data-theme="dark"] .fd-blog-block.is-smoke {
+  background: var(--fd-surface);
+}
+
+html[data-theme="dark"] .fd-blog-hero {
+  border-bottom-color: var(--fd-hairline);
+}
+
+html[data-theme="dark"] .fd-featured-post,
+html[data-theme="dark"] .fd-post-card,
+html[data-theme="dark"] .fd-side-card {
+  background: var(--fd-surface);
+  border-color: var(--fd-hairline);
+}
+
+html[data-theme="dark"] .fd-post-card:hover {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme="dark"] .fd-post-media,
+html[data-theme="dark"] .fd-featured-media,
+html[data-theme="dark"] .fd-post-media-main,
+html[data-theme="dark"] .fd-skeleton {
+  background: var(--fd-surface-2);
+}
+
+html[data-theme="dark"] .fd-post-img-fallback {
+  background: var(--fd-surface-3);
+  color: var(--fd-brand-green-text);
+}
+
+html[data-theme="dark"] .fd-post-cat {
+  color: var(--fd-brand-green-text);
+}
+
+html[data-theme="dark"] .fd-post-more {
+  color: var(--fd-text);
+}
+
+html[data-theme="dark"] .fd-post-more:hover {
+  color: var(--white-color);
+}
+
+html[data-theme="dark"] .fd-post-body-rich blockquote,
+html[data-theme="dark"] .fd-post-tip {
+  background: var(--fd-surface-2);
+}
+
+html[data-theme="dark"] .fd-post-body-rich table {
+  background: var(--fd-surface);
+  border-color: var(--fd-hairline);
+}
+
+html[data-theme="dark"] .fd-post-body-rich th,
+html[data-theme="dark"] .fd-post-body-rich td {
+  border-bottom-color: var(--fd-hairline);
+}
+
+html[data-theme="dark"] .fd-post-body-rich a {
+  color: var(--fd-brand-green-text);
+}
+
+html[data-theme="dark"] .fd-toc-list a,
+html[data-theme="dark"] .fd-side-cats a {
+  color: var(--fd-text);
+}
+
+html[data-theme="dark"] .fd-toc-list a:hover,
+html[data-theme="dark"] .fd-side-cats a:hover {
+  background: var(--fd-surface-2);
+  color: var(--fd-brand-green-text);
+}
+
+html[data-theme="dark"] .fd-side-cats [aria-current="page"] {
+  color: var(--fd-brand-green-text);
+}
+
+html[data-theme="dark"] .fd-post-share-bottom {
+  border-top-color: var(--fd-hairline);
+}
+
+/* ---------- Responsive: tablet ---------- */
+@media (max-width: 991px) {
+  .fd-post-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fd-post-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fd-post-side {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .fd-blog-hero h1 {
+    font-size: 34px;
+  }
+
+  .fd-featured-post {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fd-featured-media,
+  .fd-featured-media img {
+    min-height: 240px;
+    max-height: 300px;
+  }
+}
+
+/* ---------- Responsive: mobile ---------- */
+@media (max-width: 767px) {
+  .fd-blog-block {
+    padding: 40px 0;
+  }
+
+  .fd-blog-hero {
+    padding: 48px 0 36px;
+  }
+
+  .fd-blog-hero h1 {
+    font-size: 28px;
+  }
+
+  .fd-blog-hero p {
+    font-size: 16px;
+  }
+
+  .fd-blog-hero-actions .vs-btn,
+  .fd-blog-hero-actions .fd-ghost-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .fd-featured-body {
+    padding: 24px 20px 26px;
+  }
+
+  .fd-featured-title {
+    font-size: 23px;
+  }
+
+  .fd-featured-body .vs-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .fd-post-card {
+    border-radius: 16px;
+  }
+
+  /* .fd-post-more keeps its desktop pill radius on mobile (no reduction).
+     Only product-card View/WhatsApp links take the softened 14px radius
+     on small screens (see fresh-direct.css product-card rules). */
+
+  .fd-post-header h1 {
+    font-size: 27px;
+  }
+
+  .fd-post-body-rich {
+    font-size: 16px;
+  }
+
+  .fd-post-body-rich h2 {
+    font-size: 22px;
+  }
+
+  .fd-blog-searchbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fd-blog-searchbar .vs-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .fd-post-shop-cta .fd-whatsapp-btn,
+  .fd-post-shop-cta .vs-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ---------- Responsive: small phones ---------- */
+@media (max-width: 575px) {
+  .fd-post-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .fd-blog-hero h1 {
+    font-size: 26px;
+  }
+
+  .fd-post-side {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 400px) {
+  .fd-blog-hero {
+    padding: 40px 0 32px;
+  }
+
+  .fd-featured-body {
+    padding: 20px 16px 22px;
+  }
+
+  .fd-featured-title {
+    font-size: 21px;
+  }
+
+  .fd-post-body {
+    padding: 18px 16px 20px;
+  }
+
+  .fd-post-title {
+    font-size: 18px;
+  }
+
+  .fd-post-header h1 {
+    font-size: 24px;
+  }
+
+  .fd-post-deck {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .fd-blog-head h2,
+  .fd-section-head h2 {
+    font-size: 22px;
+  }
+
+  .fd-post-body-rich h2 {
+    font-size: 20px;
+  }
+
+  .fd-post-body-rich h3 {
+    font-size: 18px;
+  }
+
+  .fd-side-card {
+    padding: 18px 16px;
+  }
+}
+
+@media (max-width: 330px) {
+  .fd-blog-hero h1 {
+    font-size: 24px;
+  }
+
+  .fd-post-header h1 {
+    font-size: 22px;
+  }
+
+  .fd-post-title {
+    font-size: 17px;
+  }
+
+  .fd-post-excerpt {
+    font-size: 14px;
+  }
+
+  .fd-blog-searchbar .form-control,
+  .fd-blog-searchbar .vs-btn {
+    min-height: 48px;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .fd-skeleton {
+    animation: none;
+  }
+
+  .fd-post-card {
+    transition: none;
+  }
+}
