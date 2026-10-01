@@ -14,7 +14,7 @@
         <div class="container">
             <nav aria-label="Breadcrumb">
                 <ol class="fd-breadcrumb">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{% url 'harvest_castle:index' %}">Home</a></li>
                     <li aria-current="page">Shop</li>
                 </ol>
             </nav>
@@ -25,41 +25,38 @@
     </div>
 
     <!--==============================
-    Products
+    Products (Django-rendered from the catalog)
     ============================== -->
-    <!--
-      STAGE 2 MOCK DATA: products below are temporary visual placeholders.
-      Each card exposes data-product-id / name / price / unit / category /
-      stock so the Django backend can replace this markup (or a JSON feed)
-      without touching the cart, filter, or WhatsApp logic. Prices are
-      illustrative only. Images reuse existing template assets as stand-ins.
-    -->
     <div class="space">
         <div class="container">
-            <div class="fd-shop-toolbar" id="fd-shop-toolbar">
+            <form method="get" action="{% url 'harvest_castle:product' %}" id="fd-shop-form">
+            <div class="fd-shop-toolbar" id="fd-shop-toolbar" data-server-filter="true">
                 <div class="fd-shop-search">
                     <i class="far fa-search" aria-hidden="true"></i>
                     <label class="visually-hidden" for="fd-shop-search">Search fresh produce</label>
-                    <input id="fd-shop-search" class="form-control" type="search" placeholder="Search tomatoes, peppers, fruits…" autocomplete="off">
+                    <input id="fd-shop-search" class="form-control" type="search" name="q" value="{{ query }}" placeholder="Search tomatoes, peppers, fruits…" autocomplete="off">
                 </div>
                 <div class="fd-cat-pills" id="fd-shop-pills" role="group" aria-label="Filter by category">
-                    <!-- Built from the actual products by fresh-direct.js -->
+                    {% for pill in pills %}
+                    <a class="fd-cat-pill" href="{{ pill.href }}" data-cat="{% if pill.slug %}{{ pill.slug }}{% else %}all{% endif %}" aria-pressed="{% if pill.active %}true{% else %}false{% endif %}">{{ pill.name }}</a>
+                    {% endfor %}
                 </div>
                 <div class="fd-shop-meta-row">
-                    <p class="fd-result-count" id="fd-shop-count" role="status" aria-live="polite"></p>
+                    <p class="fd-result-count" id="fd-shop-count" role="status" aria-live="polite">Showing {{ products|length }} of {{ total_count }} products</p>
                     <label class="fd-shop-select" for="fd-shop-avail">Availability
-                        <select id="fd-shop-avail" class="form-select">
-                            <option value="all">All</option>
-                            <option value="in">Available now</option>
-                            <option value="out">Out of stock</option>
+                        <select id="fd-shop-avail" class="form-select" name="avail">
+                            <option value="all"{% if avail == "all" %} selected{% endif %}>All</option>
+                            <option value="in"{% if avail == "in" %} selected{% endif %}>Available</option>
+                            <option value="limited"{% if avail == "limited" %} selected{% endif %}>Limited</option>
+                            <option value="out"{% if avail == "out" %} selected{% endif %}>Out of stock</option>
                         </select>
                     </label>
                     <label class="fd-shop-select" for="fd-shop-sort">Sort by
-                        <select id="fd-shop-sort" class="form-select">
-                            <option value="featured">Featured</option>
-                            <option value="price-asc">Price: Low to High</option>
-                            <option value="price-desc">Price: High to Low</option>
-                            <option value="name">Name: A–Z</option>
+                        <select id="fd-shop-sort" class="form-select" name="sort">
+                            <option value="featured"{% if sort == "featured" %} selected{% endif %}>Featured</option>
+                            <option value="price-asc"{% if sort == "price-asc" %} selected{% endif %}>Price: Low to High</option>
+                            <option value="price-desc"{% if sort == "price-desc" %} selected{% endif %}>Price: High to Low</option>
+                            <option value="name"{% if sort == "name" %} selected{% endif %}>Name: A–Z</option>
                         </select>
                     </label>
                     <div class="fd-view-toggle" role="group" aria-label="Change product view">
@@ -68,270 +65,47 @@
                     </div>
                 </div>
             </div>
+            </form>
 
             <h2 class="visually-hidden" id="fd-list-title">Fresh produce listing</h2>
             <div class="row g-4" id="fd-shop-grid" aria-labelledby="fd-list-title">
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-tomatoes" data-product-name="Fresh Tomatoes" data-price="2500" data-unit="1kg" data-category="Tomatoes" data-stock="in">
-                        <span class="fd-badge">Fresh</span>
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-1.png' %}" alt="Fresh red tomatoes" width="203" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Tomatoes</span>
-                            <h3 class="product-title"><a href="product-details.html">Fresh Tomatoes</a></h3>
-                            <p class="fd-product-unit">1kg pack</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦2,500</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-tomatoes">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Fresh Tomatoes" data-qty="1" data-unit="1kg">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-pepper" data-product-name="Red Scotch Pepper" data-price="3200" data-unit="1kg" data-category="Peppers" data-stock="in">
-                        <span class="fd-badge">Fresh</span>
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-2.png' %}" alt="Fresh red scotch peppers" width="212" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Peppers</span>
-                            <h3 class="product-title"><a href="product-details.html">Red Scotch Pepper</a></h3>
-                            <p class="fd-product-unit">1kg pack</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦3,200</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-pepper">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Red Scotch Pepper" data-qty="1" data-unit="1kg">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-onions" data-product-name="Sweet Onions" data-price="2800" data-unit="2kg" data-category="Onions" data-stock="in">
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-3.png' %}" alt="Fresh sweet onions" width="201" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Onions</span>
-                            <h3 class="product-title"><a href="product-details.html">Sweet Onions</a></h3>
-                            <p class="fd-product-unit">2kg pack</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦2,800</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-onions">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Sweet Onions" data-qty="1" data-unit="2kg">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-ugu" data-product-name="Fresh Ugu Leaves" data-price="800" data-unit="bunch" data-category="Vegetables" data-stock="limited">
-                        <span class="fd-badge is-low">Limited</span>
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-4.png' %}" alt="Fresh ugu leaves" width="240" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Vegetables</span>
-                            <h3 class="product-title"><a href="product-details.html">Fresh Ugu Leaves</a></h3>
-                            <p class="fd-product-unit">Per bunch</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦800</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-ugu">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Fresh Ugu Leaves" data-qty="1" data-unit="bunch">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-bananas" data-product-name="Ripe Bananas" data-price="1500" data-unit="bunch" data-category="Fruits" data-stock="in">
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-5.png' %}" alt="Ripe yellow bananas" width="110" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Fruits</span>
-                            <h3 class="product-title"><a href="product-details.html">Ripe Bananas</a></h3>
-                            <p class="fd-product-unit">Per bunch</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦1,500</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-bananas">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Ripe Bananas" data-qty="1" data-unit="bunch">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-oranges" data-product-name="Fresh Oranges" data-price="2000" data-unit="2kg" data-category="Fruits" data-stock="in">
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-6.png' %}" alt="Fresh juicy oranges" width="173" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Fruits</span>
-                            <h3 class="product-title"><a href="product-details.html">Fresh Oranges</a></h3>
-                            <p class="fd-product-unit">2kg pack</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦2,000</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-oranges">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Fresh Oranges" data-qty="1" data-unit="2kg">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-yam" data-product-name="White Yam" data-price="4500" data-unit="tuber" data-category="Tubers" data-stock="in">
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-7.png' %}" alt="Fresh white yam tubers" width="134" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Tubers</span>
-                            <h3 class="product-title"><a href="product-details.html">White Yam</a></h3>
-                            <p class="fd-product-unit">Per tuber</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦4,500</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-yam">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="White Yam" data-qty="1" data-unit="tuber">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-pineapple" data-product-name="Ripe Pineapple" data-price="1200" data-unit="piece" data-category="Fruits" data-stock="in">
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-8.png' %}" alt="Ripe pineapple" width="210" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Fruits</span>
-                            <h3 class="product-title"><a href="product-details.html">Ripe Pineapple</a></h3>
-                            <p class="fd-product-unit">Per piece</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦1,200</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-pineapple">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Ripe Pineapple" data-qty="1" data-unit="piece">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1 is-out" data-product-id="mock-tatashe" data-product-name="Tatashe Peppers" data-price="2800" data-unit="1kg" data-category="Peppers" data-stock="out">
-                        <span class="fd-badge is-out">Out of Stock</span>
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-2.png' %}" alt="Tatashe peppers, currently out of stock" width="212" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Peppers</span>
-                            <h3 class="product-title"><a href="product-details.html">Tatashe Peppers</a></h3>
-                            <p class="fd-product-unit">1kg pack</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦2,800</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-tatashe" disabled aria-disabled="true">Out of Stock</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="restock" data-product="Tatashe Peppers">Notify me</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-spring-onions" data-product-name="Spring Onions" data-price="600" data-unit="bunch" data-category="Vegetables" data-stock="in">
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-3.png' %}" alt="Fresh spring onions" width="201" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Vegetables</span>
-                            <h3 class="product-title"><a href="product-details.html">Spring Onions</a></h3>
-                            <p class="fd-product-unit">Per bunch</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦600</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-spring-onions">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Spring Onions" data-qty="1" data-unit="bunch">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-cassava" data-product-name="Cassava Tubers" data-price="2400" data-unit="3kg" data-category="Tubers" data-stock="in">
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-7.png' %}" alt="Fresh cassava tubers" width="134" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Tubers</span>
-                            <h3 class="product-title"><a href="product-details.html">Cassava Tubers</a></h3>
-                            <p class="fd-product-unit">3kg pack</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦2,400</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-cassava">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Cassava Tubers" data-qty="1" data-unit="3kg">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-scent-leaves" data-product-name="Scent Leaves" data-price="500" data-unit="bunch" data-category="Herbs &amp; Spices" data-stock="in">
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-4.png' %}" alt="Fresh scent leaves" width="240" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Herbs &amp; Spices</span>
-                            <h3 class="product-title"><a href="product-details.html">Scent Leaves</a></h3>
-                            <p class="fd-product-unit">Per bunch</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦500</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-scent-leaves">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Scent Leaves" data-qty="1" data-unit="bunch">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
+                {% for product in products %}
+                {% include "partials/product_card.html" with product=product %}
+                {% endfor %}
             </div>
 
-            <div class="fd-shop-state mt-4" id="fd-shop-empty" hidden>
+            <div class="fd-shop-state mt-4" id="fd-shop-empty"{% if products %} hidden{% endif %}>
                 <i class="far fa-shopping-basket" aria-hidden="true"></i>
                 <h2>No fresh produce found</h2>
+                {% if has_products %}
                 <p>Try a different search word or category — or clear everything to browse the full range again.</p>
-                <button type="button" class="vs-btn" id="fd-shop-reset">Clear search &amp; filters</button>
+                <a href="{% url 'harvest_castle:product' %}" class="vs-btn" id="fd-shop-reset">Clear search &amp; filters</a>
+                {% else %}
+                <p>Harvest Castle has not listed any produce yet. Please check back soon.</p>
+                {% endif %}
             </div>
 
-            <!-- Django pagination will populate page numbers and prev/next
-                 availability (?page=2). This static example shows page 1. -->
+            {% if page_obj.paginator.num_pages > 1 %}
             <nav class="fd-pagination" aria-label="Shop pagination">
+                {% if page_obj.has_previous %}
+                <a class="fd-page-link" href="?{% if base_query %}{{ base_query }}&{% endif %}page={{ page_obj.previous_page_number }}">Previous</a>
+                {% else %}
                 <span class="fd-page-link is-disabled" aria-disabled="true">Previous</span>
-                <a class="fd-page-link is-current" href="product.html" aria-current="page">1</a>
-                <a class="fd-page-link" href="product.html?page=2">2</a>
-                <a class="fd-page-link" href="product.html?page=2">Next</a>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                {% if num == page_obj.number %}
+                <a class="fd-page-link is-current" href="?{% if base_query %}{{ base_query }}&{% endif %}page={{ num }}" aria-current="page">{{ num }}</a>
+                {% else %}
+                <a class="fd-page-link" href="?{% if base_query %}{{ base_query }}&{% endif %}page={{ num }}">{{ num }}</a>
+                {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <a class="fd-page-link" href="?{% if base_query %}{{ base_query }}&{% endif %}page={{ page_obj.next_page_number }}">Next</a>
+                {% else %}
+                <span class="fd-page-link is-disabled" aria-disabled="true">Next</span>
+                {% endif %}
             </nav>
+            {% endif %}
         </div>
     </div>
 

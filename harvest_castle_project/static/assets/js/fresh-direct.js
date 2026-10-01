@@ -1055,6 +1055,26 @@
     var empty = document.getElementById("fd-shop-empty");
     var reset = document.getElementById("fd-shop-reset");
 
+    // Server-side filtering (Django renders the filtered cards): the toolbar
+    // is a real GET form, so only submit on change. Skip the client-side
+    // filtering/pill rebuild below — cards already reflect the queryset.
+    if (toolbar.getAttribute("data-server-filter") === "true") {
+      var serverForm = document.getElementById("fd-shop-form");
+      var serverAvail = avail;
+      var serverSort = sort;
+      if (serverAvail && serverForm) {
+        serverAvail.addEventListener("change", function () {
+          serverForm.submit();
+        });
+      }
+      if (serverSort && serverForm) {
+        serverSort.addEventListener("change", function () {
+          serverForm.submit();
+        });
+      }
+      return;
+    }
+
     var state = { q: "", cat: "all", avail: "all", sort: "featured" };
 
     function matches(card) {
@@ -1119,14 +1139,18 @@
       }
     }
 
-    // Category pills link to the category page (backend-ready: Django
-    // filters product-category.html by ?category=<name> server-side).
+    // Category pills are Django-rendered links to /products/categories/<slug>/.
     // Clicking a pill navigates instead of client-side filtering, so the
     // grid on this page only responds to search / availability / sort.
     // The ?category=… deep link below still highlights the matching pill
     // through aria-pressed so the current category reads clearly.
+    // Category pills are server-rendered by Django with real category URLs —
+    // never rebuild them here, or shoppers get dead static links.
     function buildPills() {
       if (!pills) {
+        return;
+      }
+      if (pills.querySelector(".fd-cat-pill")) {
         return;
       }
       var seen = [];
@@ -1141,7 +1165,7 @@
       var all = document.createElement("a");
       all.className = "fd-cat-pill";
       all.textContent = "All";
-      all.setAttribute("href", "product.html");
+      all.setAttribute("href", "/products/");
       all.setAttribute("data-cat", "all");
       all.setAttribute("aria-pressed", "true");
       pills.appendChild(all);
@@ -1152,7 +1176,7 @@
           b.textContent = cat;
           b.setAttribute(
             "href",
-            "product-category.html?category=" + encodeURIComponent(cat)
+            "/products/?category=" + encodeURIComponent(cat.toLowerCase())
           );
           b.setAttribute("data-cat", cat.toLowerCase());
           b.setAttribute("aria-pressed", "false");
@@ -1449,7 +1473,20 @@
     var missing = document.getElementById("fd-pdp-missing");
     var errorBox = document.getElementById("fd-pdp-error");
     try {
-      var product = FD_CATALOG[pdpReadId()];
+      // Django-rendered PDP: product comes from the embedded JSON (slug
+      // route), not the ?id= mock catalog. Falls back to FD_CATALOG only
+      // when no server data is present.
+      var product = null;
+      var dataEl = document.getElementById("fd-pdp-data");
+      if (dataEl) {
+        try {
+          product = JSON.parse(dataEl.textContent);
+        } catch (jsonErr) {
+          product = null;
+        }
+      } else {
+        product = FD_CATALOG[pdpReadId()];
+      }
       if (!product) {
         if (main) {
           main.setAttribute("hidden", "");
@@ -1475,13 +1512,15 @@
   }
 
   function pdpStatusMeta(status) {
+    // Statuses always render on the yellow is-status pill (custom badges
+    // use the green is-custom pill), so every status shares one class.
     if (status === "out") {
-      return { badge: "Out of Stock", cls: "is-out", schema: "https://schema.org/OutOfStock" };
+      return { badge: "Out of Stock", cls: "is-status", schema: "https://schema.org/OutOfStock" };
     }
     if (status === "limited") {
-      return { badge: "Limited", cls: "is-low", schema: "https://schema.org/LimitedAvailability" };
+      return { badge: "Limited", cls: "is-status", schema: "https://schema.org/LimitedAvailability" };
     }
-    return { badge: "Available", cls: "", schema: "https://schema.org/InStock" };
+    return { badge: "Available", cls: "is-status", schema: "https://schema.org/InStock" };
   }
 
   function renderPDP(root, product) {
@@ -1871,6 +1910,10 @@
   function renderPDPRelated(product) {
     var grid = document.getElementById("fd-pdp-related");
     if (!grid) {
+      return;
+    }
+    // Django-rendered related cards: keep the server markup untouched.
+    if (grid.getAttribute("data-server") === "true") {
       return;
     }
     var ids = Object.keys(FD_CATALOG);

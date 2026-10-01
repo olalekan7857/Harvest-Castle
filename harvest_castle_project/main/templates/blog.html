@@ -14,7 +14,7 @@
         <div class="container">
             <nav aria-label="Breadcrumb">
                 <ol class="fd-breadcrumb">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{% url 'harvest_castle:index' %}">Home</a></li>
                     <li aria-current="page">Blog</li>
                 </ol>
             </nav>
@@ -31,27 +31,30 @@
     <!--==============================
     Featured article
     ============================== -->
+    {% if featured %}
     <section class="fd-blog-block" aria-labelledby="fd-blog-featured-title">
         <div class="container">
             <div class="fd-blog-head">
                 <span class="sec-subtitle">Editor's pick</span>
                 <h2 id="fd-blog-featured-title">Featured Article</h2>
             </div>
-            <!-- Static example content. Django will render the featured post here. -->
             <article class="fd-featured-post">
-                <a class="fd-featured-media" href="blog-detail.html" tabindex="-1" aria-hidden="true">
-                    <img src="{% static 'assets/img/product/product-1-3.png' %}" alt="Box of fresh vegetables" fetchpriority="high">
+                <a class="fd-featured-media" href="{% url 'harvest_castle:blog_detail' slug=featured.slug %}" tabindex="-1" aria-hidden="true">
+                    {% if featured.image %}
+                    <img src="{{ featured.image.url }}" alt="{{ featured.image_alt|default:featured.title }}" fetchpriority="high">
+                    {% endif %}
                 </a>
                 <div class="fd-featured-body">
-                    <p class="fd-featured-kicker"><span class="fd-post-cat">Featured</span><span aria-hidden="true"> · </span><a class="fd-post-cat is-plain" href="blog-category.html">Food Storage</a></p>
-                    <h2 class="fd-featured-title"><a href="blog-detail.html">How to Store Tomatoes So They Stay Fresh Longer</a></h2>
-                    <p class="fd-featured-excerpt">Counter or fridge? Whole or sliced? A practical guide to keeping tomatoes firm, flavourful, and waste-free.</p>
-                    <p class="fd-post-meta"><span class="fd-meta-item">10 Sep 2026</span><span class="fd-meta-item">4 min read</span></p>
-                    <a class="vs-btn" href="blog-detail.html">Read Article</a>
+                    <p class="fd-featured-kicker"><span class="fd-post-cat">Featured</span><span aria-hidden="true"> · </span><a class="fd-post-cat is-plain" href="{% url 'harvest_castle:blog_category' slug=featured.category.slug %}">{{ featured.category.name }}</a></p>
+                    <h2 class="fd-featured-title"><a href="{% url 'harvest_castle:blog_detail' slug=featured.slug %}">{{ featured.title }}</a></h2>
+                    <p class="fd-featured-excerpt">{{ featured.excerpt }}</p>
+                    <p class="fd-post-meta"><span class="fd-meta-item">{{ featured.published_at|date:"j M Y" }}</span><span class="fd-meta-item">{{ featured.reading_time }} min read</span></p>
+                    <a class="vs-btn" href="{% url 'harvest_castle:blog_detail' slug=featured.slug %}">Read Article</a>
                 </div>
             </article>
         </div>
     </section>
+    {% endif %}
 
     <!--==============================
     Categories + latest articles
@@ -63,104 +66,47 @@
                 <h2 id="fd-blog-latest-title">Latest Articles</h2>
                 <p>Guides, recipes, and farm notes — newest first. Choose a topic to see everything in that category.</p>
             </div>
-            <!-- Category links point at the category template for now.
-                 Django will map these to slug-based paths (/blog/category/<slug>/). -->
             <div class="fd-blog-cats">
                 <div class="fd-cat-pills" role="navigation" aria-label="Blog categories">
-                    <a class="fd-cat-pill" href="blog.html" aria-current="page">All</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Fresh Produce</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Fruits</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Vegetables</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Healthy Living</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Recipes</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Food Storage</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Farm Tips</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Seasonal</a>
+                    <a class="fd-cat-pill" href="{% url 'harvest_castle:blog' %}" aria-current="page">All</a>
+                    {% for category in categories %}
+                    <a class="fd-cat-pill" href="{% url 'harvest_castle:blog_category' slug=category.slug %}">{{ category.name }}</a>
+                    {% endfor %}
                 </div>
             </div>
-            <!-- Static example cards. Django will render one card per post here. -->
             <div class="fd-post-grid">
-                <article class="fd-post-card">
-                    <a class="fd-post-media" href="blog-detail.html" tabindex="-1" aria-hidden="true">
-                        <img src="{% static 'assets/img/blog/blog-img-1-4.jpg' %}" alt="Hand reaching toward fresh leafy greens" loading="lazy" decoding="async">
-                    </a>
-                    <div class="fd-post-body">
-                        <a class="fd-post-cat" href="blog-category.html">Vegetables</a>
-                        <h3 class="fd-post-title"><a href="blog-detail.html">Ugu Leaves: Choosing Fresh Bunches and Cooking Them Well</a></h3>
-                        <p class="fd-post-excerpt">Deep-green colour, crisp stems, no wilting — what to look for when buying ugu, plus simple cooking ideas.</p>
-                        <p class="fd-post-meta"><span class="fd-meta-item">6 Sep 2026</span><span class="fd-meta-item">3 min read</span></p>
-                        <a class="fd-post-more" href="blog-detail.html">Read Article</a>
-                    </div>
-                </article>
-                <article class="fd-post-card">
-                    <a class="fd-post-media" href="blog-detail.html" tabindex="-1" aria-hidden="true">
-                        <img src="{% static 'assets/img/blog/blog-img-1-1.jpg' %}" alt="Farmer holding freshly harvested vegetables" loading="lazy" decoding="async">
-                    </a>
-                    <div class="fd-post-body">
-                        <a class="fd-post-cat" href="blog-category.html">Recipes</a>
-                        <h3 class="fd-post-title"><a href="blog-detail.html">Red Scotch Pepper: Heat, Flavour, and Three Simple Uses</a></h3>
-                        <p class="fd-post-excerpt">Small pepper, big character. How to buy, store, and cook with fresh red scotch pepper without overpowering your food.</p>
-                        <p class="fd-post-meta"><span class="fd-meta-item">30 Aug 2026</span><span class="fd-meta-item">3 min read</span></p>
-                        <a class="fd-post-more" href="blog-detail.html">Read Article</a>
-                    </div>
-                </article>
-                <article class="fd-post-card">
-                    <a class="fd-post-media" href="blog-detail.html" tabindex="-1" aria-hidden="true">
-                        <img src="{% static 'assets/img/product/product-1-4.png' %}" alt="Fresh red apples" loading="lazy" decoding="async">
-                    </a>
-                    <div class="fd-post-body">
-                        <a class="fd-post-cat" href="blog-category.html">Seasonal</a>
-                        <h3 class="fd-post-title"><a href="blog-detail.html">Seasonal Fruits Worth Buying Around Abeokuta Right Now</a></h3>
-                        <p class="fd-post-excerpt">Buying fruit in season means better taste and better prices. Here is how to read ripeness across the fruits you will actually find.</p>
-                        <p class="fd-post-meta"><span class="fd-meta-item">22 Aug 2026</span><span class="fd-meta-item">5 min read</span></p>
-                        <a class="fd-post-more" href="blog-detail.html">Read Article</a>
-                    </div>
-                </article>
-                <article class="fd-post-card">
-                    <a class="fd-post-media" href="blog-detail.html" tabindex="-1" aria-hidden="true">
-                        <img src="{% static 'assets/img/blog/blog-s-1-1.png' %}" alt="Green crops growing on the farm" loading="lazy" decoding="async">
-                    </a>
-                    <div class="fd-post-body">
-                        <a class="fd-post-cat" href="blog-category.html">Food Storage</a>
-                        <h3 class="fd-post-title"><a href="blog-detail.html">Five Onion Storage Mistakes That Cost You Money</a></h3>
-                        <p class="fd-post-excerpt">Sprouting, soft spots, and that one rotten onion spoiling the bag — all avoidable with better storage.</p>
-                        <p class="fd-post-meta"><span class="fd-meta-item">15 Aug 2026</span><span class="fd-meta-item">4 min read</span></p>
-                        <a class="fd-post-more" href="blog-detail.html">Read Article</a>
-                    </div>
-                </article>
-                <article class="fd-post-card">
-                    <a class="fd-post-media" href="blog-detail.html" tabindex="-1" aria-hidden="true">
-                        <img src="{% static 'assets/img/product/product-1-6.png' %}" alt="Bunch of fresh bananas" loading="lazy" decoding="async">
-                    </a>
-                    <div class="fd-post-body">
-                        <a class="fd-post-cat" href="blog-category.html">Fruits</a>
-                        <h3 class="fd-post-title"><a href="blog-detail.html">Banana Ripening at Home: From Green to Perfectly Sweet</a></h3>
-                        <p class="fd-post-excerpt">How to ripen green bananas evenly, slow down ripe ones, and rescue overripe ones for cooking.</p>
-                        <p class="fd-post-meta"><span class="fd-meta-item">18 Jul 2026</span><span class="fd-meta-item">3 min read</span></p>
-                        <a class="fd-post-more" href="blog-detail.html">Read Article</a>
-                    </div>
-                </article>
-                <article class="fd-post-card has-fallback">
-                    <a class="fd-post-media" href="blog-detail.html" tabindex="-1" aria-hidden="true">
-                        <span class="fd-post-img-fallback" aria-hidden="true"><i class="fas fa-leaf"></i></span>
-                    </a>
-                    <div class="fd-post-body">
-                        <a class="fd-post-cat" href="blog-category.html">Healthy Living</a>
-                        <h3 class="fd-post-title"><a href="blog-detail.html">Eating Fresh on a Student Budget: A Practical Campus Guide</a></h3>
-                        <p class="fd-post-excerpt">Fresh produce is not only for big budgets. How students around FUNAAB can eat well with small, smart purchases.</p>
-                        <p class="fd-post-meta"><span class="fd-meta-item">8 Aug 2026</span><span class="fd-meta-item">4 min read</span></p>
-                        <a class="fd-post-more" href="blog-detail.html">Read Article</a>
-                    </div>
-                </article>
+                {% for post in posts %}
+                {% include "partials/blog_card.html" with post=post %}
+                {% endfor %}
             </div>
-            <!-- Django pagination will populate page numbers and prev/next
-                 availability (?page=2). This static example shows page 1. -->
+            {% if not posts %}
+            <div class="fd-shop-state" role="status">
+                <i class="far fa-newspaper" aria-hidden="true"></i>
+                <h2>No articles yet</h2>
+                <p>Fresh guides are on the way. Please check back soon.</p>
+            </div>
+            {% endif %}
+            {% if page_obj.paginator.num_pages > 1 %}
             <nav class="fd-pagination" aria-label="Blog pagination">
+                {% if page_obj.has_previous %}
+                <a class="fd-page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% else %}
                 <span class="fd-page-link is-disabled" aria-disabled="true">Previous</span>
-                <a class="fd-page-link is-current" href="blog.html" aria-current="page">1</a>
-                <a class="fd-page-link" href="blog.html?page=2">2</a>
-                <a class="fd-page-link" href="blog.html?page=2">Next</a>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                {% if num == page_obj.number %}
+                <a class="fd-page-link is-current" href="?page={{ num }}" aria-current="page">{{ num }}</a>
+                {% else %}
+                <a class="fd-page-link" href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <a class="fd-page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                {% else %}
+                <span class="fd-page-link is-disabled" aria-disabled="true">Next</span>
+                {% endif %}
             </nav>
+            {% endif %}
         </div>
     </section>
 
@@ -176,7 +122,7 @@
                         <p>Everything you read about — tomatoes, peppers, greens, fruits — is available to order when in season. Shop online or send your list on WhatsApp.</p>
                     </div>
                     <div class="col-lg-4 text-lg-end">
-                        <a href="product.html" class="vs-btn">Shop Fresh Produce</a>
+                        <a href="{% url 'harvest_castle:product' %}" class="vs-btn">Shop Fresh Produce</a>
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@
 {% load static %}
 
 
-{% block title %}Blog Category — Harvest Castle Blog{% endblock title %}
+{% block title %}{{ category.name }} — Harvest Castle Blog{% endblock title %}
 
 
 {% block content %}
@@ -11,74 +11,60 @@
         <div class="container">
             <nav aria-label="Breadcrumb">
                 <ol class="fd-breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li aria-current="page">Recipes</li>
+                    <li><a href="{% url 'harvest_castle:index' %}">Home</a></li>
+                    <li><a href="{% url 'harvest_castle:blog' %}">Blog</a></li>
+                    <li aria-current="page">{{ category.name }}</li>
                 </ol>
             </nav>
             <span class="sec-subtitle">Blog topic</span>
-            <!-- Django: category.name / category.description -->
-            <h1 class="sec-title">Recipes</h1>
-            <p>Simple recipes built on fresh, available ingredients.</p>
+            <h1 class="sec-title">{{ category.name }}</h1>
+            <p>{{ category.description|default:"Guides, recipes, and farm notes on this topic." }}</p>
         </div>
     </div>
     <div class="space">
         <div class="container">
-            <!-- Django: category pills (slug-based paths) + posts in this category -->
             <div class="fd-blog-cats">
                 <div class="fd-cat-pills" role="navigation" aria-label="Blog categories">
-                    <a class="fd-cat-pill" href="blog.html">All</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Fresh Produce</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Fruits</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Vegetables</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Healthy Living</a>
-                    <a class="fd-cat-pill" href="blog-category.html" aria-current="page">Recipes</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Food Storage</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Farm Tips</a>
-                    <a class="fd-cat-pill" href="blog-category.html">Seasonal</a>
+                    <a class="fd-cat-pill" href="{% url 'harvest_castle:blog' %}">All</a>
+                    {% for other in categories %}
+                    <a class="fd-cat-pill" href="{% url 'harvest_castle:blog_category' slug=other.slug %}"{% if other.slug == category.slug %} aria-current="page"{% endif %}>{{ other.name }}</a>
+                    {% endfor %}
                 </div>
             </div>
             <div class="fd-post-grid">
-                <article class="fd-post-card">
-                    <a class="fd-post-media" href="blog-detail.html" tabindex="-1" aria-hidden="true">
-                        <img src="{% static 'assets/img/blog/blog-img-1-1.jpg' %}" alt="Farmer holding freshly harvested vegetables" loading="lazy" decoding="async">
-                    </a>
-                    <div class="fd-post-body">
-                        <a class="fd-post-cat" href="blog-category.html">Recipes</a>
-                        <h3 class="fd-post-title"><a href="blog-detail.html">Red Scotch Pepper: Heat, Flavour, and Three Simple Uses</a></h3>
-                        <p class="fd-post-excerpt">Small pepper, big character. How to buy, store, and cook with fresh red scotch pepper without overpowering your food.</p>
-                        <p class="fd-post-meta"><span class="fd-meta-item">30 Aug 2026</span><span class="fd-meta-item">3 min read</span></p>
-                        <a class="fd-post-more" href="blog-detail.html">Read Article</a>
-                    </div>
-                </article>
-                <article class="fd-post-card">
-                    <a class="fd-post-media" href="blog-detail.html" tabindex="-1" aria-hidden="true">
-                        <img src="{% static 'assets/img/blog/blog-d-1-1.jpg' %}" alt="People inspecting fresh greens in a greenhouse" loading="lazy" decoding="async">
-                    </a>
-                    <div class="fd-post-body">
-                        <a class="fd-post-cat" href="blog-category.html">Recipes</a>
-                        <h3 class="fd-post-title"><a href="blog-detail.html">Simple Fresh Vegetable Soup With Whatever Is Available</a></h3>
-                        <p class="fd-post-excerpt">A flexible one-pot soup that adapts to whatever greens and vegetables you have — with timings that actually work.</p>
-                        <p class="fd-post-meta"><span class="fd-meta-item">20 Jun 2026</span><span class="fd-meta-item">6 min read</span></p>
-                        <a class="fd-post-more" href="blog-detail.html">Read Article</a>
-                    </div>
-                </article>
+                {% for post in posts %}
+                {% include "partials/blog_card.html" with post=post %}
+                {% endfor %}
             </div>
-            <!-- Django pagination (?page=). Single-page example: both ends disabled. -->
-            <nav class="fd-pagination" aria-label="Category pagination">
-                <span class="fd-page-link is-disabled" aria-disabled="true">Previous</span>
-                <a class="fd-page-link is-current" href="blog-category.html" aria-current="page">1</a>
-                <span class="fd-page-link is-disabled" aria-disabled="true">Next</span>
-            </nav>
-            <!-- Django: when a category has no posts, render the empty state
-                 below instead of the grid above.
+            {% if not posts %}
             <div class="fd-shop-state" role="status">
                 <i class="far fa-newspaper" aria-hidden="true"></i>
                 <h2>No articles here yet</h2>
                 <p>New guides for this topic are on the way. Browse everything instead.</p>
-                <p><a class="vs-btn" href="blog.html">Browse All Articles</a></p>
+                <p><a class="vs-btn" href="{% url 'harvest_castle:blog' %}">Browse All Articles</a></p>
             </div>
-            -->
+            {% endif %}
+            {% if page_obj.paginator.num_pages > 1 %}
+            <nav class="fd-pagination" aria-label="Category pagination">
+                {% if page_obj.has_previous %}
+                <a class="fd-page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                {% else %}
+                <span class="fd-page-link is-disabled" aria-disabled="true">Previous</span>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                {% if num == page_obj.number %}
+                <a class="fd-page-link is-current" href="?page={{ num }}" aria-current="page">{{ num }}</a>
+                {% else %}
+                <a class="fd-page-link" href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <a class="fd-page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                {% else %}
+                <span class="fd-page-link is-disabled" aria-disabled="true">Next</span>
+                {% endif %}
+            </nav>
+            {% endif %}
         </div>
     </div>
     </main>

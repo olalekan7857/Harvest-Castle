@@ -42,8 +42,9 @@
     <link rel="stylesheet" href="{% static 'assets/css/slick.min.css' %}">
     <!-- Theme Custom CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/harvest-castle.css' %}">
-    <!-- Harvest Castle foundation overrides (Stage 1) -->
-    <link rel="stylesheet" href="{% static 'assets/css/fresh-direct.css' %}">
+    <!-- Harvest Castle foundation overrides (Stage 1).
+         ?v= pin: bump when this file changes so browsers fetch it fresh. -->
+    <link rel="stylesheet" href="{% static 'assets/css/fresh-direct.css' %}?v=3">
     <!-- Harvest Castle blog design system (needed by blog pages; harmless elsewhere) -->
     <link rel="stylesheet" href="{% static 'assets/css/fd-blog.css' %}">
     <!-- Harvest Castle theme layer: light/dark tokens + dark surfaces (inert in Light mode) -->
@@ -349,8 +350,9 @@
     <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
     <!-- Main Js File -->
     <script src="{% static 'assets/js/main.js' %}"></script>
-    <!-- Harvest Castle config + enhancements (single WhatsApp source) -->
-    <script src="{% static 'assets/js/fresh-direct.js' %}"></script>
+    <!-- Harvest Castle config + enhancements (single WhatsApp source).
+         ?v= pin: bump when this file changes so browsers fetch it fresh. -->
+    <script src="{% static 'assets/js/fresh-direct.js' %}?v=3"></script>
     <script src="{% static 'assets/js/fd-theme.js' %}"></script>
     <!-- Harvest Castle blog UI interactions (share/copy only; safe on non-blog pages) -->
     <script src="{% static 'assets/js/fd-blog.js' %}"></script>

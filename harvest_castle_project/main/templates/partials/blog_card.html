@@ -1,0 +1,17 @@
+{# Shared blog card. Expects `post` with category prefetched. #}
+<article class="fd-post-card{% if not post.image %} has-fallback{% endif %}">
+    <a class="fd-post-media" href="{% url 'harvest_castle:blog_detail' slug=post.slug %}" tabindex="-1" aria-hidden="true">
+        {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.image_alt|default:post.title }}" loading="lazy" decoding="async">
+        {% else %}
+        <span class="fd-post-img-fallback" aria-hidden="true"><i class="fas fa-leaf"></i></span>
+        {% endif %}
+    </a>
+    <div class="fd-post-body">
+        <a class="fd-post-cat" href="{% url 'harvest_castle:blog_category' slug=post.category.slug %}">{{ post.category.name }}</a>
+        <h3 class="fd-post-title"><a href="{% url 'harvest_castle:blog_detail' slug=post.slug %}">{{ post.title }}</a></h3>
+        <p class="fd-post-excerpt">{{ post.excerpt }}</p>
+        <p class="fd-post-meta"><span class="fd-meta-item">{{ post.published_at|date:"j M Y" }}</span><span class="fd-meta-item">{{ post.reading_time }} min read</span></p>
+        <a class="fd-post-more" href="{% url 'harvest_castle:blog_detail' slug=post.slug %}">Read Article</a>
+    </div>
+</article>

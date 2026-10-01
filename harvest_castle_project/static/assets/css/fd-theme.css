@@ -269,7 +269,8 @@ html[data-theme="dark"] .fd-contact-status.is-error {
   color: var(--fd-error-text);
 }
 /* Amber pills keep their yellow fill in both themes; pin dark text. */
-html[data-theme="dark"] .fd-badge.is-low {
+html[data-theme="dark"] .fd-badge.is-low,
+html[data-theme="dark"] .fd-badge.is-status {
   color: #231a02;
 }
 

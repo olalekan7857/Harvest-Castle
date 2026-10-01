@@ -2,12 +2,12 @@
 {% load static %}
 
 
-{% block title %}Fresh Tomatoes | Harvest Castle{% endblock title %}
+{% block title %}{{ product.name }} | Harvest Castle{% endblock title %}
 
 
 {% block content %}
 <main id="fd-main">
-    <div id="fd-pdp">
+    <div id="fd-pdp" data-server-product="{{ product.slug }}">
     <!--==============================
     Breadcrumb
     ============================== -->
@@ -15,9 +15,9 @@
         <div class="container">
             <nav aria-label="Breadcrumb">
                 <ol class="fd-breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="product.html">Shop</a></li>
-                    <li><span id="fd-pdp-crumb" aria-current="page">Fresh Tomatoes</span></li>
+                    <li><a href="{% url 'harvest_castle:index' %}">Home</a></li>
+                    <li><a href="{% url 'harvest_castle:product' %}">Shop</a></li>
+                    <li><span id="fd-pdp-crumb" aria-current="page">{{ product.name }}</span></li>
                 </ol>
             </nav>
             <span class="sec-subtitle">Harvest Castle store</span>
@@ -25,43 +25,43 @@
     </div>
 
     <!--==============================
-    Product main
+    Product main (Django-rendered; JS enhances from embedded data)
     ============================== -->
-    <!--
-      STAGE 3: static markup below describes the default product (tomatoes)
-      so the page is meaningful without JavaScript. On load, fresh-direct.js
-      reads ?id= and re-renders every product-specific value from the single
-      FD_CATALOG mock object (to be replaced by Django data later).
-    -->
     <section class="fd-pdp-main" aria-labelledby="fd-pdp-name">
-        <div class="container" id="fd-pdp-main" aria-busy="true">
+        <div class="container" id="fd-pdp-main" aria-busy="false">
             <div class="row g-4 g-lg-5">
                 <div class="col-lg-6">
                     <div class="fd-pdp-gallery">
-                        <span class="fd-badge" id="fd-pdp-badge">Available</span>
-                        <a class="fd-pdp-main-img popup-image" id="fd-pdp-zoom" href="assets/img/product/product-1-1.png" aria-label="Open larger product image">
-                            <img id="fd-pdp-img" src="{% static 'assets/img/product/product-1-1.png' %}" alt="Fresh red tomatoes" width="203" height="190">
+                        <span class="{{ product.status_class }}" id="fd-pdp-badge">{{ product.status_text }}</span>
+                        {% if product.badge %}<span class="{{ product.badge_class }}">{{ product.badge }}</span>{% endif %}
+                        <a class="fd-pdp-main-img popup-image" id="fd-pdp-zoom" href="{{ product.display_image_url }}" aria-label="Open larger product image">
+                            <img id="fd-pdp-img" src="{{ product.display_image_url }}" alt="{{ product.display_image_alt }}" width="{{ product.display_image_w }}" height="{{ product.display_image_h }}">
                         </a>
                         <div class="fd-pdp-thumbs" id="fd-pdp-thumbs" hidden></div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="fd-pdp-info">
-                        <span class="fd-product-cat" id="fd-pdp-cat">Tomatoes</span>
-                        <h1 class="fd-pdp-name" id="fd-pdp-name">Fresh Tomatoes</h1>
+                        <span class="fd-product-cat"><a id="fd-pdp-cat" href="{% url 'harvest_castle:product_category' slug=product.category.slug %}">{{ product.category.name }}</a></span>
+                        <h1 class="fd-pdp-name" id="fd-pdp-name">{{ product.name }}</h1>
                         <div class="fd-pdp-price-row">
-                            <span class="fd-pdp-price" id="fd-pdp-price">₦2,500</span>
-                            <span class="fd-pdp-unit" id="fd-pdp-unit">1kg</span>
+                            <span class="fd-pdp-price" id="fd-pdp-price">{{ product.price_display }}</span>
+                            <span class="fd-pdp-unit" id="fd-pdp-unit">{{ product.display_unit_text }}</span>
                         </div>
-                        <span class="fd-pdp-stock is-in" id="fd-pdp-stock">Available</span>
-                        <p class="fd-pdp-desc" id="fd-pdp-desc">Fresh red tomatoes, picked ripe and handled carefully. An everyday staple for stews, sauces and salads.</p>
+                        <span class="fd-pdp-stock is-{% if product.status == "out" %}out{% elif product.status == "limited" %}low{% else %}in{% endif %}" id="fd-pdp-stock">{% if product.status == "out" %}Out of Stock{% elif product.status == "limited" %}Limited{% else %}Available{% endif %}</span>
+                        <p class="fd-pdp-desc" id="fd-pdp-desc">{{ product.description }}</p>
 
-                        <span class="fd-pdp-field-label" id="fd-pdp-variant-label">Choose weight</span>
+                        <span class="fd-pdp-field-label" id="fd-pdp-variant-label">{% if product.pricing_unit == "kg" %}Price per kilogram{% elif product.display_variants|length < 2 %}Selling unit{% else %}Choose option{% endif %}</span>
                         <div class="fd-variant-group" id="fd-pdp-variants" role="radiogroup" aria-labelledby="fd-pdp-variant-label">
-                            <button type="button" class="fd-variant-btn" data-variant-id="0.5kg" aria-pressed="false">0.5kg</button>
-                            <button type="button" class="fd-variant-btn" data-variant-id="1kg" aria-pressed="true">1kg</button>
-                            <button type="button" class="fd-variant-btn" data-variant-id="2kg" aria-pressed="false">2kg</button>
-                            <button type="button" class="fd-variant-btn" data-variant-id="5kg" aria-pressed="false">5kg</button>
+                            {% if product.pricing_unit == "kg" %}
+                            <button type="button" class="fd-variant-btn" data-variant-id="kg" aria-pressed="true">per kg</button>
+                            {% elif product.display_variants %}
+                            {% for variant in product.display_variants %}
+                            <button type="button" class="fd-variant-btn" data-variant-id="{{ variant.label }}" aria-pressed="{% if product.display_default and variant.pk == product.display_default.pk %}true{% else %}false{% endif %}">{{ variant.label }}</button>
+                            {% endfor %}
+                            {% else %}
+                            <button type="button" class="fd-variant-btn" data-variant-id="each" aria-pressed="true">each</button>
+                            {% endif %}
                         </div>
 
                         <span class="fd-pdp-field-label" id="fd-pdp-qty-label">Quantity</span>
@@ -71,14 +71,22 @@
                                 <span id="fd-pdp-qty" aria-live="polite">1</span>
                                 <button type="button" id="fd-pdp-inc" aria-label="Increase quantity"><i class="fas fa-plus" aria-hidden="true"></i></button>
                             </div>
+                            {% if product.status == "out" %}
+                            <button type="button" class="vs-btn fd-pdp-add" id="fd-pdp-add" disabled aria-disabled="true">Out of Stock</button>
+                            <a href="#" class="fd-whatsapp-btn fd-pdp-wa" id="fd-pdp-wa" data-whatsapp="restock" data-product="{{ product.name }}"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Notify me on WhatsApp</span></a>
+                            {% elif not product.is_purchasable %}
+                            <button type="button" class="vs-btn fd-pdp-add" id="fd-pdp-add" disabled aria-disabled="true">Unavailable</button>
+                            <a href="#" class="fd-whatsapp-btn fd-pdp-wa" id="fd-pdp-wa" data-whatsapp="general"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                            {% else %}
                             <button type="button" class="vs-btn fd-pdp-add" id="fd-pdp-add">Add to Cart</button>
-                            <a href="#" class="fd-whatsapp-btn fd-pdp-wa" id="fd-pdp-wa" data-whatsapp="product" data-product="Fresh Tomatoes" data-variant="1kg" data-qty="1"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                            <a href="#" class="fd-whatsapp-btn fd-pdp-wa" id="fd-pdp-wa" data-whatsapp="product" data-product="{{ product.name }}"{% if product.pricing_unit == "kg" %} data-variant="per kg" data-qty="1" data-unit="kg"{% elif product.display_default %} data-variant="{{ product.display_default.label }}" data-qty="1"{% endif %}><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
+                            {% endif %}
                         </div>
-                        <p class="fd-pdp-total" aria-live="polite">Total&nbsp;<strong><span id="fd-pdp-total-amount">₦2,500</span></strong>&nbsp;<span id="fd-pdp-total-detail">· 1kg × 1</span></p>
+                        <p class="fd-pdp-total" aria-live="polite">Total&nbsp;<strong><span id="fd-pdp-total-amount">{{ product.price_display }}</span></strong>&nbsp;<span id="fd-pdp-total-detail">· {{ product.display_unit_text }} × 1</span></p>
 
                         <ul class="fd-pdp-facts">
-                            <li><span>Category:</span> <strong id="fd-pdp-fact-cat">Tomatoes</strong></li>
-                            <li><span>Available options:</span> <strong id="fd-pdp-fact-options">0.5kg, 1kg, 2kg, 5kg</strong></li>
+                            <li><span>Category:</span> <strong><a id="fd-pdp-fact-cat" href="{% url 'harvest_castle:product_category' slug=product.category.slug %}">{{ product.category.name }}</a></strong></li>
+                            <li><span>Available options:</span> <strong id="fd-pdp-fact-options">{{ product.options_text }}</strong></li>
                             <li><span>Delivery:</span> <strong>Arranged with you after ordering</strong></li>
                         </ul>
                         <p class="fd-pdp-note"><i class="far fa-truck" aria-hidden="true"></i><span>Delivery is coordinated personally with you — share your hostel or address and preferred time at checkout or on WhatsApp.</span></p>
@@ -93,7 +101,7 @@
                 <i class="far fa-search" aria-hidden="true"></i>
                 <h1>Product not found</h1>
                 <p>We couldn't find the product you're looking for. It may have been removed or the link is incorrect.</p>
-                <a href="product.html" class="vs-btn">Back to Shop</a>
+                <a href="{% url 'harvest_castle:product' %}" class="vs-btn">Back to Shop</a>
             </div>
         </div>
 
@@ -105,7 +113,7 @@
                 <p>We couldn't load this product right now. Please try again or return to the shop.</p>
                 <p>
                     <button type="button" class="vs-btn" onclick="window.location.reload()">Try again</button>
-                    <a href="product.html" class="fd-ghost-btn">Back to Shop</a>
+                    <a href="{% url 'harvest_castle:product' %}" class="fd-ghost-btn">Back to Shop</a>
                 </p>
             </div>
         </div>
@@ -136,99 +144,21 @@
                 <h2 class="sec-title" id="fd-pdp-related-title">You May Also Like</h2>
             </div>
             <div class="fd-section-view" id="fd-pdp-toolbar">
-                <p class="fd-result-count" id="fd-pdp-count" role="status" aria-live="polite"></p>
+                <p class="fd-result-count" id="fd-pdp-count" role="status" aria-live="polite">Showing {{ related_products|length }} related products</p>
                 <div class="fd-view-toggle" role="group" aria-label="Change product view">
                     <button type="button" class="icon-btn" data-shop-view="grid" aria-pressed="true" aria-label="Grid view"><i class="fas fa-th" aria-hidden="true"></i></button>
                     <button type="button" class="icon-btn" data-shop-view="list" aria-pressed="false" aria-label="List view"><i class="fas fa-list" aria-hidden="true"></i></button>
                 </div>
             </div>
-            <div class="row g-4" id="fd-pdp-related">
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-pepper" data-product-name="Red Scotch Pepper" data-price="3200" data-unit="1kg" data-category="Peppers" data-stock="in">
-                        <span class="fd-badge">Fresh</span>
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-2.png' %}" alt="Fresh red scotch peppers" width="212" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Peppers</span>
-                            <h3 class="product-title"><a href="product-details.html?id=mock-pepper">Red Scotch Pepper</a></h3>
-                            <p class="fd-product-unit">1kg pack</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦3,200</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-pepper">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html?id=mock-pepper" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Red Scotch Pepper" data-qty="1" data-unit="1kg">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-onions" data-product-name="Sweet Onions" data-price="2800" data-unit="2kg" data-category="Onions" data-stock="in">
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-3.png' %}" alt="Fresh sweet onions" width="201" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Onions</span>
-                            <h3 class="product-title"><a href="product-details.html?id=mock-onions">Sweet Onions</a></h3>
-                            <p class="fd-product-unit">2kg pack</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦2,800</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-onions">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html?id=mock-onions" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Sweet Onions" data-qty="1" data-unit="2kg">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-ugu" data-product-name="Fresh Ugu Leaves" data-price="800" data-unit="bunch" data-category="Vegetables" data-stock="limited">
-                        <span class="fd-badge is-low">Limited</span>
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-4.png' %}" alt="Fresh ugu leaves" width="240" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Vegetables</span>
-                            <h3 class="product-title"><a href="product-details.html?id=mock-ugu">Fresh Ugu Leaves</a></h3>
-                            <p class="fd-product-unit">Per bunch</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦800</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-ugu">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html?id=mock-ugu" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Fresh Ugu Leaves" data-qty="1" data-unit="bunch">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <article class="product-style1" data-product-id="mock-oranges" data-product-name="Fresh Oranges" data-price="2000" data-unit="2kg" data-category="Fruits" data-stock="in">
-                        <div class="product-img">
-                            <img src="{% static 'assets/img/product/product-1-6.png' %}" alt="Fresh juicy oranges" width="173" height="190" loading="lazy" decoding="async">
-                        </div>
-                        <div class="product-about">
-                            <span class="fd-product-cat">Fruits</span>
-                            <h3 class="product-title"><a href="product-details.html?id=mock-oranges">Fresh Oranges</a></h3>
-                            <p class="fd-product-unit">2kg pack</p>
-                            <div class="fd-buy-row">
-                                <span class="price">₦2,000</span>
-                                <button type="button" class="vs-btn fd-add-btn" data-add-to-cart="mock-oranges">Add to Cart</button>
-                            </div>
-                            <div class="fd-secondary-row">
-                                <a href="product-details.html?id=mock-oranges" class="fd-view-link">View product</a>
-                                <a href="#" class="fd-wa-link" data-whatsapp="product" data-product="Fresh Oranges" data-qty="1" data-unit="2kg">WhatsApp</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
+            <div class="row g-4" id="fd-pdp-related" data-server="true">
+                {% for product in related_products %}
+                {% include "partials/product_card.html" with product=product %}
+                {% endfor %}
             </div>
         </div>
     </section>
     </div>
+    {{ pdp_json|json_script:"fd-pdp-data" }}
     </main>
 
 {% endblock content %}

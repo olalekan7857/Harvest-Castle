@@ -359,6 +359,25 @@ textarea:focus-visible,
   color: var(--title-color);
 }
 
+/* Catalog color system: custom badges are always green, availability
+   statuses are always yellow — never share a fill. */
+.fd-badge.is-custom {
+  background: var(--secondary-color);
+  color: var(--white-color);
+}
+
+.fd-badge.is-status {
+  background: var(--yellow-color);
+  color: var(--title-color);
+}
+
+/* Custom product badge sits top-right so it never covers the
+   availability status pill (top-left). */
+.fd-badge.is-right {
+  left: auto;
+  right: 10px;
+}
+
 .fd-mock-note {
   font-size: 13px;
   color: var(--body-color);
@@ -1197,7 +1216,7 @@ textarea:focus-visible,
   transition: all ease 0.4s;
 }
 
-/* Pills are links to product-category.html (Django filters server-side),
+/* Pills are Django-rendered links to /products/categories/<slug>/,
    so anchors reuse the same pill look without link underlines. */
 a.fd-cat-pill {
   display: inline-flex;
@@ -1661,6 +1680,11 @@ a.fd-cat-pill {
 .fd-pdp-gallery .fd-badge {
   top: 18px;
   left: 18px;
+}
+
+.fd-pdp-gallery .fd-badge.is-right {
+  left: auto;
+  right: 18px;
 }
 
 .fd-pdp-main-img {
