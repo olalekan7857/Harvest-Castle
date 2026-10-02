@@ -14,7 +14,7 @@
         <div class="container">
             <nav aria-label="Breadcrumb">
                 <ol class="fd-breadcrumb">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{% url 'harvest_castle:index' %}">Home</a></li>
                     <li aria-current="page">Cart</li>
                 </ol>
             </nav>
@@ -36,7 +36,7 @@
                 <i class="far fa-shopping-basket" aria-hidden="true"></i>
                 <h2>Your cart is empty</h2>
                 <p>Browse fresh produce and add items to get started.</p>
-                <a href="product.html" class="vs-btn">Browse Fresh Produce</a>
+                <a href="{% url 'harvest_castle:product' %}" class="vs-btn">Browse Fresh Produce</a>
             </div>
 
             <div class="row g-4" id="fd-cart-main" hidden>
@@ -44,7 +44,7 @@
                     <h2 class="visually-hidden" id="fd-cart-list-title">Cart items</h2>
                     <ul class="fd-cartpage-list" id="fd-cart-list" aria-labelledby="fd-cart-list-title"></ul>
                     <div class="fd-cartpage-foot">
-                        <a href="product.html" class="fd-ghost-btn"><i class="far fa-arrow-left" aria-hidden="true"></i>Continue shopping</a>
+                        <a href="{% url 'harvest_castle:product' %}" class="fd-ghost-btn"><i class="far fa-arrow-left" aria-hidden="true"></i>Continue shopping</a>
                         <button type="button" class="fd-cartpage-clear" data-cart-clear>Clear cart</button>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                             <strong data-cart-total>₦0</strong>
                         </div>
                         <div class="fd-cart-summary-actions">
-                            <a href="checkout.html" class="vs-btn">Proceed to Checkout</a>
+                            <a href="{% url 'harvest_castle:checkout' %}" class="vs-btn">Proceed to Checkout</a>
                             <a href="#" class="fd-whatsapp-btn" id="fd-cart-wa"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Order on WhatsApp</span></a>
                         </div>
                     </aside>

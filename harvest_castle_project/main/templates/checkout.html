@@ -14,8 +14,8 @@
         <div class="container">
             <nav aria-label="Breadcrumb">
                 <ol class="fd-breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="{% url 'harvest_castle:index' %}">Home</a></li>
+                    <li><a href="{% url 'harvest_castle:cart' %}">Cart</a></li>
                     <li aria-current="page">Checkout</li>
                 </ol>
             </nav>
@@ -35,7 +35,7 @@
                 <i class="far fa-shopping-basket" aria-hidden="true"></i>
                 <h2>Your cart is empty</h2>
                 <p>Add some fresh produce before checking out.</p>
-                <a href="product.html" class="vs-btn">Browse Fresh Produce</a>
+                <a href="{% url 'harvest_castle:product' %}" class="vs-btn">Browse Fresh Produce</a>
             </div>
 
             <div class="row g-4" id="fd-checkout-main" hidden>
@@ -155,7 +155,7 @@
                             <span>Total</span>
                             <strong data-checkout-total>₦0</strong>
                         </div>
-                        <a href="cart.html" class="fd-ghost-btn fd-checkout-edit">Edit cart</a>
+                        <a href="{% url 'harvest_castle:cart' %}" class="fd-ghost-btn fd-checkout-edit">Edit cart</a>
                     </aside>
                 </div>
             </div>

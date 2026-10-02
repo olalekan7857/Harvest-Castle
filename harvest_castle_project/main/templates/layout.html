@@ -69,7 +69,7 @@
 
 </head>
 
-<body>
+<body data-current-view="{{ request.resolver_match.view_name|default:'' }}">
 
     <a class="fd-skip-link" href="#fd-main">Skip to main content</a>
 
@@ -96,13 +96,13 @@
             </div>
             <nav class="vs-mobile-menu" aria-label="Mobile navigation">
                 <ul>
-                    <li><a href="{% url 'harvest_castle:index' %}" aria-current="page">Home</a></li>
-                    <li><a href="{% url 'harvest_castle:product' %}">Shop Produce</a></li>
-                    <li><a href="{% url 'harvest_castle:about' %}">About</a></li>
-                    <li><a href="{% url 'harvest_castle:index' %}#how-it-works">How It Works</a></li>
-                    <li><a href="{% url 'harvest_castle:contact' %}">Contact</a></li>
-                    <li><a href="{% url 'harvest_castle:blog' %}">Blog</a></li>
-                    <li><a href="{% url 'harvest_castle:cart' %}">Cart</a></li>
+                    <li><a href="{% url 'harvest_castle:index' %}" data-view="harvest_castle:index">Home</a></li>
+                    <li><a href="{% url 'harvest_castle:product' %}" data-view="harvest_castle:product">Shop Produce</a></li>
+                    <li><a href="{% url 'harvest_castle:about' %}" data-view="harvest_castle:about">About</a></li>
+                    <li><a href="{% url 'harvest_castle:index' %}#how-it-works" data-view="harvest_castle:index">How It Works</a></li>
+                    <li><a href="{% url 'harvest_castle:contact' %}" data-view="harvest_castle:contact">Contact</a></li>
+                    <li><a href="{% url 'harvest_castle:blog' %}" data-view="harvest_castle:blog">Blog</a></li>
+                    <li><a href="{% url 'harvest_castle:cart' %}" data-view="harvest_castle:cart">Cart</a></li>
                     <li><a href="#" data-whatsapp="general">Order on WhatsApp</a></li>
                 </ul>
             </nav>
@@ -168,16 +168,16 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <nav class="main-menu menu-style1 d-none d-lg-block" aria-label="Primary navigation">
-                                    <ul>
-                                        <li><a href="{% url 'harvest_castle:index' %}" aria-current="page">Home</a></li>
-                                        <li><a href="{% url 'harvest_castle:product' %}">Shop Produce</a></li>
-                                        <li><a href="{% url 'harvest_castle:about' %}">About</a></li>
-                                        <li><a href="{% url 'harvest_castle:index' %}#how-it-works">How It Works</a></li>
-                                        <li><a href="{% url 'harvest_castle:contact' %}">Contact</a></li>
-                                        <li><a href="{% url 'harvest_castle:blog' %}">Blog</a></li>
-                                    </ul>
-                                </nav>
+<nav class="main-menu menu-style1 d-none d-lg-block" aria-label="Primary navigation">
+                                     <ul>
+                                         <li><a href="{% url 'harvest_castle:index' %}" data-view="harvest_castle:index">Home</a></li>
+                                         <li><a href="{% url 'harvest_castle:product' %}" data-view="harvest_castle:product">Shop Produce</a></li>
+                                         <li><a href="{% url 'harvest_castle:about' %}" data-view="harvest_castle:about">About</a></li>
+                                         <li><a href="{% url 'harvest_castle:index' %}#how-it-works" data-view="harvest_castle:index">How It Works</a></li>
+                                         <li><a href="{% url 'harvest_castle:contact' %}" data-view="harvest_castle:contact">Contact</a></li>
+                                         <li><a href="{% url 'harvest_castle:blog' %}" data-view="harvest_castle:blog">Blog</a></li>
+                                     </ul>
+                                 </nav>
                             </div>
                             <div class="col-auto d-lg-none">
                                 <div class="fd-header-actions">
@@ -353,10 +353,28 @@
     <!-- Harvest Castle config + enhancements (single WhatsApp source).
          ?v= pin: bump when this file changes so browsers fetch it fresh. -->
     <script src="{% static 'assets/js/fresh-direct.js' %}?v=3"></script>
-    <script src="{% static 'assets/js/fd-theme.js' %}"></script>
+<script src="{% static 'assets/js/fd-theme.js' %}"></script>
     <!-- Harvest Castle blog UI interactions (share/copy only; safe on non-blog pages) -->
     <script src="{% static 'assets/js/fd-blog.js' %}"></script>
-
+    <!-- Active nav highlighting -->
+    <script>
+      (function () {
+        var currentView = document.body.getAttribute('data-current-view');
+        if (!currentView) return;
+        var selectors = [
+          '.vs-mobile-menu a[data-view]',
+          '.main-menu a[data-view]'
+        ];
+        selectors.forEach(function (sel) {
+          var links = document.querySelectorAll(sel);
+          for (var i = 0; i < links.length; i++) {
+            if (links[i].getAttribute('data-view') === currentView) {
+              links[i].setAttribute('aria-current', 'page');
+            }
+          }
+        });
+      })();
+    </script>
 
 </body>
 

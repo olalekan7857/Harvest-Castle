@@ -64,6 +64,7 @@
                     </div>
                 </aside>
             </div>
+            {% if related_posts %}
             <section aria-labelledby="fd-related-title" style="margin-top: 56px;">
                 <div class="fd-section-head">
                     <h2 id="fd-related-title">More from Harvest Castle</h2>
@@ -75,8 +76,11 @@
                     {% endfor %}
                 </div>
             </section>
+            {% endif %}
         </div>
     </div>
     </main>
 
 {% endblock content %}
+
+{% block footer %}{% endblock footer %}

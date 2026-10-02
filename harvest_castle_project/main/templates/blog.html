@@ -2,7 +2,7 @@
 {% load static %}
 
 
-{% block title %}Harvest Castle Blog — Guides, Recipes &amp; Farm Notes{% endblock title %}
+{% block title %}Harvest Castle Blog — Guides, Recipes & Farm Notes{% endblock title %}
 
 
 {% block content %}
@@ -23,7 +23,7 @@
             <p>Practical guides to fresh produce, storage tips that reduce waste, seasonal picks around Abeokuta, healthy campus eating, and simple recipes built on what is available.</p>
             <div class="fd-blog-hero-actions">
                 <a href="#fd-blog-latest" class="vs-btn">Browse Articles</a>
-                <a href="blog-search.html" class="fd-ghost-btn"><i class="far fa-search" aria-hidden="true"></i><span>Search Articles</span></a>
+                <a href="{% url 'harvest_castle:blog_search' %}" class="fd-ghost-btn"><i class="far fa-search" aria-hidden="true"></i><span>Search Articles</span></a>
             </div>
         </div>
     </div>
@@ -79,7 +79,7 @@
                 {% include "partials/blog_card.html" with post=post %}
                 {% endfor %}
             </div>
-            {% if not posts %}
+            {% if total_count == 0 %}
             <div class="fd-shop-state" role="status">
                 <i class="far fa-newspaper" aria-hidden="true"></i>
                 <h2>No articles yet</h2>

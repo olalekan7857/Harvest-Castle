@@ -205,10 +205,19 @@ def contact(request):
 
 def blog(request):
     posts = _published_posts()
-    featured = posts.filter(is_featured=True).first() or posts.first()
-    grid_qs = posts.exclude(pk=featured.pk) if featured else posts.none()
-
-    paginator = Paginator(grid_qs, BLOG_PAGE_SIZE)
+    
+    # Get featured posts (could be multiple, we'll pick one randomly with time-based seed)
+    featured_posts = list(posts.filter(is_featured=True))
+    if featured_posts:
+        # Time-based rotation: changes every 10 minutes
+        import time
+        seed = int(time.time() // 600)  # Changes every 10 minutes
+        featured = featured_posts[seed % len(featured_posts)]
+    else:
+        featured = None
+    
+    # Grid shows ALL published posts (including featured)
+    paginator = Paginator(posts, BLOG_PAGE_SIZE)
     page_obj = paginator.get_page(request.GET.get("page"))
 
     context = {

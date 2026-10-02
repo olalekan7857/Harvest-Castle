@@ -4,8 +4,6 @@ from django.utils import timezone
 from django.utils.html import strip_tags
 from django.utils.text import slugify
 
-from ckeditor.fields import RichTextField
-
 
 def _unique_slug(model, base_slug, pk=None):
     """Return a slug unique for ``model``, appending -2, -3... on conflict."""
@@ -25,20 +23,6 @@ def calc_reading_time(html, words_per_minute=250):
     """Reading minutes for rich-text content (HTML stripped, min 1)."""
     words = len(strip_tags(html or "").split())
     return max(1, -(-words // words_per_minute))
-
-
-def _unique_slug(model, base_slug, pk=None):
-    """Return a slug unique for ``model``, appending -2, -3... on conflict."""
-    slug = base_slug or "item"
-    candidate = slug
-    counter = 2
-    qs = model.objects.all()
-    if pk is not None:
-        qs = qs.exclude(pk=pk)
-    while qs.filter(slug=candidate).exists():
-        candidate = f"{slug}-{counter}"
-        counter += 1
-    return candidate
 
 
 class Category(models.Model):
@@ -236,7 +220,8 @@ class BlogCategory(models.Model):
 
     class Meta:
         ordering = ["name"]
-        verbose_name_plural = "blog categories"
+        verbose_name = "Blog Category"
+        verbose_name_plural = "Blog Categories"
 
     def __str__(self):
         return self.name
@@ -245,6 +230,10 @@ class BlogCategory(models.Model):
         if not self.slug and self.name:
             self.slug = _unique_slug(BlogCategory, slugify(self.name), self.pk)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("harvest_castle:blog_category", args=[self.slug])
 
 
 class BlogPost(models.Model):
@@ -262,7 +251,7 @@ class BlogPost(models.Model):
     )
     excerpt = models.TextField(max_length=500)
     author = models.CharField(
-        max_length=80, default="Harvest Castle Team"
+        max_length=80, default="Harvest Castle Team", blank=True
     )
     tags = models.CharField(
         max_length=250,
@@ -270,7 +259,10 @@ class BlogPost(models.Model):
         default="",
         help_text="Comma-separated, e.g. tomatoes, storage, food waste.",
     )
-    image = models.ImageField(upload_to="blog/", blank=True, null=True)
+    image = models.ImageField(
+        upload_to="blog/",
+        help_text="Required — every post must have a featured image.",
+    )
     image_alt = models.CharField(
         max_length=125,
         blank=True,
@@ -279,7 +271,7 @@ class BlogPost(models.Model):
         "You can still edit it for a better description.",
     )
     image_caption = models.CharField(max_length=200, blank=True, default="")
-    body = RichTextField()
+    body = models.TextField()
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICES, default=STATUS_DRAFT
     )
@@ -287,8 +279,20 @@ class BlogPost(models.Model):
         default=False,
         help_text="Editor's pick slot on the blog page.",
     )
-    seo_title = models.CharField(max_length=160, blank=True, default="")
-    seo_description = models.CharField(max_length=300, blank=True, default="")
+    seo_title = models.CharField(
+        max_length=160,
+        blank=True,
+        default="",
+        help_text="Shown in browser tabs and search results. "
+        "Leave empty to use the post title.",
+    )
+    seo_description = models.CharField(
+        max_length=300,
+        blank=True,
+        default="",
+        help_text="Short summary for search results "
+        "(about 150–160 characters is ideal).",
+    )
     reading_time = models.PositiveIntegerField(
         default=1,
         editable=False,
@@ -300,8 +304,11 @@ class BlogPost(models.Model):
 
     class Meta:
         ordering = ["-published_at"]
+        verbose_name = "Blog Post"
+        verbose_name_plural = "Blog Posts"
         indexes = [
             models.Index(fields=["status", "published_at"]),
+            models.Index(fields=["slug"]),
         ]
 
     def __str__(self):
@@ -310,7 +317,17 @@ class BlogPost(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug and self.title:
             self.slug = _unique_slug(BlogPost, slugify(self.title), self.pk)
+        if not self.author:
+            self.author = "Harvest Castle Team"
         if not self.image_alt and self.title:
             self.image_alt = f"{self.title} image"
         self.reading_time = calc_reading_time(self.body)
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("harvest_castle:blog_detail", args=[self.slug])
+
+    @property
+    def is_published(self):
+        return self.status == self.STATUS_PUBLISHED
