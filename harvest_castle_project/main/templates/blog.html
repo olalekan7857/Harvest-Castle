@@ -23,7 +23,14 @@
             <p>Practical guides to fresh produce, storage tips that reduce waste, seasonal picks around Abeokuta, healthy campus eating, and simple recipes built on what is available.</p>
             <div class="fd-blog-hero-actions">
                 <a href="#fd-blog-latest" class="vs-btn">Browse Articles</a>
-                <a href="{% url 'harvest_castle:blog_search' %}" class="fd-ghost-btn"><i class="far fa-search" aria-hidden="true"></i><span>Search Articles</span></a>
+                <form action="{% url 'harvest_castle:blog_search' %}" method="get" role="search" class="fd-search-simple" id="fd-blog-search-simple">
+                    <label class="visually-hidden" for="fd-blog-search-input">Search articles</label>
+                    <div class="fd-search-input-wrapper">
+                        <input id="fd-blog-search-input" name="q" type="search" placeholder="Search articles&hellip;" autocomplete="off" aria-label="Search articles">
+                        <button type="button" class="fd-search-clear" aria-label="Clear search"><i class="far fa-times" aria-hidden="true"></i></button>
+                        <button type="submit" class="fd-search-submit" aria-label="Search"><i class="far fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -131,3 +138,34 @@
     </main>
 
 {% endblock content %}
+
+{% block extra_js %}
+<script>
+  (function () {
+    var wrapper = document.getElementById('fd-blog-search-simple');
+    if (!wrapper) return;
+    var input = wrapper.querySelector('#fd-blog-search-input');
+    var clearBtn = wrapper.querySelector('.fd-search-clear');
+    var inputWrapper = wrapper.querySelector('.fd-search-input-wrapper');
+
+    if (clearBtn && input && inputWrapper) {
+      clearBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        input.value = '';
+        inputWrapper.classList.remove('has-value');
+        input.focus();
+      });
+    }
+
+    if (input && inputWrapper) {
+      input.addEventListener('input', function () {
+        inputWrapper.classList.toggle('has-value', input.value.length > 0);
+      });
+      // Initialize has-value if there's a pre-filled query
+      if (input.value.length > 0) {
+        inputWrapper.classList.add('has-value');
+      }
+    }
+  })();
+</script>
+{% endblock extra_js %}

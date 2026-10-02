@@ -7,68 +7,125 @@
 
 {% block content %}
 <main id="fd-main">
-    <div class="fd-shop-intro">
+    <div class="fd-blog-hero">
         <div class="container">
             <nav aria-label="Breadcrumb">
                 <ol class="fd-breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="{% url 'harvest_castle:index' %}">Home</a></li>
+                    <li><a href="{% url 'harvest_castle:blog' %}">Blog</a></li>
                     <li aria-current="page">Search</li>
                 </ol>
             </nav>
-            <span class="sec-subtitle">Search the blog</span>
-            <h1 class="sec-title">Results for “tomatoes”</h1>
-            <!-- Plain GET form: Django will read ?q= and render the results. -->
-            <form action="blog-search.html" method="get" role="search" aria-label="Search blog articles" style="margin-top: 20px;">
-                <div class="fd-blog-searchbar">
-                    <label class="visually-hidden" for="fd-blog-q">Search articles</label>
-                    <input id="fd-blog-q" name="q" class="form-control" type="search" value="tomatoes" placeholder="Try “tomatoes”, “storage”, or “recipes”…" autocomplete="off">
-                    <button type="submit" class="vs-btn">Search</button>
-                </div>
-            </form>
+            <span class="fd-hero-tag">The Harvest Castle Blog</span>
+            <h1>Fresh Ideas From the Farm</h1>
+            <p>Practical guides to fresh produce, storage tips that reduce waste, seasonal picks around Abeokuta, healthy campus eating, and simple recipes built on what is available.</p>
+            <div class="fd-blog-hero-actions">
+                <a href="#fd-blog-latest" class="vs-btn">Browse Articles</a>
+                <form action="{% url 'harvest_castle:blog_search' %}" method="get" role="search" class="fd-search-simple" id="fd-blog-search-simple">
+                    <label class="visually-hidden" for="fd-blog-search-input">Search articles</label>
+                    <div class="fd-search-input-wrapper">
+                        <input id="fd-blog-search-input" name="q" type="search" value="{{ query|escape }}" placeholder="Search articles&hellip;" autocomplete="off" aria-label="Search articles">
+                        <button type="button" class="fd-search-clear" aria-label="Clear search"><i class="far fa-times" aria-hidden="true"></i></button>
+                        <button type="submit" class="fd-search-submit" aria-label="Search"><i class="far fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="space">
+
+    <section class="fd-blog-block is-smoke" aria-labelledby="fd-blog-search-title">
         <div class="container">
-            <!-- Django: result count + one card per hit for ?q=. -->
-            <p class="fd-result-count" role="status" style="margin-bottom: 18px;">2 articles found.</p>
-            <div class="fd-post-grid">
-                <article class="fd-post-card">
-                    <a class="fd-post-media" href="blog-detail.html" tabindex="-1" aria-hidden="true">
-                        <img src="{% static 'assets/img/product/product-1-3.png' %}" alt="Box of fresh vegetables" loading="lazy" decoding="async">
-                    </a>
-                    <div class="fd-post-body">
-                        <a class="fd-post-cat" href="blog-category.html">Food Storage</a>
-                        <h3 class="fd-post-title"><a href="blog-detail.html">How to Store Tomatoes So They Stay Fresh Longer</a></h3>
-                        <p class="fd-post-excerpt">Counter or fridge? Whole or sliced? A practical guide to keeping tomatoes firm, flavourful, and waste-free.</p>
-                        <p class="fd-post-meta"><span class="fd-meta-item">10 Sep 2026</span><span class="fd-meta-item">4 min read</span></p>
-                        <a class="fd-post-more" href="blog-detail.html">Read Article</a>
-                    </div>
-                </article>
-                <article class="fd-post-card">
-                    <a class="fd-post-media" href="blog-detail.html" tabindex="-1" aria-hidden="true">
-                        <img src="{% static 'assets/img/blog/blog-d-1-1.jpg' %}" alt="People inspecting fresh greens in a greenhouse" loading="lazy" decoding="async">
-                    </a>
-                    <div class="fd-post-body">
-                        <a class="fd-post-cat" href="blog-category.html">Recipes</a>
-                        <h3 class="fd-post-title"><a href="blog-detail.html">Simple Fresh Vegetable Soup With Whatever Is Available</a></h3>
-                        <p class="fd-post-excerpt">A flexible one-pot soup that adapts to whatever greens and vegetables you have — with timings that actually work.</p>
-                        <p class="fd-post-meta"><span class="fd-meta-item">20 Jun 2026</span><span class="fd-meta-item">6 min read</span></p>
-                        <a class="fd-post-more" href="blog-detail.html">Read Article</a>
-                    </div>
-                </article>
+            <div class="fd-blog-head">
+                <h2 id="fd-blog-search-title">Search Results</h2>
             </div>
-            <!-- Django: when nothing matches, render the no-results state
-                 below instead of the grid above.
+            {% if total_count > 0 %}
+            <p class="fd-result-count" role="status" style="margin-bottom: 18px;">{{ total_count }} article{{ total_count|pluralize }} found.</p>
+            <div class="fd-post-grid">
+                {% for post in posts %}
+                {% include "partials/blog_card.html" with post=post %}
+                {% endfor %}
+            </div>
+            {% if page_obj.paginator.num_pages > 1 %}
+            <nav class="fd-pagination" aria-label="Search results pagination">
+                {% if page_obj.has_previous %}
+                <a class="fd-page-link" href="?q={{ query|urlencode }}&page={{ page_obj.previous_page_number }}">Previous</a>
+                {% else %}
+                <span class="fd-page-link is-disabled" aria-disabled="true">Previous</span>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                {% if num == page_obj.number %}
+                <a class="fd-page-link is-current" href="?q={{ query|urlencode }}&page={{ num }}" aria-current="page">{{ num }}</a>
+                {% else %}
+                <a class="fd-page-link" href="?q={{ query|urlencode }}&page={{ num }}">{{ num }}</a>
+                {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <a class="fd-page-link" href="?q={{ query|urlencode }}&page={{ page_obj.next_page_number }}">Next</a>
+                {% else %}
+                <span class="fd-page-link is-disabled" aria-disabled="true">Next</span>
+                {% endif %}
+            </nav>
+            {% endif %}
+            {% else %}
             <div class="fd-shop-state" role="status">
                 <i class="far fa-search" aria-hidden="true"></i>
                 <h2>No articles matched your search</h2>
                 <p>Try different words, check spelling, or browse the full blog instead.</p>
-                <p><a class="vs-btn" href="blog.html">Browse All Articles</a></p>
+                <p><a class="vs-btn" href="{% url 'harvest_castle:blog' %}">Browse All Articles</a></p>
             </div>
-            -->
+            {% endif %}
         </div>
-    </div>
-    </main>
+    </section>
+
+    <!--==============================
+    Shop CTA band
+    ============================== -->
+    <section class="space-bottom" aria-labelledby="fd-blog-cta-title">
+        <div class="container">
+            <div class="fd-cta-band" style="margin-top: 56px;">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-8">
+                        <h2 id="fd-blog-cta-title">Read it here, shop it fresh</h2>
+                        <p>Everything you read about &mdash; tomatoes, peppers, greens, fruits &mdash; is available to order when in season. Shop online or send your list on WhatsApp.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a href="{% url 'harvest_castle:product' %}" class="vs-btn">Shop Fresh Produce</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
 {% endblock content %}
+
+{% block extra_js %}
+<script>
+  (function () {
+    var wrapper = document.getElementById('fd-blog-search-simple');
+    if (!wrapper) return;
+    var input = wrapper.querySelector('#fd-blog-search-input');
+    var clearBtn = wrapper.querySelector('.fd-search-clear');
+    var inputWrapper = wrapper.querySelector('.fd-search-input-wrapper');
+
+    if (clearBtn && input && inputWrapper) {
+      clearBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        input.value = '';
+        inputWrapper.classList.remove('has-value');
+        input.focus();
+      });
+    }
+
+    if (input && inputWrapper) {
+      input.addEventListener('input', function () {
+        inputWrapper.classList.toggle('has-value', input.value.length > 0);
+      });
+      // Initialize has-value if there's a pre-filled query
+      if (input.value.length > 0) {
+        inputWrapper.classList.add('has-value');
+      }
+    }
+  })();
+</script>
+{% endblock extra_js %}

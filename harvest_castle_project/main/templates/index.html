@@ -167,7 +167,7 @@
                     </a>
                 </div>
                 {% endfor %}
-                <div class="fd-cat-cell">
+                {% comment %} <div class="fd-cat-cell">
                     <a class="fd-cat-card-link" href="{% url 'harvest_castle:product' %}" aria-label="Shop all produce - Shop now">
                     <div class="categorie-style1">
                         <div class="categorie-img">
@@ -179,13 +179,13 @@
                         </div>
                     </div>
                     </a>
-                </div>
+                </div> {% endcomment %}
             </div>
-            {% if home_categories|length > home_visible_count %}
+            {% comment %} {% if home_categories|length > home_visible_count %}
             <div class="fd-more-wrap">
                 <button type="button" class="vs-btn" id="fd-cat-toggle" aria-expanded="false" aria-controls="fd-cat-grid">Show More</button>
             </div>
-            {% endif %}
+            {% endif %} {% endcomment %}
         </div>
     </section>
 

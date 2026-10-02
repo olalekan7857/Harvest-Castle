@@ -294,7 +294,11 @@ def blog_search(request):
     posts = _published_posts()
     if query:
         posts = posts.filter(
-            Q(title__icontains=query) | Q(category__name__icontains=query)
+            Q(title__icontains=query) |
+            Q(category__name__icontains=query) |
+            Q(excerpt__icontains=query) |
+            Q(body__icontains=query) |
+            Q(tags__icontains=query)
         )
 
     paginator = Paginator(posts, BLOG_PAGE_SIZE)
