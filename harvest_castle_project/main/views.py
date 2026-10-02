@@ -289,8 +289,25 @@ def _published_posts():
         .order_by("-published_at", "-id")
     )
 
-def blogdetail(request):
-    return render(request, 'blog-detail.html')
+def blog_search(request):
+    query = request.GET.get("q", "").strip()
+    posts = _published_posts()
+    if query:
+        posts = posts.filter(
+            Q(title__icontains=query) | Q(category__name__icontains=query)
+        )
+
+    paginator = Paginator(posts, BLOG_PAGE_SIZE)
+    page_obj = paginator.get_page(request.GET.get("page"))
+
+    context = {
+        "query": query,
+        "categories": list(BlogCategory.objects.order_by("name")),
+        "posts": page_obj.object_list,
+        "page_obj": page_obj,
+        "total_count": paginator.count,
+    }
+    return render(request, 'blog-search.html', context)
 
 
 def privacy(request):
