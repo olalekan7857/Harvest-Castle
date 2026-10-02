@@ -238,11 +238,20 @@
                     <!-- Account -->
                     <section class="fd-dash-section" aria-labelledby="fd-set-account-title">
                         <h2 id="fd-set-account-title">Account</h2>
+                        <!-- Backend hooks: Django populates the signed-in administrator record. -->
                         <ul class="fd-order-facts" id="fd-set-account-facts">
-                            <li><span>Role:</span><strong> Seller Admin</strong></li>
+                            <li><span>Name:</span><strong id="fd-set-account-name">—</strong></li>
+                            <li><span>Email:</span><strong id="fd-set-account-email">—</strong></li>
+                            <li><span>Role:</span><strong id="fd-set-account-role"> Seller Admin</strong></li>
+                            <li><span>Status:</span><strong id="fd-set-account-status">—</strong></li>
                             <li><span>Password:</span><strong> Managed by the store owner</strong></li>
                         </ul>
-                        <p class="fd-dash-hint">Need a password change? Contact the store owner to reset your seller password.</p>
+                        <p class="fd-dash-hint">Need a password change? Use the change-password page, or contact the store owner to reset your seller password.</p>
+                        <div class="fd-set-actions">
+                            <a href="admin-change-password.html" class="fd-ghost-btn fd-dash-btn" id="fd-set-change-password">
+                                <i class="far fa-key" aria-hidden="true"></i>Change Password
+                            </a>
+                        </div>
                         <p class="fd-set-note" id="fd-set-account-note" role="status" hidden></p>
                         <div class="fd-set-actions">
                             <button type="button" class="fd-admin-logout fd-set-logout" id="fd-set-logout" aria-disabled="true" title="Sign in first — log out is available after sign-in">
@@ -250,6 +259,18 @@
                             </button>
                         </div>
                         <p class="fd-admin-logout-hint" style="text-align:left">Log out is available after you sign in.</p>
+                    </section>
+
+                    <!-- Administrators (Owner-level): entry point to Settings → Administrators. -->
+                    <section class="fd-dash-section" aria-labelledby="fd-set-admins-title">
+                        <h2 id="fd-set-admins-title">Administrators</h2>
+                        <p class="fd-dash-hint" style="margin-top:0">Owner-level management of seller accounts, invitations and access. Role checks are enforced by Django in the next stage.</p>
+                        <div class="fd-set-actions">
+                            <a href="admin-administrators.html" class="vs-btn fd-dash-btn" id="fd-set-admins-open">
+                                <i class="fas fa-users-cog" aria-hidden="true"></i>Manage Administrators
+                            </a>
+                        </div>
+                        <p class="fd-dash-hint">Restricted: normal administrators cannot assign the Owner role.</p>
                     </section>
 
                 </div>

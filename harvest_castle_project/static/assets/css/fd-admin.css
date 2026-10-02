@@ -284,6 +284,12 @@
   min-height: 52px;
 }
 
+/* Dropdowns match text inputs (same radius + height, e.g. invite role). */
+.fd-admin .form-select {
+  border-radius: 12px;
+  min-height: 52px;
+}
+
 .fd-admin-check-row {
   display: flex;
   align-items: center;
@@ -1326,6 +1332,8 @@
   margin-top: 18px;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 /* ---------- Product list responsive --------------------------------------- */

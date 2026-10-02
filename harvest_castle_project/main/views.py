@@ -532,5 +532,58 @@ def admin_blog(request):
     return render(request, 'admin-blog.html')
 
 
-def layout(request):
-    return render(request, 'layout.html')
+# TEMPORARY FRONTEND PREVIEW VIEWS — remove before backend auth stage.
+def admin_login_preview(request):
+    return render(request, 'admin-login.html')
+
+
+def admin_settings_preview(request):
+    return render(request, 'admin-settings.html')
+
+
+def admin_products_preview(request):
+    return render(request, 'admin-products.html')
+
+
+def admin_product_edit_preview(request):
+    return render(request, 'admin-product-edit.html')
+
+
+def admin_orders_preview(request):
+    return render(request, 'admin-orders.html')
+
+
+def admin_order_preview(request):
+    return render(request, 'admin-order.html')
+
+
+def admin_blog_edit_preview(request):
+    return render(request, 'admin-blog-edit.html')
+
+
+def admin_forgot_password_preview(request):
+    return render(request, 'admin-forgot-password.html')
+
+
+def admin_reset_password_preview(request):
+    return render(request, 'admin-reset-password.html')
+
+
+def admin_reset_password_complete_preview(request):
+    return render(request, 'admin-reset-password-complete.html')
+
+
+def admin_invitation_preview(request):
+    return render(request, 'admin-invitation.html')
+
+
+def admin_change_password_preview(request):
+    return render(request, 'admin-change-password.html')
+
+
+def admin_administrators_preview(request):
+    return render(request, 'admin-administrators.html')
+
+
+def admin_403_preview(request):
+    return render(request, '403.html')
